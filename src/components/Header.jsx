@@ -1,12 +1,18 @@
+
+// COMPONENTS
+import Promo from "./Promo.jsx";
+
+// IMAGES
 import AmrahLogo from '../assets/amrah-logo.png';
-import UserIcon from '/user.svg';
+import UserIcon from '/user-icon.svg';
 import ShoppingBag from '/shopping-bag.svg'
 import Search from '/magnifying-glass.svg';
 
 export default function Header ({  }) {
     
     return (
-        <header id='header'>
+        <header>
+            
             {/* LOGO  */}
             <a>
                 <img src={AmrahLogo} alt="amrah-logo" width="140rem"/>
