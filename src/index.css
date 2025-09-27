@@ -1,6 +1,6 @@
-*,
-::before,
-::after {
+@import url('https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=League+Spartan:wght@100..900&family=Pacifico&display=swap');
+
+* {
     margin: 0;
     box-sizing: border-box;
 }
@@ -25,30 +25,30 @@ body {
     margin-right: 1rem;
 }
 
-/* CARTMODAL */
-
-.cart-modal {
-    border: none;
-    border-radius: 8px;
-    padding: 2rem;
-    background-color: #d7fcf8;
-}
-
-/* CARTMODAL */
-
 /* HEADER */
 
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: #C64B50 solid 1px;
+    border-bottom: #C64B50 solid 1px;
     background-color: transparent;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1;
+
+    transition: 
+    background-color 300ms ease-in-out,
+    border-bottom 300ms ease-in-out,
+    padding-bottom 300ms ease-in-out;
+}
+
+header:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-bottom: 0;
+    padding-bottom: .18rem;
 }
 
 header nav {
@@ -68,14 +68,34 @@ header ul > li {
     display: inline-block;
 }
 
-header nav ul a {
+header nav ul li a {
+    position: relative;
+
     font-size: 1.2rem;
     color: #C64B50;
     text-decoration: none;
+
+    font-family: "League Spartan", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+
+    transition: scale 300ms ease-in-out;
 }
 
-header nav ul a:hover {
-    font-weight: bold;
+header nav ul li a::before {
+    content: '';     
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #C64B50;
+    transition: 0.3s;
+}
+
+header nav ul li a:hover::before {
+    width: 100%;
 }
 
 header p {
@@ -90,10 +110,11 @@ header > p > button {
     background: none;
     border: none;
     cursor: pointer;
+    transition: scale 200ms ease-in-out
 }
 
 header > p > button:hover {
-    scale: 1.1;
+    scale: 1.2;
 }
 
 /* HEADER */
@@ -155,6 +176,8 @@ header > p > button:hover {
     fill: transparent;
     width: 2rem;
     height: 2rem;
+
+    transition: scale 200ms ease-in-out;
 }
 
 .img-slider-btn > *:hover {
@@ -167,7 +190,7 @@ header > p > button:hover {
     cursor: pointer;
     width: 1rem;
     height: 1rem;
-    transition: scale 100ms ease-in-out
+    transition: scale 200ms ease-in-out
 }
 
 .img-slider-dot-btn:hover {
@@ -195,6 +218,11 @@ header > p > button:hover {
     color: white;
 
     cursor: pointer;
+    transition: scale 200ms ease-in-out
+}
+
+.carousel-shop-now-btn:hover {
+    scale: 1.1;
 }
 
 /* CAROUSEL */
@@ -219,16 +247,19 @@ header > p > button:hover {
     width: 25%;
 
     background-color: white;
-
-    transition: translate 500ms ease-in-out;
 }
 
 .cart-modal::backdrop {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.cart-modal[open] {
+    animation: open-cart 0.40s ease-in-out;
 }
 
 body:has(.cart-modal[open]) {
     overflow: hidden;
+
 }
 
 .cart-modal > form > button {
@@ -248,3 +279,17 @@ body:has(.cart-modal[open]) {
 }
 
 /* CART MODAL */
+
+@keyframes open-cart {
+
+  0% {
+    transform: translateX(90%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+}

@@ -19,10 +19,10 @@ export default function Header ({ onOpenCart }) {
             </a>
             <nav>
                 <ul>
-                    <li><a href='#'>Home</a></li>
-                    <li><a href='#'>Shop</a></li>
-                    <li><a href='#'>Collections</a></li>
-                    <li><a href='#'>Services</a></li>
+                    <li><a href='#'>HOME</a></li>
+                    <li><a href='#'>SHOP</a></li>
+                    <li><a href='#'>COLLECTIONS</a></li>
+                    <li><a href='#'>SERVICES</a></li>
                     
                 </ul>
                 

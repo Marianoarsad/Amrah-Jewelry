@@ -23,8 +23,18 @@ const CartModal = forwardRef((props, ref) => {
 
             }}>
                 <img src={EmptyCart} alt='empty cart' width="100rem"/>
-                <p>Your cart is empty</p>
-                <p>Continue shopping <a href='#'>here</a></p>
+                <p style={{
+                    fontFamily: "League Spartan, sans-serif",
+                    fontOpticalSizing: "auto",
+                    fontWeight: "200",
+                    fontStyle: "normal",
+                }}>Your cart is empty</p>
+                <p style={{
+                    fontFamily: "League Spartan, sans-serif",
+                    fontOpticalSizing: "auto",
+                    fontWeight: "200",
+                    fontStyle: "normal",
+                }}>Continue shopping <a href='#'>here</a></p>
             </div>
             
             <div style={{
@@ -32,7 +42,7 @@ const CartModal = forwardRef((props, ref) => {
                 flexDirection: "column", 
                 alignItems: "center", 
                 width: "100%", 
-                height: "27%", 
+                height: "20%", 
                 borderTop: "#C64B50 solid 1px"
             }}>
                 <div style={{

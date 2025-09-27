@@ -1,3 +1,3 @@
 # Amrah-Jewelry
 
-The official E-commerce website for Amrah Jewelry.
+An E-commerce website project for a jewelry shop written in React JS.
