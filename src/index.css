@@ -1,10 +1,6 @@
 *,
 ::before,
 ::after {
-    box-sizing: border-box;
-}
-
-* {
     margin: 0;
     box-sizing: border-box;
 }
@@ -28,6 +24,19 @@ body {
     color: #C64B50;
     margin-right: 1rem;
 }
+
+/* CARTMODAL */
+
+.cart-modal {
+    border: none;
+    border-radius: 8px;
+    padding: 2rem;
+    background-color: #d7fcf8;
+}
+
+/* CARTMODAL */
+
+/* HEADER */
 
 header {
     display: flex;
@@ -77,7 +86,40 @@ header p > * {
     margin: 0.6rem;
 }
 
+header > p > button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+header > p > button:hover {
+    scale: 1.1;
+}
+
+/* HEADER */
+
 /* CAROUSEL */
+
+.carousel {
+    max-width: 100vw;
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    aspect-ratio: 10 / 6;
+}
+
+.img-slider-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.img-placeholder {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
 
 .img-slider-img {
     object-fit: cover;
@@ -86,10 +128,19 @@ header p > * {
     display: block;
     flex-shrink: 0;
     flex-grow: 0;
-    transition: translate 300ms ease-in-out
+    transition: translate 550ms ease-in-out
 }
 
-.image-slider-btn {
+.img-slider-dot-container {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    translate: -50%;
+    display: flex;
+    gap: .50rem;
+}
+
+.img-slider-btn {
     all: unset;
     display: block;
     position: absolute;
@@ -99,11 +150,15 @@ header p > * {
     cursor: pointer;
 }
 
-.image-slider-btn > * {
+.img-slider-btn > * {
     stroke: #C64B50;
     fill: transparent;
     width: 2rem;
     height: 2rem;
+}
+
+.img-slider-btn > *:hover {
+    scale: 1.2;
 }
 
 .img-slider-dot-btn {
@@ -120,10 +175,76 @@ header p > * {
 }
 
 .img-slider-dot-btn > * {
-    stroke: white;
-    fill: black;
+    stroke: #C64B50;
+    fill: transparent;
     height: 100%;
     width: 100%;
 }
 
+.carousel-shop-now-btn {
+    position: absolute;
+    bottom: 10rem;
+    left: 50%;
+    translate: -50%;
+
+    background: transparent;
+    border: .3rem solid white;
+    padding: .8rem;
+
+    font-size: 1rem;
+    color: white;
+
+    cursor: pointer;
+}
+
 /* CAROUSEL */
+
+/* CART MODAL */
+
+.cart-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between  ;
+
+    position: absolute;
+    left: 75%;
+
+    border-radius: 0;
+    border-left: #C64B50 solid 2px;
+    margin: 0;
+    padding: 0;
+
+    max-height: 100vh;
+    height: 100%;
+    width: 25%;
+
+    background-color: white;
+
+    transition: translate 500ms ease-in-out;
+}
+
+.cart-modal::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+body:has(.cart-modal[open]) {
+    overflow: hidden;
+}
+
+.cart-modal > form > button {
+    padding: 0;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    border: none;
+    background: none;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.cart-modal > form > button > * {
+    stroke: #C64B50;
+    width: 100%;
+    height: 100%;
+}
+
+/* CART MODAL */

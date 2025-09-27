@@ -8,7 +8,7 @@ import UserIcon from '/user-icon.svg';
 import ShoppingBag from '/shopping-bag.svg'
 import Search from '/magnifying-glass.svg';
 
-export default function Header ({  }) {
+export default function Header ({ onOpenCart }) {
     
     return (
         <header>
@@ -30,15 +30,15 @@ export default function Header ({  }) {
 
             {/* ICONS  */}
             <p>
-                    <a>
+                    <button>
                         <img src={Search}  width="30rem"/>
-                    </a>
-                    <a>
+                    </button>
+                    <button onClick={onOpenCart}>
                         <img src={ShoppingBag}  width="30rem"/>
-                    </a>
-                    <a>
+                    </button>
+                    <button>
                         <img src={UserIcon}  width="30rem"/>
-                    </a>    
+                    </button>    
             </p>
         </header>
     )
