@@ -1,11 +1,9 @@
-import { forwardRef } from 'react';
-import { createPortal } from 'react-dom';
-import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
 
-//IMAGES
+// IMAGES
 import EmptyCart from '/empty-cart.svg';
 
-const CartModal = forwardRef((props, ref) => {
+export default function CartModal ({ ref }) {
     
     
     return (
@@ -36,7 +34,7 @@ const CartModal = forwardRef((props, ref) => {
                     fontStyle: "normal",
                 }}>Continue shopping <a href='#'>here</a></p>
             </div>
-            
+                
             <div style={{
                 display: "flex", 
                 flexDirection: "column", 
@@ -71,6 +69,4 @@ const CartModal = forwardRef((props, ref) => {
             </div> 
         </dialog>
     );
-});
-
-export default CartModal;
+}
