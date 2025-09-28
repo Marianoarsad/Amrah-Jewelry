@@ -1,20 +1,29 @@
-import { forwardRef } from 'react';
+import { forwardRef, useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { Car } from 'lucide-react';
 
 // IMAGES
 
 // COMPONENTS
 import CartModal from './CartModal.jsx';
-import { Car } from 'lucide-react';
+import SigninModal from './SigninModal.jsx';
 
-const Modal = forwardRef(({  }, ref) => {
+const Modal = forwardRef(({ type }, ref) => {
 
-    const modal = <CartModal ref={ref} />;
+    let modalType;
 
+    if (type === 'signin') {
+        modalType = <SigninModal ref={ref} />;
+    }
+
+    if (type === 'cart') {
+        modalType = <CartModal ref={ref} />
+    }
 
     return (
-        modal
-    );
+        modalType
+    )
+
 });
 
-export default CartModal;
+export default Modal;

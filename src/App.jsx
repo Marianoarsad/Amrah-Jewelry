@@ -29,8 +29,9 @@ function App() {
 
     return (
         <>
-                <Modal ref={cart} />
-                <Header onOpenCart={handleOpenCart} />
+                <Modal ref={signin} type='signin'/>
+                <Modal ref={cart} type='cart'/>
+                <Header onOpenCart={handleOpenCart} onOpenSignin={handleOpenSignin} />
                 <Carousel />
         </>
     )

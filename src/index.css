@@ -280,6 +280,55 @@ body:has(.cart-modal[open]) {
 
 /* CART MODAL */
 
+/* SIGNIN MODAL */
+
+.signin-modal {
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: white;
+    width: 38rem;
+    height: 30rem;
+
+    border: none;
+    border-radius: 1rem;
+}
+
+.signin-modal[open] {
+    animation: open-signin 0.3s ease-in-out;
+    top: 45%;
+}
+
+.signin-modal::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.signin-modal > form > button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+.signin-modal > form > button > * {
+    stroke: #C64B50;
+    width: 2rem;
+    height: 2rem;
+}
+
+body:has(.signin-modal[open]) {
+    overflow: hidden;
+
+}
+
+
+/* SIGNIN MODAL */
+
 @keyframes open-cart {
 
   0% {
@@ -291,5 +340,19 @@ body:has(.cart-modal[open]) {
     transform: translateX(0);
     opacity: 1;
   }
+
+}
+
+@keyframes open-signin {
+
+    0% {
+        top: 0;
+        opacity: 0;
+    }
+
+    100% {
+        top: 45%;
+        opacity: 1;
+    }
 
 }
