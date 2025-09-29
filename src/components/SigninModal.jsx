@@ -4,8 +4,19 @@ export default function SigninModal ({ref}) {
 
     return (
         <dialog ref={ref} className='signin-modal'>
-            <form method="dialog">
+            <form className='signin-modal-back-btn-container' method="dialog">
                 <button><ArrowLeft /></button>
+            </form>
+            <h2>SIGN IN</h2>
+            <form className='signin-form'>
+                <label>EMAIL</label>
+                <input placeholder='Enter email' />
+                <label>PASSWORD</label>
+                <input placeholder='Enter password' />
+                
+                <a href='#'>Forgot password?</a>
+                <button className='signin-btn'>SIGN IN</button>
+                <button className='create-btn'>CREATE ACCOUNT</button>    
             </form>
         </dialog>
     )

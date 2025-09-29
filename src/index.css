@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=League+Spartan:wght@100..900&family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&family=Delius+Swash+Caps&family=League+Spartan:wght@100..900&family=Lexend+Mega:wght@100..900&family=Pacifico&display=swap');
 
 * {
     margin: 0;
@@ -285,6 +285,7 @@ body:has(.cart-modal[open]) {
 .signin-modal {
     display: flex;
     flex-direction: column;
+    align-items: center;
 
     position: absolute;
     top: 45%;
@@ -292,8 +293,8 @@ body:has(.cart-modal[open]) {
     transform: translate(-50%, -50%);
 
     background-color: white;
-    width: 38rem;
-    height: 30rem;
+    width: 33rem;
+    height: 28rem;
 
     border: none;
     border-radius: 1rem;
@@ -308,14 +309,27 @@ body:has(.cart-modal[open]) {
     background: rgba(0, 0, 0, 0.5);
 }
 
-.signin-modal > form > button {
+.signin-modal > h2 {
+    font-family: "Lexend Mega", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+
+    color: #C64B50;
+}
+
+.signin-modal-back-btn-container > button {
     cursor: pointer;
     border: none;
     outline: none;
     background: none;
 }
 
-.signin-modal > form > button > * {
+.signin-modal-back-btn-container {
+    align-self: flex-start;
+}
+
+.signin-modal-back-btn-container > button > * {
     stroke: #C64B50;
     width: 2rem;
     height: 2rem;
@@ -323,7 +337,55 @@ body:has(.cart-modal[open]) {
 
 body:has(.signin-modal[open]) {
     overflow: hidden;
+}
 
+.signin-form {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+}
+
+.signin-form > label {
+    align-self: flex-start;
+    margin-top: 1rem;
+    color: #C64B50;
+    left: 20px;
+}
+
+.signin-form > a {
+    margin-top: 3rem;
+    align-self: flex-start;
+    text-decoration: none;
+    color: #C64B50;
+    
+}
+
+.signin-form > input {
+    width: 100%;
+    height: 2.6rem;
+    border: .01rem solid#C64B50;
+    outline: none;
+    padding: 1rem;
+}
+
+.signin-form > button {
+    width: 100%;
+    height: 3rem;
+    margin: .3rem;
+}
+
+.signin-btn {
+    background-color: #C64B50;
+    color: white;
+    border: none;
+}
+
+.create-btn {
+    background-color: transparent;
+    border: .01rem solid#C64B50;
+    color: #C64B50;
 }
 
 
