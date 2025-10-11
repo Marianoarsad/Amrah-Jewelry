@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&family=Delius+Swash+Caps&family=League+Spartan:wght@100..900&family=Lexend+Mega:wght@100..900&family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Carrois+Gothic+SC&family=Delius+Swash+Caps&family=League+Spartan:wght@100..900&family=Lexend+Mega:wght@100..900&family=Pacifico&display=swap');
 
 * {
     margin: 0;
@@ -259,7 +259,6 @@ header > p > button:hover {
 
 body:has(.cart-modal[open]) {
     overflow: hidden;
-
 }
 
 .cart-modal > form > button {
@@ -310,11 +309,9 @@ body:has(.cart-modal[open]) {
 }
 
 .signin-modal > h2 {
-    font-family: "Lexend Mega", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 200;
+    font-family: "Carrois Gothic SC", sans-serif;
+    font-weight: 600;
     font-style: normal;
-
     color: #C64B50;
 }
 
@@ -352,6 +349,10 @@ body:has(.signin-modal[open]) {
     margin-top: 1rem;
     color: #C64B50;
     left: 20px;
+
+    font-family: "Carrois Gothic SC", sans-serif;
+    font-weight: 100;
+    font-style: normal;
 }
 
 .signin-form > a {
@@ -359,6 +360,10 @@ body:has(.signin-modal[open]) {
     align-self: flex-start;
     text-decoration: none;
     color: #C64B50;
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 1.1rem;
     
 }
 
@@ -391,6 +396,53 @@ body:has(.signin-modal[open]) {
 
 /* SIGNIN MODAL */
 
+/* POPULAR PRODUCTS */
+
+.popular-products {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100vh;
+    width: 100wh;
+    background-color: #FFFF;
+    text-align: center;
+}
+
+.popular-products > h2 {
+    font-family: "Pacifico", cursive;
+    font-weight: 400;
+    font-size: 4rem;
+    font-style: normal;
+    color: #C64B50;
+}
+
+.popular-products-card > button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.slick-slide img {
+    display: block;
+    width: 70%;
+    height: auto;
+ }
+
+ .slick-slide > div {
+    margin: 0 .8rem;
+ }
+
+ .slick-prev {
+  left: 3% !important;
+  z-index: 1;
+}
+.slick-next {
+  right: 3% !important;
+  z-index: 1;
+}
+
+/* POPULAR PRODUCTS */
+
 @keyframes open-cart {
 
   0% {
@@ -402,6 +454,20 @@ body:has(.signin-modal[open]) {
     transform: translateX(0);
     opacity: 1;
   }
+
+}
+
+@keyframes close-cart {
+
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(90%);
+        opacity: 0;
+    }
 
 }
 

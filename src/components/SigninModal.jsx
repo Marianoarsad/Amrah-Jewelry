@@ -9,9 +9,9 @@ export default function SigninModal ({ref}) {
             </form>
             <h2>SIGN IN</h2>
             <form className='signin-form'>
-                <label>EMAIL</label>
+                <label>Email</label>
                 <input placeholder='Enter email' />
-                <label>PASSWORD</label>
+                <label>Password</label>
                 <input placeholder='Enter password' />
                 
                 <a href='#'>Forgot password?</a>

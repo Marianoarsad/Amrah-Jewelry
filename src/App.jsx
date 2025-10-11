@@ -5,6 +5,7 @@ import Page from "./components/Page.jsx";
 import Header from "./components/Header.jsx";
 import Carousel from "./components/Carousel.jsx";
 import Modal from "./components/Modal.jsx";
+import PopularProducts from './components/PopularProducts.jsx';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
                 <Modal ref={cart} type='cart'/>
                 <Header onOpenCart={handleOpenCart} onOpenSignin={handleOpenSignin} />
                 <Carousel />
+                <PopularProducts />
         </>
     )
 }
