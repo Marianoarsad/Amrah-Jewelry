@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Carrois+Gothic+SC&family=Delius+Swash+Caps&family=League+Spartan:wght@100..900&family=Lexend+Mega:wght@100..900&family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arapey:ital@0;1&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Bebas+Neue&family=Carrois+Gothic+SC&family=Delius+Swash+Caps&family=League+Spartan:wght@100..900&family=Lexend+Mega:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pacifico&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 * {
     margin: 0;
@@ -41,14 +41,12 @@ header {
 
     transition: 
     background-color 300ms ease-in-out,
-    border-bottom 300ms ease-in-out,
-    padding-bottom 300ms ease-in-out;
+    border-bottom 300ms ease-in-out;
 }
 
 header:hover {
     background-color: rgba(255, 255, 255, 0.9);
     border-bottom: 0;
-    padding-bottom: .18rem;
 }
 
 header nav {
@@ -399,6 +397,7 @@ body:has(.signin-modal[open]) {
 /* POPULAR PRODUCTS */
 
 .popular-products {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -420,28 +419,271 @@ body:has(.signin-modal[open]) {
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;
+    width: 80%;
+    padding: 0;
 }
 
+.popular-products-card > button > h3 {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: .9rem;
+    transition: color 200ms ease-in-out ;
+}
+
+.popular-products-card > button:hover {
+    color: #C64B50;
+}
+
+.popular-products-card > button > p {
+    font-family: "Arapey", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.3rem;
+    color: #C64B50;
+}
+
+/* IMAGE SIZE */
 .slick-slide img {
-    display: block;
-    width: 70%;
+    width: 100%;
+    height: 100%;
     height: auto;
  }
 
- .slick-slide > div {
-    margin: 0 .8rem;
+/* CARD SIZE */
+.slick-slide > div {
+    width: 70%;
  }
 
- .slick-prev {
-  left: 3% !important;
-  z-index: 1;
+.popular-products .custom-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: auto;
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.95);
+    border-radius: 50%;
+    border: 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    z-index: 20;
 }
-.slick-next {
-  right: 3% !important;
-  z-index: 1;
+
+.popular-products .custom-prev { 
+    left: 4rem; 
+}
+
+.popular-products .custom-next { 
+    right: 4rem; 
 }
 
 /* POPULAR PRODUCTS */
+
+/* CATEGORIES */
+
+.categories {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100wh;
+    background-color: #FFFF;
+    text-align: center;
+}
+
+.categories > h2 {
+    font-family: "Pacifico", cursive;
+    font-weight: 400;
+    font-size: 4rem;
+    font-style: normal;
+    color: #C64B50;
+}
+
+.categories-category-container {
+    display: flex;               
+    flex-direction: row;         
+    justify-content: center;     
+    align-items: center;         
+    gap: 2rem;                   
+    flex-wrap: wrap;             
+    width: 100%;
+    height: 70%;
+}
+
+.categories-category {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 70%;
+    width: 20%;
+    text-decoration: none;
+}
+
+.categories-category > img {
+    aspect-ratio: 6 / 6;
+    height: auto;
+}
+
+.categories-category > h2 {
+    color: #C64B50;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.4rem;
+}
+
+/* CATEGORIES */
+
+/* FOOTER */
+
+footer {
+    width: 99vw;
+    height: 80vh;
+    border-top: #C64B50 solid 1px;
+}
+
+.footer-upper-container {
+    width: 100%;
+    height: 40%;
+    display: flex;
+}
+
+.footer-upper-container > ul {
+    padding: 0;
+    margin-top: 3rem;
+    margin-left: 3rem;
+    gap: 5rem;
+}
+
+.footer-upper-container-header {
+    list-style: none;
+
+    color: #C64B50;
+    font-size: 2rem;
+
+    font-family: "League Spartan", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.footer-upper-container-links {
+    list-style: none;
+    margin-top: 0.7rem;
+}
+
+.footer-upper-container-links > a {
+    text-decoration: none;
+
+    color: black;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 0.9rem;
+
+    transition: color 200ms ease-in-out
+}
+
+.footer-upper-container-links > a:hover {
+    color: #C64B50;
+}
+
+.footer-lower-container {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.newsletter-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: .7rem;
+    margin-left: 3rem;
+    height: 100%;
+}
+
+.newsletter-container h3 {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2.4rem;
+    color: #C64B50;
+}
+
+.newsletter-container p {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 250;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    font-size: 1.3rem;
+}
+
+.newsletter-container > form {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.newsletter-container > form > input {
+    width: 70%;
+    height: 2.6rem;
+    padding: 1rem;
+    border: #C64B50 solid 1px;
+    border-right: none;
+    outline: none;
+}
+
+.newsletter-container > form > button {
+    height: 2.6rem;
+    width: 2.6rem;
+    padding: 0;
+    border: #C64B50 solid 1px;
+    border-left: none;
+    background: none;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.socmed-container {
+    height: 100%;
+    width: auto;
+    display: flex;
+    align-items: flex-end;
+    gap: 1.7rem;
+    margin-right: 3rem;
+}
+
+.socmed-logo {
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 1rem;
+}
+
+.copyright {
+    font-size: .7rem;
+    margin-left: 3rem;
+    color: #C64B50;
+    padding-bottom: 1rem;
+}
+
+/* FOOTER */
 
 @keyframes open-cart {
 

@@ -6,6 +6,8 @@ import Header from "./components/Header.jsx";
 import Carousel from "./components/Carousel.jsx";
 import Modal from "./components/Modal.jsx";
 import PopularProducts from './components/PopularProducts.jsx';
+import Categories from './components/Categories.jsx';
+import Footer from './components/Footer.jsx';
 
 function App() {
 
@@ -35,6 +37,8 @@ function App() {
                 <Header onOpenCart={handleOpenCart} onOpenSignin={handleOpenSignin} />
                 <Carousel />
                 <PopularProducts />
+                <Categories />
+                <Footer />
         </>
     )
 }

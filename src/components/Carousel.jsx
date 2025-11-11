@@ -50,7 +50,7 @@ export default function Carousel () {
             console.log('NEXT IMAGE');
             showNextImage();
             
-        }, 9000);
+        }, 10000);
 
         return () => {
             clearInterval(interval);
@@ -93,7 +93,7 @@ export default function Carousel () {
                 <div className="img-slider-dot-container">
                     {IMAGES.map((_, index) => (
                         <button 
-                            key={index} 
+                            key={index}
                             className='img-slider-dot-btn' 
                             onClick={() => setImageIndex(index)} 
                         >
