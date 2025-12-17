@@ -1,0 +1,114 @@
+img {
+    padding: none;
+    margin: none;
+}
+
+.header {
+    z-index: 3;
+    height: 9vh;
+    width: 100%;
+    position: fixed;
+
+    display: flex;
+    flex-direction: row;
+    align-items : center;
+    justify-content: space-between;
+
+    box-shadow: 0 .4px 10px rgba(0, 0, 0, 0.2);
+    background-color: #FFFFFF;
+    transition: 
+        box-shadow 300ms ease-in-out,
+        scale 300ms ease-in-out;
+}
+
+.header:hover {
+    scale: 1.001;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.header nav {
+    display: flex;
+    align-items: center;
+    margin-left: 2rem;
+    padding: 0;
+    
+}
+
+.header nav ul {
+    padding: 0;
+    margin: 0;
+}
+
+.header nav ul li {
+    display: inline;
+    margin-left: 2rem;
+}
+/* NAV LINKS */
+.header nav ul li a {
+    color: #c64b50;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+
+    font-size: .8rem;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+
+    transition: 
+        color 200ms ease-in-out,
+        font-weight 200ms ease-in-out;
+}
+
+.header nav ul li a:hover {
+    font-weight: 400;
+    color: #94161b;
+}
+
+.header nav ul li a::before {
+    content: '';     
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #C64B50;
+    transition: 0.3s;
+}
+
+.header nav ul li a:hover::before {
+    width: 100%;
+}
+
+.verticalLine {
+    width: .07vw;
+    background-color: #C9CDCF;
+}
+/* BUTTONS CONTAINER */
+.header p {
+    display: flex;
+    gap: 1rem;
+    margin-right: 2rem;
+}
+
+.header p button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #c96868;
+
+    transition: scale 200ms ease-in-out;
+}
+
+.header p button:hover {
+    scale: 1.2;
+    color: #94161b;
+}
+
+.logo {
+    display: block;
+    min-height: 100%;
+    width: 2.4rem;
+}
