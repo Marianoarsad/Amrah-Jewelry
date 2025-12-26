@@ -43,6 +43,7 @@ img {
     display: inline;
     margin-left: 2rem;
 }
+
 /* NAV LINKS */
 .header nav ul li a {
     color: #c64b50;
@@ -86,13 +87,13 @@ img {
     background-color: #C9CDCF;
 }
 /* BUTTONS CONTAINER */
-.header p {
+.buttonContainer {
     display: flex;
     gap: 1rem;
     margin-right: 2rem;
 }
 
-.header p button {
+.buttonContainer button {
     background: none;
     border: none;
     padding: 0;
@@ -102,7 +103,7 @@ img {
     transition: scale 200ms ease-in-out;
 }
 
-.header p button:hover {
+.buttonContainer button:hover {
     scale: 1.2;
     color: #94161b;
 }

@@ -4,6 +4,7 @@ import styles from "../css/Header.module.css";
 
 // COMPONENTS
 import Promo from "./Promo.jsx";
+import Dropdown from "./Dropdown.jsx";
 
 // PACKAGES
 import { useState } from "react";
@@ -22,17 +23,22 @@ const HEADLINE = [
     'Pulvinar vivamus fringilla lacus nec metus bibendum egestas!'
 ]
 
-export default function Header ({ onOpenCart, onOpenSignin, showPromo }) {
+export default function Header ({ activeCategory, setActiveCategory, headerHover, setHeaderHover, onOpenCart, onOpenSignin, showPromo }) {
 
-    const [ headerHover, setHeaderHover ] = useState(false);
     const [ headlineIndex, setHeadlineIndex ] = useState(0);
 
     function handleMouseEnter () {
+
         setHeaderHover(true);
+
     }
 
     function handleMouseLeave () {
-        setHeaderHover(false);
+
+        if (activeCategory === '') {
+            setHeaderHover(false);
+        }
+
     }
 
     function prevHeadline () {
@@ -70,17 +76,16 @@ export default function Header ({ onOpenCart, onOpenSignin, showPromo }) {
             : null}
             
             <header 
-                id={styles.header}
-                className={ showPromo ? styles.headerShowPromo : null }
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                style={{boxShadow: headerHover ?  "0 0 10px rgba(0, 0, 0, 0.5)" : ""}}
+                className={headerHover ? styles.headerHovered : styles.header}
+                onMouseEnter={() => handleMouseEnter()}
+                onMouseLeave={() => handleMouseLeave()}
+                style={{boxShadow: headerHover ?  "0 0 10px rgba(0, 0, 0, 0.5)" : "", top: showPromo ? "var(--promo-height)" : ""}}
             >
 
                 {/* BUTTONS  */}
                 <p style={{marginBottom: "2rem", marginLeft: "2rem"}}>
-                    <Search className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav} style={{cursor: "pointer"}}/>
-                    <Phone className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav} style={{cursor: "pointer"}}/>
+                    <Search className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav}/>
+                    <Phone className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav}/>
                 </p>
                 
                 {/* LOGO  */}
@@ -90,11 +95,51 @@ export default function Header ({ onOpenCart, onOpenSignin, showPromo }) {
                     </a>
                     <nav>
                         <ul>
-                            <li><a href='#' className={ headerHover ? styles.navHover : styles.nav}>EARRINGS</a></li>
-                            <li><a href='#' className={ headerHover ? styles.navHover : styles.nav}>NECKLACE</a></li>
-                            <li><a href='#' className={ headerHover ? styles.navHover : styles.nav}>RINGS</a></li>
-                            <li><a href='#' className={ headerHover ? styles.navHover : styles.nav}>BRACELET</a></li>
-                            <li><a href='#' className={ headerHover ? styles.navHover : styles.nav}>MORE</a></li>
+                            <li>
+                                <a 
+                                    href='#' 
+                                    className={`${headerHover ? styles.navHover : styles.nav} ${activeCategory === 'earrings' ? styles.active : ''}`}
+                                    onMouseEnter={() => { setActiveCategory('earrings'); }}
+                                >
+                                    EARRINGS
+                                </a>
+                            </li>
+                            <li>
+                                <a 
+                                    href='#' 
+                                    className={`${headerHover ? styles.navHover : styles.nav} ${activeCategory === 'necklace' ? styles.active : ''}`}
+                                    onMouseEnter={() => { setActiveCategory('necklace'); }}
+                                >
+                                    NECKLACE
+                                </a>
+                            </li>
+                            <li>
+                                <a 
+                                    href='#' 
+                                    className={`${headerHover ? styles.navHover : styles.nav} ${activeCategory === 'rings' ? styles.active : ''}`}
+                                    onMouseEnter={() => { setActiveCategory('rings'); }}
+                                >
+                                    RINGS
+                                </a>
+                            </li>
+                            <li>
+                                <a 
+                                    href='#' 
+                                    className={`${headerHover ? styles.navHover : styles.nav} ${activeCategory === 'bracelet' ? styles.active : ''}`}
+                                    onMouseEnter={() => { setActiveCategory('bracelet'); }}
+                                >
+                                    BRACELET
+                                </a>
+                            </li>
+                            <li>
+                                <a 
+                                    href='#' 
+                                    className={`${headerHover ? styles.navHover : styles.nav} ${activeCategory === 'more' ? styles.active : ''}`}
+                                    onMouseEnter={() => { setActiveCategory('more'); }}
+                                >
+                                    MORE
+                                </a>
+                            </li>
                         </ul>    
                     </nav>
                 </div>
@@ -106,6 +151,52 @@ export default function Header ({ onOpenCart, onOpenSignin, showPromo }) {
                 </p>
 
             </header>
+
+            {activeCategory === 'earrings' && headerHover ? 
+                <Dropdown 
+                    activeCategory={activeCategory}
+                    setHeaderHover={setHeaderHover}
+                    setActiveCategory={setActiveCategory}
+                    showPromo={showPromo}
+                /> : null
+            }
+
+            {activeCategory === 'necklace' && headerHover ? 
+                <Dropdown 
+                    activeCategory={activeCategory}
+                    setHeaderHover={setHeaderHover}
+                    setActiveCategory={setActiveCategory}
+                    showPromo={showPromo}
+                /> : null
+            }
+
+            {activeCategory === 'rings' && headerHover ? 
+                <Dropdown 
+                    activeCategory={activeCategory}
+                    setHeaderHover={setHeaderHover}
+                    setActiveCategory={setActiveCategory}
+                    showPromo={showPromo}
+                /> : null
+            }
+
+            {activeCategory === 'bracelet' && headerHover ? 
+                <Dropdown 
+                    activeCategory={activeCategory}
+                    setHeaderHover={setHeaderHover}
+                    setActiveCategory={setActiveCategory}
+                    showPromo={showPromo}
+                /> : null
+            }
+
+            {activeCategory === 'more' && headerHover ? 
+                <Dropdown 
+                    activeCategory={activeCategory}
+                    setHeaderHover={setHeaderHover}
+                    setActiveCategory={setActiveCategory}
+                    showPromo={showPromo}
+                /> : null
+            }
+            
         </>
         
     )

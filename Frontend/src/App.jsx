@@ -16,7 +16,10 @@ function App() {
     const signin = useRef();
 
     const [ showPromo, setShowPromo ] = useState(true);
-    const [ headerChange, setHeaderChange ] = useState(false);
+    const [ headerChange, setHeaderChange ] = useState(true);
+    const [ headerHover, setHeaderHover ] = useState(false);
+    const [ activeCategory, setActiveCategory ] = useState('');
+    const [ headerType, setHeaderType ] = useState()
 
     function handleOpenCart () {
 
@@ -34,35 +37,59 @@ function App() {
 
     }
 
-    let verticalScroll;
-    window.addEventListener("scroll", () => {
+    
+    // HEADER CHANGE HANDLER    
+    useEffect(() => {
 
-        verticalScroll = window.scrollY;
-        console.log(verticalScroll)
+        const handleScroll = () => {
 
-        if( verticalScroll === 0 ) {
-            setShowPromo(true);
+            let verticalScroll = window.scrollY;
+
+            if (verticalScroll <= 659) {
+
+                setHeaderChange(true);
+
+            } 
+            
+            if (verticalScroll >= 660) {
+
+                setHeaderChange(false);
+
+            }
+
+            if ( verticalScroll === 0 ) {
+
+                setShowPromo(true);
+
+            }
+
+            if ( verticalScroll !== 0 ) {
+
+                setShowPromo(false);
+
+            }
         }
 
-        if ( verticalScroll !== 0 ) {
-            setShowPromo(false);
-        }
-        
-        if (verticalScroll <= 659) {
-            setHeaderChange(true);
-        }
-        
-        if ( verticalScroll >= 660 ) {
-            setHeaderChange(false);
-        }
+        window.addEventListener("scroll", handleScroll);  
 
-    });
+    }, [])
 
     return (
         <>  
                 <Modal ref={signin} type='signin'/>
                 <Modal ref={cart} type='cart'/>
-                { headerChange ? <Header showPromo={showPromo} onOpenCart={handleOpenCart} onOpenSignin={handleOpenSignin}/> : <HeaderMinimized/>}
+                { headerChange ? 
+                    <Header 
+                        showPromo={showPromo}
+                        activeCategory={activeCategory}
+                        headerHover={headerHover}
+                        setHeaderHover={setHeaderHover}
+                        setActiveCategory={setActiveCategory}
+                        onOpenCart={handleOpenCart} 
+                        onOpenSignin={handleOpenSignin}
+                    /> : 
+                    <HeaderMinimized/>
+                }
                 <Carousel />
                 <PopularProducts />
                 <Categories />
