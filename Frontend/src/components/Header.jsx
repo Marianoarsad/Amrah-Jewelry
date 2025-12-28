@@ -23,7 +23,15 @@ const HEADLINE = [
     'Pulvinar vivamus fringilla lacus nec metus bibendum egestas!'
 ]
 
-export default function Header ({ activeCategory, setActiveCategory, headerHover, setHeaderHover, onOpenCart, onOpenSignin, showPromo }) {
+export default function Header ({ 
+    activeCategory, 
+    setActiveCategory, 
+    headerHover, 
+    setHeaderHover, 
+    handleOpenCart, 
+    handleOpenSignin, 
+    showPromo,
+    headerType }) {
 
     const [ headlineIndex, setHeadlineIndex ] = useState(0);
 
@@ -98,7 +106,10 @@ export default function Header ({ activeCategory, setActiveCategory, headerHover
                             <li>
                                 <a 
                                     href='#' 
-                                    className={`${headerHover ? styles.navHover : styles.nav} ${activeCategory === 'earrings' ? styles.active : ''}`}
+                                    className={`
+                                        ${headerHover ? styles.navHover : styles.nav} 
+                                        ${activeCategory === 'earrings' ? styles.active : ''}
+                                    `}
                                     onMouseEnter={() => { setActiveCategory('earrings'); }}
                                 >
                                     EARRINGS
@@ -107,7 +118,10 @@ export default function Header ({ activeCategory, setActiveCategory, headerHover
                             <li>
                                 <a 
                                     href='#' 
-                                    className={`${headerHover ? styles.navHover : styles.nav} ${activeCategory === 'necklace' ? styles.active : ''}`}
+                                    className={`
+                                        ${headerHover ? styles.navHover : styles.nav} 
+                                        ${activeCategory === 'necklace' ? styles.active : ''}
+                                    `}
                                     onMouseEnter={() => { setActiveCategory('necklace'); }}
                                 >
                                     NECKLACE
@@ -146,8 +160,14 @@ export default function Header ({ activeCategory, setActiveCategory, headerHover
 
                 {/* BUTTONS  */}
                 <p style={{marginBottom: "2rem", marginRight: "2rem"}}>
-                    <ShoppingCart className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav} style={{cursor: "pointer"}}/>
-                    <User className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav} style={{cursor: "pointer"}}/>
+                    <ShoppingCart
+                        onClick={handleOpenCart} 
+                        className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav }
+                    />
+                    <User
+                        onClick={handleOpenSignin} 
+                        className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav }
+                    />
                 </p>
 
             </header>

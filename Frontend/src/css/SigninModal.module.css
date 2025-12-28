@@ -1,0 +1,111 @@
+.signinModal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: white;
+    width: 33rem;
+    height: 28rem;
+
+    border: none;
+    border-radius: 1rem;
+}
+
+.signinModal[open] {
+    animation: open-signin 0.3s ease-in-out;
+    top: 45%;
+}
+
+body:has(.signinModal[open]) {
+    overflow: hidden;
+}
+
+.signinModal::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.signinModal > h2 {
+    font-family: "Carrois Gothic SC", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    color: #C64B50;
+}
+
+.signinModalBackBtnContainer > button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+.signinModalBackBtnContainer {
+    align-self: flex-start;
+}
+
+.signinModalBackBtnContainer > button > * {
+    stroke: #C64B50;
+    width: 2rem;
+    height: 2rem;
+}
+
+.signinForm {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+}
+
+.signinForm > label {
+    align-self: flex-start;
+    margin-top: 1rem;
+    color: #C64B50;
+    left: 20px;
+
+    font-family: "Carrois Gothic SC", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+}
+
+.signinForm > a {
+    margin-top: 3rem;
+    align-self: flex-start;
+    text-decoration: none;
+    color: #C64B50;
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 1.1rem;
+    
+}
+
+.signinForm > input {
+    width: 100%;
+    height: 2.6rem;
+    border: .01rem solid#C64B50;
+    outline: none;
+    padding: 1rem;
+}
+
+.signinForm > button {
+    width: 100%;
+    height: 3rem;
+    margin: .3rem;
+}
+
+.signinBtn {
+    background-color: #C64B50;
+    color: white;
+    border: none;
+}
+
+.createBtn {
+    background-color: transparent;
+    border: .01rem solid#C64B50;
+    color: #C64B50;
+}

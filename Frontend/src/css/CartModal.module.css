@@ -1,0 +1,101 @@
+.cartModal {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between  ;
+
+    position: absolute;
+    left: 65%;
+
+    border-radius: 0;
+    border-left: #C64B50 solid 2px;
+    margin: 0;
+    padding: 0;
+
+    max-height: 100vh;
+    height: 100%;
+    width: 35%;
+
+    background-color: white;
+}
+
+.cartModal::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.cartModal[open] {
+    animation: open-cart 0.40s ease-in-out;
+}
+
+body:has(.cartModal[open]) {
+    overflow: hidden;
+}
+
+.cartModal > form > button {
+    padding: 0;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    border: none;
+    background: none;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.cartModal > form > button > * {
+    stroke: #C64B50;
+    width: 100%;
+    height: 100%;
+}
+
+.cartBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    gap: .7rem;
+    
+    height: 80%;
+    width: 100%;
+    font-size: 1.1rem;
+}
+
+.cartBody p {
+    font-family: "League Spartan, sans-serif";
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+}
+
+.cartBody p a {
+    text-decoration: none;
+}
+
+.cartFooter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+    border-top: #C64B50 solid 1px;
+}
+
+.cartFooterBody {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin-top: 1rem;
+}
+
+.cartFooterProductContainer {
+    width: 80%;
+    height: 53%;
+    border: black solid 1px;
+    border-radius: 1rem;
+}
+
+.cartFooterBtn {
+    padding: 0;
+    background: none;
+    border: none;
+}

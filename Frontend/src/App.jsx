@@ -19,8 +19,9 @@ function App() {
     const [ headerChange, setHeaderChange ] = useState(true);
     const [ headerHover, setHeaderHover ] = useState(false);
     const [ activeCategory, setActiveCategory ] = useState('');
-    const [ headerType, setHeaderType ] = useState()
+    const [ headerType, setHeaderType ] = useState('headerFull');
 
+    // TO FIX
     function handleOpenCart () {
 
         if (cart.current) {
@@ -29,6 +30,7 @@ function App() {
         
     }
 
+    // TO FIX
     function handleOpenSignin () {
 
         if (signin.current) {
@@ -46,27 +48,22 @@ function App() {
             let verticalScroll = window.scrollY;
 
             if (verticalScroll <= 659) {
-
                 setHeaderChange(true);
-
+                setHeaderType('headerFull');
             } 
             
             if (verticalScroll >= 660) {
-
                 setHeaderChange(false);
-
+                setHeaderType('headerMinimized');
             }
 
+            // TO SIMPLIFY
             if ( verticalScroll === 0 ) {
-
                 setShowPromo(true);
-
             }
 
             if ( verticalScroll !== 0 ) {
-
                 setShowPromo(false);
-
             }
         }
 
@@ -79,16 +76,29 @@ function App() {
                 <Modal ref={signin} type='signin'/>
                 <Modal ref={cart} type='cart'/>
                 { headerChange ? 
-                    <Header 
+                    
+                    <Header
+                        cartRef={cart}
+                        signinRef={signin}
                         showPromo={showPromo}
                         activeCategory={activeCategory}
                         headerHover={headerHover}
+                        headerType={headerType}
+                        setHeaderHover={setHeaderHover}
+                        setActiveCategory={setActiveCategory}
+                        handleOpenCart={handleOpenCart} 
+                        handleOpenSignin={handleOpenSignin}
+                        
+                    /> : 
+                    <HeaderMinimized
+                        activeCategory={activeCategory}
+                        headerHover={headerHover}
+                        headerType={headerType}
                         setHeaderHover={setHeaderHover}
                         setActiveCategory={setActiveCategory}
                         onOpenCart={handleOpenCart} 
                         onOpenSignin={handleOpenSignin}
-                    /> : 
-                    <HeaderMinimized/>
+                    />
                 }
                 <Carousel />
                 <PopularProducts />

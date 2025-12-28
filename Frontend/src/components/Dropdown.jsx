@@ -4,7 +4,13 @@ import TestImage from '/image-4.jpg';
 // STYLES
 import styles from '../css/Dropdown.module.css';
 
-export default function Dropdown ({ activeCategory, setActiveCategory, setHeaderHover, showPromo }) {
+export default function Dropdown ({
+        showPromo, 
+        activeCategory, 
+        setActiveCategory,
+        headerType, 
+        setHeaderHover,
+    }) {
     
     return (
         <>  
@@ -15,7 +21,7 @@ export default function Dropdown ({ activeCategory, setActiveCategory, setHeader
                     setActiveCategory('');
                     setHeaderHover(false);
                 }}
-                style={{ top: showPromo ? 'calc(15vh + var(--promo-height))' : '15vh' }}
+                style={{ top: showPromo ? 'calc(15vh + var(--promo-height))' : `${headerType === 'headerMinimized' ? "9vh" : "15vh"}` }}
             >
                 <ul>
                     <li style={{marginTop: "2rem", marginLeft: "8rem"}}><a href='#'><strong>ABOUT US</strong></a></li>
@@ -41,10 +47,12 @@ export default function Dropdown ({ activeCategory, setActiveCategory, setHeader
                     setActiveCategory('');
                     setHeaderHover(false);
                 }}
-                style={{ top: showPromo ? 'calc(15vh + var(--promo-height))' : '15vh' }}
+                style={{ 
+                    top: showPromo ? 'calc(15vh + var(--promo-height))' : `${headerType === 'headerMinimized' ? "9vh" : "15vh"}`, 
+                }}
             >
-                
                 <a style={{marginTop: "2rem", marginLeft: "8rem"}} href='#'><strong>ALL {activeCategory.toUpperCase()}</strong></a>
+                
                 <ul>
                     <li style={{marginTop: "2rem", marginLeft: "8rem"}}><a href='#'><strong>STYLE</strong></a></li>
                     <li style={{marginTop: "1rem" ,marginLeft: "8rem"}}><a href='#'>GEMSTONE</a></li>

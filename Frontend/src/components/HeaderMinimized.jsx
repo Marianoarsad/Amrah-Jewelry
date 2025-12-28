@@ -10,18 +10,23 @@ import { useState } from 'react';
 // COMPONENTS
 import Dropdown from './Dropdown.jsx';
 
-export default function HeaderMinimized () {
-    
-    const [ activeCategory, setActiveCategory ] = useState('');
+export default function HeaderMinimized ({ 
+    activeCategory,
+    setActiveCategory,
+    headerType,
+    setHeaderHover
+    }) {
 
     return (
         <>
             <header className={styles.header}>
                 <nav>
+
                     {/* LOGO */}
                     <a href='#'>
                         <img src='/amrah-logo-stand-alone.png' alt='amrah-logo' className={styles.logo}/>
                     </a>
+
                     {/* NAV LINKS */}
                     <ul>
                         <li>
@@ -85,12 +90,51 @@ export default function HeaderMinimized () {
                     <button><User/></button>
                 </div>
             </header>
+
             {activeCategory === 'earrings' ? 
                 <Dropdown 
-                    category={'earrings'}
+                    activeCategory={activeCategory}
                     setActiveCategory={setActiveCategory}
+                    headerType={headerType}
+                    setHeaderHover={setHeaderHover}
                 /> 
-            : null
+                : null
+            }
+            {activeCategory === 'necklace' ? 
+                <Dropdown 
+                    activeCategory={activeCategory}
+                    setActiveCategory={setActiveCategory}
+                    headerType={headerType}
+                    setHeaderHover={setHeaderHover}
+                /> 
+                : null
+            }
+            {activeCategory === 'rings' ? 
+                <Dropdown 
+                    activeCategory={activeCategory}
+                    setActiveCategory={setActiveCategory}
+                    headerType={headerType}
+                    setHeaderHover={setHeaderHover}
+                /> 
+                : null
+            }
+            {activeCategory === 'bracelet' ? 
+                <Dropdown 
+                    activeCategory={activeCategory}
+                    setActiveCategory={setActiveCategory}
+                    headerType={headerType}
+                    setHeaderHover={setHeaderHover}
+                /> 
+                : null
+            }
+            {activeCategory === 'more' ? 
+                <Dropdown 
+                    activeCategory={activeCategory}
+                    setActiveCategory={setActiveCategory}
+                    headerType={headerType}
+                    setHeaderHover={setHeaderHover}
+                /> 
+                : null
             }
         </>
     )
