@@ -1,10 +1,12 @@
 import { useState } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import './App.css'
 
 // COMPONENTS
 import Login from './pages/Login.jsx';
 import Inventory from './pages/Inventory.jsx';
+import Landing from './pages/Landing.jsx';
 
 // CONTEXT
 import { AuthContextProvider } from './context/AuthContext';
@@ -34,11 +36,17 @@ function App() {
 
     }
 
-  return (
-    <AuthContextProvider>
-      <Inventory/>
-    </AuthContextProvider>
-  )
+    return (
+        <BrowserRouter >
+            <AuthContextProvider>
+                    <Routes>
+                        <Route path='/' element={<Landing/>}/>
+                        <Route path="/login" element={<Login/>}/>
+                        <Route path="/inventory" element={<Inventory/>}/>
+                    </Routes>
+            </AuthContextProvider>
+        </BrowserRouter>
+    )
 }
 
 export default App
