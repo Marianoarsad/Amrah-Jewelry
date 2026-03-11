@@ -5,7 +5,7 @@ export default function Header() {
         <header className="landing-header">
             <div className="header-container">
                 <div className="logo">
-                    <h2>App</h2>
+                    <h2>Arzad pares</h2>
                 </div>
                 <nav className="navigation">
                     <a href="/">Home</a>

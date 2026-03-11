@@ -1,14 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import TextArea from "../components/TextArea.jsx";
 
 import { productService } from "../service/inventoryService.js";
+import { useAuth } from "../context/AuthContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 export default function Inventory({ }) {
     
     const [ formData, setFormData ] = useState({});
     const [ errors, setErrors ] = useState({});
     const [ loading, setLoading ] = useState();
+
+    const { user } = useAuth();
+    const navigate = useNavigate();
 
     function handleChange (e) {
         const { name, value } = e.target;
@@ -32,6 +37,14 @@ export default function Inventory({ }) {
         }
 
     }
+
+    useEffect(() => {
+
+        if (!user) {
+            navigate('/login');
+        }
+
+    }, [])
 
     return (
         <>

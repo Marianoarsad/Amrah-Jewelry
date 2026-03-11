@@ -8,6 +8,7 @@ export function AuthContextProvider ({ children }) {
     
     const [ user, setUser ] = useState(null);
     const [ loading, setLoading ] = useState(true);
+
     
     useEffect(() => {
 

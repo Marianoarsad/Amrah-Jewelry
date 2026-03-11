@@ -2,47 +2,41 @@ import { useState, useContext } from "react"
 import { useAuth } from "../context/AuthContext.jsx";
 
 import AuthContext from "../context/AuthContext.jsx";
-
+import LoginComponent from "../components/auth/LoginComponent.jsx";
+import RegisterComponent from "../components/auth/RegisterComponent.jsx";
 
 export default function Login ({ }) {
     
-    const authCtx = useContext(AuthContext);
+    // const authCtx = useContext(AuthContext);
 
-    const [ formData, setFormData ] = useState({});
-    const [ errors, setErrors ] = useState({});
-    const [ loading, setLoading ] = useState();
+    // const [ formData, setFormData ] = useState({});
+    // const [ errors, setErrors ] = useState({});
+    // const [ loading, setLoading ] = useState();
 
-    function handleChange(e) {
+    // function handleChange(e) {
         
-        const { name, value } = e.target;
+    //     const { name, value } = e.target;
 
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value
-        }))
-    }
+    //     setFormData((prevData) => ({
+    //         ...prevData,
+    //         [name]: value
+    //     }))
+    // }
 
-    async function handleSumit(e) {
-        e.preventDefault();
+    // async function handleSumit(e) {
+    //     e.preventDefault();
 
-        try {
+    //     try {
 
-        } catch (error) {
-            setErrors({message: error.message})
-        }
-    }
+    //     } catch (error) {
+    //         setErrors({message: error.message})
+    //     }
+    // }
     
     return (
         <>
-        <form>
-            <label>Email</label>
-            <input value={formData.email} onChange={handleChange} placeholder="Enter your email" type="text"/>
-            <label>Password</label>
-            <input value={formData.password} onChange={handleChange} placeholder="Enter your password" type="password"/>
-
-            <button>Submit</button>
-        </form>
-            
+            <LoginComponent />
+            <RegisterComponent />
         </>
     )
 }

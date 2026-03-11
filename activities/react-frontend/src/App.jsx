@@ -6,7 +6,7 @@ import './App.css'
 // COMPONENTS
 import Login from './pages/Login.jsx';
 import Inventory from './pages/Inventory.jsx';
-import Landing from './pages/Landing.jsx';
+import Landing from './components/landing/Landing.jsx';
 
 // CONTEXT
 import { AuthContextProvider } from './context/AuthContext';
