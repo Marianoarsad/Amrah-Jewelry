@@ -1,67 +1,34 @@
-.signinModal {
+.register {
+    margin-top: 15rem;
+    width: 99vw;
+    height: 28vh;
+
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    background-color: white;
-    width: 33rem;
-    height: 28rem;
-
-    border: none;
-    border-radius: 1rem;
-}
-
-.signinModal[open] {
-    animation: open-signin 0.3s ease-in-out;
-    top: 45%;
-}
-
-body:has(.signinModal[open]) {
-    overflow: hidden;
-}
-
-.signinModal::backdrop {
-    background: rgba(0, 0, 0, 0.5);
 }
 
 .signinModal > h2 {
+    
     font-family: "Carrois Gothic SC", sans-serif;
     font-weight: 600;
     font-style: normal;
     color: #C64B50;
 }
 
-.signinModalBackBtnContainer > button {
-    cursor: pointer;
-    border: none;
-    outline: none;
-    background: none;
-}
+.registerForm {
+    width: 27%;
 
-.signinModalBackBtnContainer {
-    align-self: flex-start;
-}
+    margin-top: 7rem;
 
-.signinModalBackBtnContainer > button > * {
-    stroke: #C64B50;
-    width: 2rem;
-    height: 2rem;
-}
-
-.signinForm {
-    display: flex; 
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 90%;
 }
 
-.signinForm > label {
+.registerForm > label {
     align-self: flex-start;
     margin-top: 1rem;
     color: #C64B50;
@@ -72,7 +39,7 @@ body:has(.signinModal[open]) {
     font-style: normal;
 }
 
-.signinForm > a {
+.registerForm > a {
     margin-top: 3rem;
     align-self: flex-start;
     text-decoration: none;
@@ -84,7 +51,7 @@ body:has(.signinModal[open]) {
     
 }
 
-.signinForm > input {
+.registerForm > input {
     width: 100%;
     height: 2.6rem;
     border: .01rem solid#C64B50;
@@ -92,19 +59,33 @@ body:has(.signinModal[open]) {
     padding: 1rem;
 }
 
-.signinForm > button {
-    width: 100%;
+.registerActionsContainer {
     height: 3rem;
-    margin: .3rem;
+    width: 100%;
 }
 
-.signinBtn {
+.registerFormBtn {
+    width: 100%;
+
+    padding: 0;
+    margin-top: 2rem;
+}
+
+.registerBtn {
+    margin-top: .7rem;
+    width: 100%;
+    height: 100%;
+
     background-color: #C64B50;
     color: white;
     border: none;
 }
 
-.createBtn {
+.cancelBtn {
+    margin-top: .7rem;
+    width: 100%;
+    height: 100%;
+
     background-color: transparent;
     border: .01rem solid#C64B50;
     color: #C64B50;

@@ -13,7 +13,6 @@ export default function Landing ({}) {
             <Carousel />
             <PopularProducts />
             <Categories />
-            <Footer />
         </>
     )
 }

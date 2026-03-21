@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 
 // COMPONENTS
 import CartModal from '../Cart.jsx';
-import SigninModal from '../SigninModal.jsx';
+import SigninModal from '../../pages/Signin.jsx';
 
 export default function Modal({ children, open, onClose, className }) {
 
