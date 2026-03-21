@@ -1,0 +1,31 @@
+.shopGridMainItem {
+    height: 100%;
+    width: 100%;
+    
+    display: flex;
+}
+
+.shopGridMainItem:hover {
+    width: 101%;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+}
+
+.shopGridMainItem img {
+    width: 100%;
+}
+
+.shopGridMainItem article {
+    display: flex;
+    flex-direction: column;
+    grid-gap: .6rem;
+    
+}
+
+.shopGridMainItem p {
+    text-align: center;
+    margin: 0;
+}
+
+.price {
+    font-size: 1.2rem;
+}
