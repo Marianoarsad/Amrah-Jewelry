@@ -8,6 +8,7 @@ import Header from "./components/Header.jsx";
 import HeaderMinimized from './components/HeaderMinimized.jsx';
 import Cart from "./components/Cart.jsx";
 import Footer from './components/Footer.jsx';
+import Search from './components/Search.jsx';
 
 
 // PAGES
@@ -91,6 +92,7 @@ function App() {
                     <Route path='/register' element={<Register/>}/>
                 </Routes>
                 <Cart />
+                <Search />
                 <Footer />
             </CartContextProvider>
             </UserProgressContextProvider>
@@ -99,3 +101,9 @@ function App() {
 }
 
 export default App
+
+// TODO:
+// Build Search Component ✅
+// Build Cart Component ✅
+// Build Checkout Component 
+// Integrate MongoDB

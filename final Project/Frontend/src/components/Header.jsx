@@ -41,6 +41,10 @@ export default function Header ({
         userProgressCtx.showCart();
     }
 
+    function handleShowSearch() {
+        userProgressCtx.showSearch();
+    }
+
     function handleMouseEnter () {
         setHeaderHover(true);
     }
@@ -95,7 +99,10 @@ export default function Header ({
 
                 {/* BUTTONS  */}
                 <p style={{marginBottom: "2rem", marginLeft: "2rem"}}>
-                    <Search className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav}/>
+                    <Search 
+                        onClick={handleShowSearch} 
+                        className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav}
+                    />
                     <Phone className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav}/>
                 </p>
                 

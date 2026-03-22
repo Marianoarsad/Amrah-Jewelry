@@ -12,14 +12,14 @@ export default function Modal({ children, open, onClose, className }) {
     useEffect(() => {
 
         const modal = dialog.current;
+        
         if (!modal) return;
 
         if (open) {
             modal.showModal();
-        } else {
-            if (!modal.open) return;
-            modal.close();
         }
+            
+        return () => modal.close();
 
     }, [open]);
 

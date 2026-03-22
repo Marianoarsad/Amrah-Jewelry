@@ -4,7 +4,7 @@ import styles from '../css/Shop.module.css';
 import { ChevronDown, ListFilter } from 'lucide-react';
 
 // COMPONENTS
-import GridItem from '../components/UI/GridItem.jsx';
+import ProductItem from '../components/UI/ProductItem.jsx';
 
 // ASSETS
 import sampleImage1 from '../assets/pearl.png'
@@ -64,30 +64,30 @@ export default function Shop({}) {
                 </div>
                 {/* MAIN */}
                 <ul className={styles.shopGridMain}>
-                    <GridItem />
-                    <GridItem />
-                    <GridItem />
-                    <GridItem />
+                    <ProductItem />
+                    <ProductItem />
+                    <ProductItem />
+                    <ProductItem />
 
-                    <GridItem />
-                    <GridItem />
-                    <GridItem />
-                    <GridItem />
+                    <ProductItem />
+                    <ProductItem />
+                    <ProductItem />
+                    <ProductItem />
 
-                    <GridItem />
-                    <GridItem />
-                    <GridItem />
-                    <GridItem />
+                    <ProductItem />
+                    <ProductItem />
+                    <ProductItem />
+                    <ProductItem />
 
-                    <GridItem />
-                    <GridItem />
-                    <GridItem />
-                    <GridItem />
+                    <ProductItem />
+                    <ProductItem />
+                    <ProductItem />
+                    <ProductItem />
 
-                    <GridItem />
-                    <GridItem />
-                    <GridItem />
-                    <GridItem />
+                    <ProductItem />
+                    <ProductItem />
+                    <ProductItem />
+                    <ProductItem />
                 </ul>
             </div>
         </section>
