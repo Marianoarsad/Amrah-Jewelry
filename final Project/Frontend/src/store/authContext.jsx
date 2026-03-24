@@ -17,20 +17,21 @@ export function AuthContextProvider({ children }) {
     const [ user, setUser ] = useState(null);
     const [ isLoading, setIsLoading ] = useState(false);
 
-    useEffect(() => {
-        const currentUser = authService.getCurrentUser();
-        console.log(`Current User: ${JSON.stringify(currentUser)}`);
+    // useEffect(() => {
+    //     const currentUser = authService.getCurrentUser();
+    //     console.log(`Current User: ${JSON.stringify(currentUser)}`);
 
-        if (currentUser) {
-            setUser(currentUser);
-        }
+    //     if (currentUser) {
+    //         setUser(currentUser);
+    //     }
 
-    }, []);
+    // }, []);
 
     async function login (credentials) {
-        const data = await authService.login(credentials);
-        setUser(data);
-        return data
+        const res = await authService.login(credentials);
+        console.log(res);
+        setUser(res);
+        return res
     }
 
     async function register (userData) {
@@ -44,7 +45,7 @@ export function AuthContextProvider({ children }) {
     }
 
     const authContext = {
-        user,
+        user: user,
         isLoading,
         login,
         register,

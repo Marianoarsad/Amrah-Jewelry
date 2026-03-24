@@ -29,8 +29,7 @@ import UserProgressContext from './store/UserProgressContext.jsx';
 
 function App() {
 
-    const [ user, setUser ] = useState(null);
-
+    const [ isLoggedIn, setIsLoggedIn ] = useState(false);
     const [ showPromo, setShowPromo ] = useState(true);
     const [ headerChange, setHeaderChange ] = useState(true);
     const [ headerHover, setHeaderHover ] = useState(false);
@@ -41,16 +40,20 @@ function App() {
     const userProgressCtx = useContext(UserProgressContext);
     const authContext = useContext(AuthContext);
 
+    // console.log(`authContext.user:  ${JSON.stringify(authContext.user)}`)
+    // console.log(`authContext.isAuthenticated:  ${authContext.isAuthenticated}`)
+
     // HEADER CHANGE HANDLER
+    
+    // CHECK IF THERE IS A LOGGED IN USER
+    let existingUser = authService.getCurrentUser();
     useEffect(() => {   
-        // CHECK IF THERE IS A LOGGED IN USER
-        const currentUser = authService.getCurrentUser();
 
-        if (currentUser) {
-            //console.log(`LOGGED IN USER: ${currentUser}`);
-
-
-            setUser(currentUser);
+        if (existingUser) {
+            console.log(`Existing User: ${JSON.stringify(existingUser)}`);
+            setIsLoggedIn(true);
+        } else {
+            console.log(`NO USER LOGGED IN`);
         }
 
         const handleScroll = () => {
@@ -78,7 +81,7 @@ function App() {
 
         window.addEventListener("scroll", handleScroll);  
 
-    }, []);
+    }, [existingUser]);
 
     return (
         <BrowserRouter>
@@ -93,6 +96,7 @@ function App() {
                         headerType={headerType}
                         setHeaderHover={setHeaderHover}
                         setActiveCategory={setActiveCategory}
+                        isLoggedIn={isLoggedIn}
                     /> : 
                     <HeaderMinimized
                         activeCategory={activeCategory}
@@ -100,6 +104,7 @@ function App() {
                         headerType={headerType}
                         setHeaderHover={setHeaderHover}
                         setActiveCategory={setActiveCategory}
+                        isLoggedIn={isLoggedIn}
                     />
                 }
                 <Routes>

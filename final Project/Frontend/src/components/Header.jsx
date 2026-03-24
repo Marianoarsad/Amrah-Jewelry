@@ -6,8 +6,9 @@ import Promo from "./Promo.jsx";
 import Dropdown from "./Dropdown.jsx";
 
 // PACKAGES
-import { useContext, useState } from "react";
-import { ChevronLeft, ChevronRight, Phone, Search, ShoppingCart, User } from 'lucide-react';
+import { useContext, useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight, Phone, Search, ShoppingCart, User, LogOut } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 
 // IMAGES
 import AmrahTextLogoBlack from '/amrah-logo-text-black.png';
@@ -18,6 +19,7 @@ import ShoppingBag from '/shopping-bag.svg';
 
 // CONTEXT
 import UserProgressContext from "../store/UserProgressContext.jsx";
+import AuthContext from "../store/authContext.jsx";
 
 const HEADLINE = [
     'Lorem ipsum dolor sit amet consectetur adipiscing elit',
@@ -31,11 +33,20 @@ export default function Header ({
     headerHover,
     setHeaderHover,
     showPromo,
+    isLoggedIn
 }) {
 
     const [ headlineIndex, setHeadlineIndex ] = useState(0);
 
     const userProgressCtx = useContext(UserProgressContext);
+    const authContext = useContext(AuthContext);
+
+    const navigate = useNavigate();
+
+    function handleLogout () {
+        authContext.logout();
+        navigate('/sign-in')
+    }
 
     function handleShowCart() {
         userProgressCtx.showCart();
@@ -103,7 +114,9 @@ export default function Header ({
                         onClick={handleShowSearch} 
                         className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav}
                     />
-                    <Phone className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav}/>
+                    <Phone 
+                        className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav}
+                    />
                 </p>
                 
                 {/* LOGO  */}
@@ -169,14 +182,21 @@ export default function Header ({
                 </div>
 
                 {/* BUTTONS  */}
-                <p style={{marginBottom: "2rem", marginRight: "2rem"}}>
+                <p style={{marginBottom: "2rem", marginRight: "2rem"}} className={styles.btnContainer}>
                     <ShoppingCart
                         onClick={handleShowCart} 
                         className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav }
                     />
-                    <User
-                        className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav }
-                    />
+                    { isLoggedIn ? 
+                        <LogOut 
+                            className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav }
+                            onClick={handleLogout}
+                        />
+                        :  
+                        <User 
+                            className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav }
+                        />
+                    }
                 </p>
 
             </header>

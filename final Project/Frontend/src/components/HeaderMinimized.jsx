@@ -2,7 +2,7 @@
 import styles from '../css/HeaderMinimized.module.css';
 
 // PACKAGES
-import { Search, Phone, ShoppingCart, User } from 'lucide-react';
+import { Search, Phone, ShoppingCart, User, LogOut } from 'lucide-react';
 
 // REACT HOOKS
 import { useState } from 'react';
@@ -14,7 +14,8 @@ export default function HeaderMinimized ({
     activeCategory,
     setActiveCategory,
     headerType,
-    setHeaderHover
+    setHeaderHover,
+    isLoggedIn
     }) {
 
     return (
@@ -87,7 +88,7 @@ export default function HeaderMinimized ({
                     <div className={styles.verticalLine}></div>
                     <button><Phone/></button>
                     <button><ShoppingCart/></button>
-                    <button><User/></button>
+                    <button>{ isLoggedIn ?  <LogOut/> : <User/>}</button>
                 </div>
             </header>
 
