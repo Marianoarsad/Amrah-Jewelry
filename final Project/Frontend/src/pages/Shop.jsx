@@ -1,16 +1,47 @@
-import styles from '../css/Shop.module.css';
-
-// PACKAGES
+// HOOKS & PACKAGES
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { ChevronDown, ListFilter } from 'lucide-react';
 
 // COMPONENTS
-import ProductItem from '../components/UI/ProductItem.jsx';
+import ProductItem from '../components/ProductItem.jsx';
 
 // ASSETS
-import sampleImage1 from '../assets/pearl.png'
+import sampleImage1 from '../assets/pearl.png';
+
+// UTIL
+import { currencyFormatter } from '../util/formatting.js';
+
+import styles from '../css/Shop.module.css';
 
 export default function Shop({}) {
+    const location = useLocation();
     
+    const [ products, setProducts ] = useState([]);
+
+    // DESTRUCTURE FROM Search.jsx
+    const { filteredProducts, category } = location.state || {};
+
+    // FETCH PRODUCTS
+    useEffect(() => {
+
+        if (filteredProducts) {
+            setProducts(filteredProducts);
+            
+        } else {
+            async function getProducts () {
+                const response = await fetch ('http://localhost:8000/products/getProducts');
+                const products = await response.json();
+
+                setProducts(products);
+            }
+
+            getProducts();
+        }
+
+        
+    });
+
     return (
         <section className={styles.shop}>
             {/* CATEGORY */}
@@ -49,11 +80,11 @@ export default function Shop({}) {
                             SORT BY
                             <ChevronDown  size={24} color="#c7464e"/>
                         </button>
-                        <p>108 products</p>
+                        <p>{products.length} PRODUCTS</p>
                         
                     </div>
                     <div className={styles.shopGridUpperMiddle}>
-                        <h3>Shop</h3>
+                        {category ? <h3>{category}</h3> : <h3>Shop</h3>}
                     </div>
                     <div className={styles.shopGridUpperRight}>
                         <button>
@@ -64,30 +95,17 @@ export default function Shop({}) {
                 </div>
                 {/* MAIN */}
                 <ul className={styles.shopGridMain}>
-                    <ProductItem />
-                    <ProductItem />
-                    <ProductItem />
-                    <ProductItem />
-
-                    <ProductItem />
-                    <ProductItem />
-                    <ProductItem />
-                    <ProductItem />
-
-                    <ProductItem />
-                    <ProductItem />
-                    <ProductItem />
-                    <ProductItem />
-
-                    <ProductItem />
-                    <ProductItem />
-                    <ProductItem />
-                    <ProductItem />
-
-                    <ProductItem />
-                    <ProductItem />
-                    <ProductItem />
-                    <ProductItem />
+                    {products.map((product) => (
+                        <ProductItem
+                            product={product}
+                            key={product._id}
+                            id={product._id}
+                            name={product.name}
+                            category={product.category}
+                            description={product.description}
+                            price={currencyFormatter.format(product.price)}
+                        />
+                    ))}
                 </ul>
             </div>
         </section>

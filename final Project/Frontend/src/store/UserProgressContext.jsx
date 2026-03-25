@@ -14,9 +14,10 @@ export function UserProgressContextProvider({ children }) {
 
     const [ userProgress, setUserProgress ] = useState('');
 
+    //console.log(userProgress);
+
     function showCart() {
         setUserProgress('cart');
-        console.log(userProgress);
     }
 
     function hideCart() {

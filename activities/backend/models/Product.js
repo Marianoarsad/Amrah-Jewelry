@@ -19,6 +19,24 @@ const productSchema = new mongoose.Schema({
         required: true, 
         min: 0
     },
+    image: {
+        type: String
+    },
+    category: {
+        type: String
+    },
+    status: {
+        type: String,
+        enum: ["active", "inactive"],
+        default: "active"
+    },
+    featured: {
+        type: Boolean,
+        default: false
+    },
+    featuredAt: {
+        type: Date
+    }
 }, { timestamps: true });
 
 export default mongoose.model('Product', productSchema);

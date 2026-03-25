@@ -1,5 +1,6 @@
 // HOOKS & LIBRARIES
-import { useContext } from 'react';
+import { useContext, useActionState, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, X  } from 'lucide-react';
 
 // CONTEXT
@@ -17,10 +18,27 @@ export default function Search({}) {
     
     const userProgressCtx = useContext(UserProgressContext);
 
+    const navigate = useNavigate();
+
     function handleHideSearch() {
         userProgressCtx.hideSearch();
     }
     
+    async function handleSearchAction (prevFormState, formData) {
+        
+        const search = formData.get('search');
+        console.log(search);
+        
+        const response = await fetch(`http://localhost:8000/products/search?category=${search}`);
+        const data = await  response.json();
+        console.log(response);
+
+        navigate('/shop', { state: { filteredProducts: data, category: search } });
+        userProgressCtx.hideSearch();
+    }
+
+    const [ formState, formAction ] = useActionState(handleSearchAction, { errors: null });
+
     return (
         <Modal
             className={styles.search}
@@ -36,8 +54,17 @@ export default function Search({}) {
             </button>
 
             {/*SEARCH*/}
-            <form className={styles.searchForm}>
-                <input className={styles.searchInput} type='search' placeholder="Search" />
+            <form 
+                className={styles.searchForm}
+                action={formAction}
+            >
+                <input 
+                    className={styles.searchInput} 
+                    type='search' 
+                    placeholder="Search"
+                    id="search"
+                    name="search"
+                />
 
                 <div className={styles.searchCategory}>
                     <h3>Category</h3>

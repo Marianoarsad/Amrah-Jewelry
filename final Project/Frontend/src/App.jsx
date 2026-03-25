@@ -8,6 +8,7 @@ import HeaderMinimized from './components/HeaderMinimized.jsx';
 import Cart from "./components/Cart.jsx";
 import Footer from './components/Footer.jsx';
 import Search from './components/Search.jsx';
+import Checkout from './components/Checkout.jsx';
 
 // PAGES
 import Landing from './pages/Landing.jsx';
@@ -50,10 +51,10 @@ function App() {
     useEffect(() => {   
 
         if (existingUser) {
-            console.log(`Existing User: ${JSON.stringify(existingUser)}`);
+            //console.log(`Existing User: ${JSON.stringify(existingUser)}`);
             setIsLoggedIn(true);
         } else {
-            console.log(`NO USER LOGGED IN`);
+            //console.log(`NO USER LOGGED IN`);
         }
 
         const handleScroll = () => {
@@ -116,6 +117,7 @@ function App() {
                 </Routes>
                 <Cart />
                 <Search />
+                <Checkout />
                 <Footer />
             </CartContextProvider>
             </UserProgressContextProvider>

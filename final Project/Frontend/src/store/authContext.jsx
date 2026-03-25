@@ -1,5 +1,5 @@
 // HOOKS & LIBRARIES
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useReducer } from "react";
 
 // SERVICES (Helper Functions)
 import { authService } from '../services/authService.js';
@@ -8,13 +8,12 @@ const AuthContext = createContext({
     user: null,
     login: (credentials) => {},
     register: (userData) => {},
-    logout: () => {},
-    isAuthenticated: false
+    logout: () => {}
 });
 
 export function AuthContextProvider({ children }) {
 
-    const [ user, setUser ] = useState(null);
+    const [ currentUser, setCurrentUser ] = useState(null);
     const [ isLoading, setIsLoading ] = useState(false);
 
     // useEffect(() => {
@@ -29,8 +28,8 @@ export function AuthContextProvider({ children }) {
 
     async function login (credentials) {
         const res = await authService.login(credentials);
-        console.log(res);
-        setUser(res);
+        //console.log(res);
+        setCurrentUser(res);
         return res
     }
 
@@ -41,17 +40,15 @@ export function AuthContextProvider({ children }) {
 
     async function logout () {
         await authService.logout();
-        setUser(null);
+        setCurrentUser(null);
     }
 
     const authContext = {
-        user: user,
+        user: currentUser,
         isLoading,
         login,
         register,
         logout,
-        // Double Negation Operator
-        isAuthenticated: !!user // true or false
     }
 
     return <AuthContext.Provider value={authContext}>{children}</AuthContext.Provider>

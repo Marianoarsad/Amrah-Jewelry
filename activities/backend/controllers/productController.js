@@ -1,6 +1,45 @@
 import Product from '../models/Product.js';
 import mongoose from 'mongoose';
 
+// GET ALL ACTIVE PRODUCTS
+// Returns products with status: "active"
+export const getAllActive = async (req, res) => {
+    try {
+        // Find all products where status equals "active"
+        // Select only the fields needed: id, name, description, price, image, category
+        const products = await Product.find({ status: "active" })
+            .select("name description price image category");
+
+        // Return the products as JSON (empty array if none exist)
+        res.status(200).json(products);
+
+    } catch (error) {
+        // Return 500 error if something goes wrong
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// GET FEATURED PRODUCTS
+// Returns products marked as featured (max 10)
+export const getFeatured = async (req, res) => {
+    try {
+        // Find products where featured equals true
+        // Limit to 10 products maximum
+        // Sort by featuredAt date (most recent first) if available
+        const products = await Product.find({ featured: true })
+            .select("name description price image category")
+            .limit(10)
+            .sort({ featuredAt: -1 });
+
+        // Return the featured products as JSON
+        res.status(200).json(products);
+
+    } catch (error) {
+        // Return 500 error if something goes wrong
+        res.status(500).json({ message: error.message });
+    }
+};
+
 export const create = async (req, res) => {
 
     try {

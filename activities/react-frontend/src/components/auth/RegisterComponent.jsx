@@ -30,7 +30,7 @@ export default function RegisterComponent () {
     }
 
     return (
-        <form>
+        <form onSubmit={handleSumit}>
             <h3>Create an account</h3>
             <label>Username</label>
             <input value={formData.email} onChange={handleChange} placeholder="Enter your username" type="text"/>

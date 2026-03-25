@@ -1,0 +1,90 @@
+.checkout[open] {
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+    left: 64.8%;
+
+    border-radius: 0;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: #C64B50 solid 2px;
+    margin: 0;
+    
+    width: 35%;
+    height: 100%;
+    min-height: 100vh;
+    max-height: fit-content;
+
+    background-color: white;
+}
+
+.checkout::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.checkoutForm {
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+    
+    margin-top: 2rem;
+}
+
+body:has(.checkout[open]) {
+    overflow: hidden;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkoutForm h2 {
+    font-size: 2rem;
+    color: #C64B50;
+}
+
+.checkoutForm p {
+    font-size: 1.3rem;
+}
+
+.checkoutForm label {
+    color: #C64B50;
+    font-size: 1.1rem;
+}
+
+.checkoutForm input {
+    height: 2rem;
+    border: 1px solid #C64B50;
+}
+
+.checkoutForm button {
+    height: 3.2rem;
+    border: 0;
+    color: white;
+    background-color: #C64B50;
+}
+
+.checkoutSubmitBtn {
+    height: 3.2rem;
+    border: 0;
+    color: white;
+    background-color: #C64B50;
+}
+
+.modalActions {
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    width: 2rem;
+    height: 2rem;
+}
+
+.modalActions > * {
+    stroke: #C64B50;
+    width: 100%;
+    height: 100%;
+}
