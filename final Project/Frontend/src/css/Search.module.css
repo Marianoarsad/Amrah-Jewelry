@@ -1,0 +1,205 @@
+.search[open] {
+    position: fixed;
+    box-sizing: border-box;
+    inset: 0;
+    z-index: 1000;
+    
+    margin: 0;
+    padding: 0;
+    border: none;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    width: 100vw;
+    height: 100vh;
+    /* Remove default dialog styles */
+    max-width: none;
+    max-height: none;
+
+    background: white;
+}
+
+body:has(.search[open]) {
+    overflow: hidden;
+}
+
+.closeBtn {
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 1.4rem;
+    margin-left: 1.4rem;
+    
+    border: none;
+    border-radius: 25px;
+    padding: 1rem;
+    cursor: pointer;
+    
+    /*FIT ONLY <X/> COMPONENT*/
+    width: fit-content;
+    height: fit-content;
+
+    background-color: rgba(184, 184, 184, 0.1); /* 0.5 is 50% opacity */
+}
+
+.closeBtn > * {
+    
+    padding: none;
+    margin: 0;
+}
+
+.searchForm {
+    width: 70%;
+    height: fit-content;
+
+    display: flex;
+    flex-direction: column;
+
+    background: none;
+}
+
+.searchInput {
+    width: 100%;
+    height: 3rem;
+
+    padding-left: none;
+    padding-right: none;
+    padding-top: none;
+    padding-bottom: none;
+
+    border-left: none;
+    border-top: none;
+    border-right: none;
+
+    font-size: 2rem;
+    border-bottom: 1px solid #c7464e;
+}
+
+/* REMOVES "X" BUTTON ON THE RIGHT */
+.searchInput::-webkit-search-decoration,
+.searchInput::-webkit-search-cancel-button,
+.searchInput::-webkit-search-results-button,
+.searchInput::-webkit-search-results-decoration {
+    display: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.searchInput:focus {
+    outline: none;
+}
+
+.searchInput::placeholder {
+    font-size: 2rem;
+}
+
+/* CATEGORY */
+.searchCategory {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 4rem;
+
+    color: #c96868;
+    font-size: 1.4rem;
+}
+
+.categoryContainer {
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+    gap: .9rem;
+}
+
+.categoryContainer > button {
+    width: fit-content;
+    height: 3.3rem;
+
+    margin-top: 1rem;
+
+    border: none;
+    padding-left: .8rem;
+    padding-right: .8rem;
+
+    cursor: pointer;
+
+    background-color: #f8f8fa;
+}
+
+.categoryContainer > button:hover {
+    scale: 1.1;
+}
+/* CATEGORY */
+
+/* POPULAR */
+.popular {
+    width: 70%;
+    height: fit-content;
+    height: fit-content;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    margin-top: 4rem;
+    gap: .7rem;
+    
+}
+
+.popular > ul {
+    padding: 0;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.popular > h3 {
+    color: #c96868;
+    font-size: 1.4rem;
+}
+
+.popularItem {
+    width: 10rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin: none;
+
+    padding: .4rem;
+}
+
+.popularItem:hover {
+    scale: 101%;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+}
+
+.popularItem img {
+    width: 100%;
+}
+
+.popularItem article {
+    display: flex;
+    flex-direction: column;
+}
+
+.popularItem p {
+    text-align: center;
+    margin: 0;
+
+    font-size: 1rem;
+}
+
+.price {
+    font-size: 1rem;
+}
+/* POPULAR */

@@ -1,0 +1,100 @@
+.signIn {
+    margin-top: 13rem;
+    width: 99vw;
+    height: 28vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.signinModal > h2 {
+    
+    font-family: "Carrois Gothic SC", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    color: #C64B50;
+}
+
+.signinForm {
+    width: 27%;
+
+    margin-top: 7rem;
+
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.signinForm > label {
+    align-self: flex-start;
+    margin-top: 1rem;
+    color: #C64B50;
+    left: 20px;
+
+    font-family: "Carrois Gothic SC", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+}
+
+.signinForm > a {
+    margin-top: 3rem;
+    align-self: flex-start;
+    text-decoration: none;
+    color: #C64B50;
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 1.1rem;
+    
+}
+
+.signinForm > input {
+    width: 100%;
+    height: 2.6rem;
+    border: .01rem solid#C64B50;
+    outline: none;
+    padding: 1rem;
+}
+
+.signinActionsContainer {
+    height: 3rem;
+    width: 100%;
+
+    width: 100%;
+    height: 3rem;
+    margin: .3rem;
+}
+
+.signinFormBtn {
+    width: 100%;
+
+    padding: 0;
+    margin-top: 2rem;
+}
+
+.signinBtn {
+    margin-top: .7rem;
+    width: 100%;
+    height: 100%;
+
+    background-color: #C64B50;
+    color: white;
+    border: none;
+
+    cursor: pointer;
+}
+
+.createBtn {
+    margin-top: .7rem;
+    width: 100%;
+    height: 100%;
+
+    background-color: transparent;
+    border: .01rem solid#C64B50;
+    color: #C64B50;
+
+    cursor: pointer;
+}

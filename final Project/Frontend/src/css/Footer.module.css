@@ -1,0 +1,143 @@
+.footer {
+    margin-top: 20rem;
+    width: 99vw;
+    height: 80vh;
+    border-top: #C64B50 solid 1px;
+}
+
+.footerUpperContainer {
+    width: 100%;
+    height: 40%;
+    display: flex;
+}
+
+.footerUpperContainer > ul {
+    padding: 0;
+    margin-top: 3rem;
+    margin-left: 3rem;
+    gap: 5rem;
+}
+
+.footerUpperContainer > ul > li {
+    display: block;
+}
+
+.footerUpperContainerHeader {
+    list-style: none;
+
+    color: #C64B50;
+    font-size: 2rem;
+
+    font-family: "League Spartan", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.footerUpperContainerLinks {
+    list-style: none;
+    margin-top: 0.7rem;
+}
+
+.footerUpperContainerLinks > a {
+    text-decoration: none;
+
+    color: black;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 0.9rem;
+
+    transition: color 200ms ease-in-out
+}
+
+.footerUpperContainerLinks > a:hover {
+    color: #C64B50;
+}
+
+.footerLowerContainer {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.newsletterContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: .7rem;
+    margin-left: 3rem;
+    height: 100%;
+}
+
+.newsletterContainer h3 {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2.4rem;
+    color: #C64B50;
+}
+
+.newsletterContainer p {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 250;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    font-size: 1.3rem;
+}
+
+.newsletterContainer > form {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.newsletterContainer > form > input {
+    width: 70%;
+    height: 2.6rem;
+    padding: 1rem;
+    border: #C64B50 solid 1px;
+    border-right: none;
+    outline: none;
+}
+
+.newsletterContainer > form > button {
+    height: 2.6rem;
+    width: 2.6rem;
+    padding: 0;
+    border: #C64B50 solid 1px;
+    border-left: none;
+    background: none;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.socmedContainer {
+    height: 100%;
+    width: auto;
+    display: flex;
+    align-items: flex-end;
+    gap: 1.7rem;
+    margin-right: 3rem;
+}
+
+.socmedLogo {
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 1rem;
+}
+
+.copyright {
+    font-size: .7rem;
+    margin-left: 3rem;
+    color: #C64B50;
+    padding-bottom: 1rem;
+
+    justify-self: center;
+}
