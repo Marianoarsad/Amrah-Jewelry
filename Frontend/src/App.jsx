@@ -1,58 +1,72 @@
-import { useRef, useEffect, useState } from 'react';
+// HOOKS & LIBRARIES
+import { useRef, useEffect, useState, useContext } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // COMPONENTS
 import Header from "./components/Header.jsx";
 import HeaderMinimized from './components/HeaderMinimized.jsx';
-import Page from "./components/Page.jsx";
-import Carousel from "./components/Carousel.jsx";
-import Modal from "./components/Modal.jsx";
-import PopularProducts from './components/PopularProducts.jsx';
-import Categories from './components/Categories.jsx';
+import Cart from "./components/Cart.jsx";
 import Footer from './components/Footer.jsx';
+import Search from './components/Search.jsx';
+import Checkout from './components/Checkout.jsx';
+
+// PAGES
+import Landing from './pages/Landing.jsx';
+import Register from './pages/Register.jsx';
+import Signin from './pages/Signin.jsx';
+import Shop from './pages/Shop.jsx';
+
+// CONTEXT PROVIDER
+import { AuthContextProvider } from './store/authContext.jsx';
+import { CartContextProvider } from './store/CartContext.jsx';
+import { UserProgressContextProvider } from './store/UserProgressContext.jsx';
+
+// SERVICES (Helper Functions)
+import { authService } from './services/authService.js';
+
+// CONTEXT
+import AuthContext from './store/authContext.jsx';
+import UserProgressContext from './store/UserProgressContext.jsx';
 
 function App() {
 
-    const cart = useRef();
-    const signin = useRef();
-
+    const [ isLoggedIn, setIsLoggedIn ] = useState(false);
     const [ showPromo, setShowPromo ] = useState(true);
     const [ headerChange, setHeaderChange ] = useState(true);
     const [ headerHover, setHeaderHover ] = useState(false);
     const [ activeCategory, setActiveCategory ] = useState('');
     const [ headerType, setHeaderType ] = useState('headerFull');
-
-    // TO FIX
-    function handleOpenCart () {
-
-        if (cart.current) {
-            cart.current.showModal();
-        }
-        
-    }
-
-    // TO FIX
-    function handleOpenSignin () {
-
-        if (signin.current) {
-            signin.current.showModal();
-        }
-
-    }
-
     
-    // HEADER CHANGE HANDLER    
-    useEffect(() => {
+    // CONTEXT
+    const userProgressCtx = useContext(UserProgressContext);
+    const authContext = useContext(AuthContext);
+
+    // console.log(`authContext.user:  ${JSON.stringify(authContext.user)}`)
+    // console.log(`authContext.isAuthenticated:  ${authContext.isAuthenticated}`)
+
+    // HEADER CHANGE HANDLER
+    
+    // CHECK IF THERE IS A LOGGED IN USER
+    let existingUser = authService.getCurrentUser();
+    useEffect(() => {   
+
+        if (existingUser) {
+            //console.log(`Existing User: ${JSON.stringify(existingUser)}`);
+            setIsLoggedIn(true);
+        } else {
+            //console.log(`NO USER LOGGED IN`);
+        }
 
         const handleScroll = () => {
 
             let verticalScroll = window.scrollY;
 
-            if (verticalScroll <= 659) {
+            if (verticalScroll <= 79) {
                 setHeaderChange(true);
                 setHeaderType('headerFull');
-            } 
+            }
             
-            if (verticalScroll >= 660) {
+            if (verticalScroll >= 80) {
                 setHeaderChange(false);
                 setHeaderType('headerMinimized');
             }
@@ -60,35 +74,30 @@ function App() {
             // TO SIMPLIFY
             if ( verticalScroll === 0 ) {
                 setShowPromo(true);
-            }
-
-            if ( verticalScroll !== 0 ) {
+            } else {
                 setShowPromo(false);
             }
+
         }
 
         window.addEventListener("scroll", handleScroll);  
 
-    }, [])
+    }, [existingUser]);
 
     return (
-        <>  
-                <Modal ref={signin} type='signin'/>
-                <Modal ref={cart} type='cart'/>
+        <BrowserRouter>
+            <AuthContextProvider>
+            <UserProgressContextProvider>
+            <CartContextProvider>
                 { headerChange ? 
-                    
                     <Header
-                        cartRef={cart}
-                        signinRef={signin}
                         showPromo={showPromo}
                         activeCategory={activeCategory}
                         headerHover={headerHover}
                         headerType={headerType}
                         setHeaderHover={setHeaderHover}
                         setActiveCategory={setActiveCategory}
-                        handleOpenCart={handleOpenCart} 
-                        handleOpenSignin={handleOpenSignin}
-                        
+                        isLoggedIn={isLoggedIn}
                     /> : 
                     <HeaderMinimized
                         activeCategory={activeCategory}
@@ -96,16 +105,34 @@ function App() {
                         headerType={headerType}
                         setHeaderHover={setHeaderHover}
                         setActiveCategory={setActiveCategory}
-                        onOpenCart={handleOpenCart} 
-                        onOpenSignin={handleOpenSignin}
+                        isLoggedIn={isLoggedIn}
                     />
                 }
-                <Carousel />
-                <PopularProducts />
-                <Categories />
+                <Routes>
+                    <Route path='/' element={<Landing/>}/>
+                    <Route path='/home' element={<Landing/>}/>
+                    <Route path='/shop' element={<Shop/>}/>
+                    <Route path='/sign-in' element={<Signin/>}/>
+                    <Route path='/register' element={<Register/>}/>
+                </Routes>
+                <Cart />
+                <Search />
+                <Checkout />
                 <Footer />
-        </>
+            </CartContextProvider>
+            </UserProgressContextProvider>
+            </AuthContextProvider>
+        </BrowserRouter>
     )
 }
 
 export default App
+
+// TODO:
+
+// Build Search Component ✅
+// Build Cart Component ✅
+// Build Item Component (Modal)
+// Build Checkout Component 
+
+

@@ -11,6 +11,8 @@ import image3 from '/image-3.jpg'
 import image4 from '/image-4.jpg'
 import image5 from '/image-5.jpg'
 
+import styles from '../css/Carousel.module.css'
+
 // AN ARRAY OF URLs
 const IMAGES = [image1, image2, image3, image4, image5];
 
@@ -101,7 +103,7 @@ export default function Carousel () {
                         </button>
                     ))}
                 </div>
-                <button className="carousel-shop-now-btn">Shop now</button>
+                <button className={styles.carouselShopNowBtn}><a href="/shop">Shop now</a></button>
             </div>    
         </div>
     )

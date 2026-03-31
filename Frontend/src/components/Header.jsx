@@ -1,4 +1,3 @@
-
 // STYLES
 import styles from "../css/Header.module.css";
 
@@ -7,15 +6,20 @@ import Promo from "./Promo.jsx";
 import Dropdown from "./Dropdown.jsx";
 
 // PACKAGES
-import { useState } from "react";
-import { ChevronLeft, ChevronRight, Phone, Search, ShoppingCart, User } from 'lucide-react';
+import { useContext, useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight, Phone, Search, ShoppingCart, User, LogOut } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 
 // IMAGES
-import AmrahTextLogoWhite from '/amrah-logo-text-white.png';
-import AmrahTextLogoRed from '/amrah-logo-text-red.png'
+import AmrahTextLogoBlack from '/amrah-logo-text-black.png';
+import AmrahTextLogoRed from '/amrah-logo-text-red.png';
 import AmrahLogo from '../assets/amrah-logo.png';
 import UserIcon from '/user-icon.svg';
-import ShoppingBag from '/shopping-bag.svg'
+import ShoppingBag from '/shopping-bag.svg';
+
+// CONTEXT
+import UserProgressContext from "../store/UserProgressContext.jsx";
+import AuthContext from "../store/authContext.jsx";
 
 const HEADLINE = [
     'Lorem ipsum dolor sit amet consectetur adipiscing elit',
@@ -24,41 +28,55 @@ const HEADLINE = [
 ]
 
 export default function Header ({ 
-    activeCategory, 
-    setActiveCategory, 
-    headerHover, 
-    setHeaderHover, 
-    handleOpenCart, 
-    handleOpenSignin, 
+    activeCategory,
+    setActiveCategory,
+    headerHover,
+    setHeaderHover,
     showPromo,
-    headerType }) {
+    isLoggedIn
+}) {
 
     const [ headlineIndex, setHeadlineIndex ] = useState(0);
 
+    const userProgressCtx = useContext(UserProgressContext);
+    const authContext = useContext(AuthContext);
+
+    const navigate = useNavigate();
+
+    function handleLogout () {
+        authContext.logout();
+        navigate('/sign-in')
+    }
+
+    function handleShowCart() {
+        userProgressCtx.showCart();
+    }
+
+    function handleShowSearch() {
+        userProgressCtx.showSearch();
+    }
+
     function handleMouseEnter () {
-
         setHeaderHover(true);
-
     }
 
     function handleMouseLeave () {
-
         if (activeCategory === '') {
             setHeaderHover(false);
         }
-
     }
 
     function prevHeadline () {
-        
+
         setHeadlineIndex((prevIndex) => {
-            
+        
             if (prevIndex === 0) {
                 return HEADLINE.length - 1
             }
 
             return prevIndex - 1;
         });
+        
     }
     
     function nextHeadline () {
@@ -92,20 +110,25 @@ export default function Header ({
 
                 {/* BUTTONS  */}
                 <p style={{marginBottom: "2rem", marginLeft: "2rem"}}>
-                    <Search className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav}/>
-                    <Phone className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav}/>
+                    <Search 
+                        onClick={handleShowSearch} 
+                        className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav}
+                    />
+                    <Phone 
+                        className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav}
+                    />
                 </p>
                 
                 {/* LOGO  */}
                 <div className={styles.navPlaceHolder}>
-                    <a href="#" style={{userSelect: "none"}}>
-                        <img src={ headerHover ? AmrahTextLogoRed : AmrahTextLogoWhite} alt="amrah-logo" width="370rem"/>
+                    <a href="/" style={{userSelect: "none"}}>
+                        <img src={ headerHover ? AmrahTextLogoRed : AmrahTextLogoBlack} alt="amrah-logo" width="370rem"/>
                     </a>
                     <nav>
                         <ul>
                             <li>
                                 <a 
-                                    href='#' 
+                                    href='/shop' 
                                     className={`
                                         ${headerHover ? styles.navHover : styles.nav} 
                                         ${activeCategory === 'earrings' ? styles.active : ''}
@@ -117,7 +140,7 @@ export default function Header ({
                             </li>
                             <li>
                                 <a 
-                                    href='#' 
+                                    href='/shop' 
                                     className={`
                                         ${headerHover ? styles.navHover : styles.nav} 
                                         ${activeCategory === 'necklace' ? styles.active : ''}
@@ -129,7 +152,7 @@ export default function Header ({
                             </li>
                             <li>
                                 <a 
-                                    href='#' 
+                                    href='/shop' 
                                     className={`${headerHover ? styles.navHover : styles.nav} ${activeCategory === 'rings' ? styles.active : ''}`}
                                     onMouseEnter={() => { setActiveCategory('rings'); }}
                                 >
@@ -138,7 +161,7 @@ export default function Header ({
                             </li>
                             <li>
                                 <a 
-                                    href='#' 
+                                    href='/shop' 
                                     className={`${headerHover ? styles.navHover : styles.nav} ${activeCategory === 'bracelet' ? styles.active : ''}`}
                                     onMouseEnter={() => { setActiveCategory('bracelet'); }}
                                 >
@@ -147,7 +170,7 @@ export default function Header ({
                             </li>
                             <li>
                                 <a 
-                                    href='#' 
+                                    href='/shop' 
                                     className={`${headerHover ? styles.navHover : styles.nav} ${activeCategory === 'more' ? styles.active : ''}`}
                                     onMouseEnter={() => { setActiveCategory('more'); }}
                                 >
@@ -159,15 +182,21 @@ export default function Header ({
                 </div>
 
                 {/* BUTTONS  */}
-                <p style={{marginBottom: "2rem", marginRight: "2rem"}}>
+                <p style={{marginBottom: "2rem", marginRight: "2rem"}} className={styles.btnContainer}>
                     <ShoppingCart
-                        onClick={handleOpenCart} 
+                        onClick={handleShowCart} 
                         className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav }
                     />
-                    <User
-                        onClick={handleOpenSignin} 
-                        className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav }
-                    />
+                    { isLoggedIn ? 
+                        <LogOut 
+                            className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav }
+                            onClick={handleLogout}
+                        />
+                        :  
+                        <User 
+                            className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav }
+                        />
+                    }
                 </p>
 
             </header>
