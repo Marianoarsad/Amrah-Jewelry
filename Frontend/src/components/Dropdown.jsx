@@ -37,11 +37,11 @@ export default function Dropdown ({
                     <li style={{marginTop: "1rem", marginLeft: "8rem"}}><a href='#'>REPAIR</a></li>
                     <li style={{marginTop: ".7rem", marginLeft: "8rem"}}><a href='#'>BOOK AN APPOINTMENT</a></li>
                 </ul>
-                <img 
-                    className={styles.dropdownImg}
-                    src={TestImage} 
-                    alt='product image'
-                />
+                <div className={styles.dropdownImgContainer}>
+                    <p>Lorem, ipsum dolor.</p>
+                    <button>SHOP NOW</button>
+                </div>
+                
             </div>
             : // ELSE 
             <div 
@@ -68,11 +68,10 @@ export default function Dropdown ({
                     <li style={{marginTop: "1rem", marginLeft: "8rem"}}><a href='#'>GOLD</a></li>
                     <li style={{marginTop: ".7rem", marginLeft: "8rem"}}><a href='#'>SILVER</a></li>
                 </ul>
-                <img 
-                    className={styles.dropdownImg}
-                    src={TestImage} 
-                    alt='product image'
-                />
+                <div className={styles.dropdownImgContainer}>
+                    <p>Lorem, ipsum dolor.</p>
+                    <button>SHOP NOW</button>
+                </div>
             </div>
             }
         </>

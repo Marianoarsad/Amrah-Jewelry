@@ -47,6 +47,7 @@ export default function Cart ({ ref }) {
 
     let content = (
         <>
+            <button className={styles.modalActions} onClick={handleCloseCart}><ArrowLeft size={16} /></button>
             <div className={styles.cartBody}>
                 <img src={EmptyCart} alt='empty cart' width="80rem"/>
                 <span>YOUR CART IS EMPTY</span>
@@ -55,34 +56,42 @@ export default function Cart ({ ref }) {
         </>
     )
 
+    if (cartCtx.products.length > 1) {
+        content = (
+            <>
+                <button className={styles.modalActions} onClick={handleCloseCart}><ArrowLeft size={16} /></button>
+                <ul className={styles.cartBody}>
+                    {/*CART ITEMS*/}
+                    {cartCtx.products?.map((product) => (
+                        <CartItem
+                            key={product._id} 
+                            product={product}
+                        />
+                    ))}
+                </ul>
+                <div className={styles.cartFooter}>
+                    <div className={styles.cartFooterUpper}>
+                        <p className={styles.subtotal}>Subtotal:</p>
+                        <p className={styles.totalPrice}>{currencyFormatter.format(cartTotal)}</p>
+                    </div>
+                    <button 
+                        className={styles.checkoutBtn}
+                        onClick={handleGoToCheckout}
+                    >
+                        CONTINUE TO CHECKOUT
+                    </button>
+                </div>
+            </>
+        )
+    }
+
     return (
         <Modal 
             className={styles.cart}
             open={userProgressCtx.progress === 'cart'}
             onClose={userProgressCtx.progress === 'cart' ? handleCloseCart : null}
         >
-            <button className={styles.modalActions} onClick={handleCloseCart}><ArrowLeft size={16} /></button>
-            <ul className={styles.cartBody}>
-                {/*CART ITEMS*/}
-                {cartCtx.products?.map((product) => (
-                    <CartItem
-                        key={product._id} 
-                        product={product}
-                    />
-                ))}
-            </ul>
-            <div className={styles.cartFooter}>
-                <div className={styles.cartFooterUpper}>
-                    <p className={styles.subtotal}>Subtotal:</p>
-                    <p className={styles.totalPrice}>{currencyFormatter.format(cartTotal)}</p>
-                </div>
-                <button 
-                    className={styles.checkoutBtn}
-                    onClick={handleGoToCheckout}
-                >
-                    CONTINUE TO CHECKOUT
-                </button>
-            </div>
+            {content}
         </Modal>
     );
 }

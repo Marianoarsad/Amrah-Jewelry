@@ -1,7 +1,4 @@
-// STYLES
-import styles from '../css/HeaderMinimized.module.css';
-
-// PACKAGES
+// HOOKS & LIBRARIES
 import { Search, Phone, ShoppingCart, User, LogOut } from 'lucide-react';
 
 // REACT HOOKS
@@ -10,17 +7,33 @@ import { useState } from 'react';
 // COMPONENTS
 import Dropdown from './Dropdown.jsx';
 
+import styles from '../css/HeaderMinimized.module.css';
+
 export default function HeaderMinimized ({ 
     activeCategory,
     setActiveCategory,
-    headerType,
+    headerHover,
     setHeaderHover,
     isLoggedIn
     }) {
+    
+    function handleMouseEnter () {
+        setHeaderHover(true);
+    }
+
+    function handleMouseLeave () {
+        if (activeCategory === '') {
+            setHeaderHover(false);
+        }
+    }
 
     return (
         <>
-            <header className={styles.header}>
+            <header 
+                className={styles.header}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+            >
                 <nav>
 
                     {/* LOGO */}
@@ -91,13 +104,14 @@ export default function HeaderMinimized ({
                     <button><ShoppingCart/></button>
                     <button>{ isLoggedIn ?  <LogOut/> : <User/>}</button>
                 </div>
-                { activeCategory && 
+                {/*DROPDOWN*/}
+                { activeCategory && headerHover ?
                     <Dropdown 
                         activeCategory={activeCategory}
                         setActiveCategory={setActiveCategory}
-                        headerType={headerType}
+                        headerType={'headerMinimized'}
                         setHeaderHover={setHeaderHover}
-                    />
+                    /> : null
                 }
             </header>
         </>

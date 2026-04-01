@@ -1,13 +1,14 @@
-// COMPONENTS
-import Promo from "./Promo.jsx";
-import Dropdown from "./Dropdown.jsx";
-
 // PACKAGES
 import { useContext, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Phone, Search, ShoppingCart, User, LogOut } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
-// IMAGES
+// COMPONENTS
+import Promo from "./Promo.jsx";
+import Dropdown from "./Dropdown.jsx";
+import Header from "./Header.jsx";
+
+// ASSETS
 import AmrahTextLogoBlack from '/amrah-logo-text-white.png';
 import AmrahTextLogoRed from '/amrah-logo-text-red.png';
 import AmrahLogo from '../assets/amrah-logo.png';
@@ -26,7 +27,7 @@ const HEADLINE = [
     'Pulvinar vivamus fringilla lacus nec metus bibendum egestas!'
 ]
 
-export default function Header ({ 
+export default function HeaderFull ({ 
     activeCategory,
     setActiveCategory,
     headerHover,
@@ -103,8 +104,8 @@ export default function Header ({
             
             <header 
                 className={headerHover ? styles.headerHovered : styles.header}
-                onMouseEnter={() => handleMouseEnter()}
-                onMouseLeave={() => handleMouseLeave()}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
                 style={{boxShadow: headerHover ?  "0 0 10px rgba(0, 0, 0, 0.5)" : "", top: showPromo ? "var(--promo-height)" : ""}}
             >
                 {/* BUTTONS  */}
@@ -196,8 +197,8 @@ export default function Header ({
                     }
                 </p>
             </header>
-
-            {activeCategory === 'earrings' && headerHover ? 
+            {/*DROPDOWN*/}
+            { activeCategory && headerHover ? 
                 <Dropdown 
                     activeCategory={activeCategory}
                     setHeaderHover={setHeaderHover}
@@ -205,44 +206,6 @@ export default function Header ({
                     showPromo={showPromo}
                 /> : null
             }
-
-            {activeCategory === 'necklace' && headerHover ? 
-                <Dropdown 
-                    activeCategory={activeCategory}
-                    setHeaderHover={setHeaderHover}
-                    setActiveCategory={setActiveCategory}
-                    showPromo={showPromo}
-                /> : null
-            }
-
-            {activeCategory === 'rings' && headerHover ? 
-                <Dropdown 
-                    activeCategory={activeCategory}
-                    setHeaderHover={setHeaderHover}
-                    setActiveCategory={setActiveCategory}
-                    showPromo={showPromo}
-                /> : null
-            }
-
-            {activeCategory === 'bracelet' && headerHover ? 
-                <Dropdown 
-                    activeCategory={activeCategory}
-                    setHeaderHover={setHeaderHover}
-                    setActiveCategory={setActiveCategory}
-                    showPromo={showPromo}
-                /> : null
-            }
-
-            {activeCategory === 'more' && headerHover ? 
-                <Dropdown 
-                    activeCategory={activeCategory}
-                    setHeaderHover={setHeaderHover}
-                    setActiveCategory={setActiveCategory}
-                    showPromo={showPromo}
-                /> : null
-            }
-            
         </>
-        
     )
 }
