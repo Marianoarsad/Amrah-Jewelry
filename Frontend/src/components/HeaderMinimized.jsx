@@ -82,61 +82,24 @@ export default function HeaderMinimized ({
                         </li>
                     </ul>
                 </nav>
-
+            
                 <div className={styles.buttonContainer}>
                     <button><Search/></button>
                     <div className={styles.verticalLine}></div>
+                    {/*BUTTONS*/}
                     <button><Phone/></button>
                     <button><ShoppingCart/></button>
                     <button>{ isLoggedIn ?  <LogOut/> : <User/>}</button>
                 </div>
+                { activeCategory && 
+                    <Dropdown 
+                        activeCategory={activeCategory}
+                        setActiveCategory={setActiveCategory}
+                        headerType={headerType}
+                        setHeaderHover={setHeaderHover}
+                    />
+                }
             </header>
-
-            {activeCategory === 'earrings' ? 
-                <Dropdown 
-                    activeCategory={activeCategory}
-                    setActiveCategory={setActiveCategory}
-                    headerType={headerType}
-                    setHeaderHover={setHeaderHover}
-                /> 
-                : null
-            }
-            {activeCategory === 'necklace' ? 
-                <Dropdown 
-                    activeCategory={activeCategory}
-                    setActiveCategory={setActiveCategory}
-                    headerType={headerType}
-                    setHeaderHover={setHeaderHover}
-                /> 
-                : null
-            }
-            {activeCategory === 'rings' ? 
-                <Dropdown 
-                    activeCategory={activeCategory}
-                    setActiveCategory={setActiveCategory}
-                    headerType={headerType}
-                    setHeaderHover={setHeaderHover}
-                /> 
-                : null
-            }
-            {activeCategory === 'bracelet' ? 
-                <Dropdown 
-                    activeCategory={activeCategory}
-                    setActiveCategory={setActiveCategory}
-                    headerType={headerType}
-                    setHeaderHover={setHeaderHover}
-                /> 
-                : null
-            }
-            {activeCategory === 'more' ? 
-                <Dropdown 
-                    activeCategory={activeCategory}
-                    setActiveCategory={setActiveCategory}
-                    headerType={headerType}
-                    setHeaderHover={setHeaderHover}
-                /> 
-                : null
-            }
         </>
     )
 }

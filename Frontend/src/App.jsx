@@ -3,7 +3,7 @@ import { useRef, useEffect, useState, useContext } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // COMPONENTS
-import Header from "./components/Header.jsx";
+import HeaderFull from "./components/HeaderFull.jsx";
 import HeaderMinimized from './components/HeaderMinimized.jsx';
 import Cart from "./components/Cart.jsx";
 import Footer from './components/Footer.jsx';
@@ -30,7 +30,10 @@ import UserProgressContext from './store/UserProgressContext.jsx';
 
 function App() {
 
+    const [ user, setUser ] = useState(null);
+
     const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+
     const [ showPromo, setShowPromo ] = useState(true);
     const [ headerChange, setHeaderChange ] = useState(true);
     const [ headerHover, setHeaderHover ] = useState(false);
@@ -48,16 +51,18 @@ function App() {
     
     // CHECK IF THERE IS A LOGGED IN USER
     let existingUser = authService.getCurrentUser();
+
     useEffect(() => {   
+        console.log('RE-RENDERED');
 
         if (existingUser) {
             //console.log(`Existing User: ${JSON.stringify(existingUser)}`);
             setIsLoggedIn(true);
         } else {
-            //console.log(`NO USER LOGGED IN`);
+            console.log(`NO USER LOGGED IN`);
         }
 
-        const handleScroll = () => {
+        function handleScroll () {
 
             let verticalScroll = window.scrollY;
 
@@ -71,7 +76,7 @@ function App() {
                 setHeaderType('headerMinimized');
             }
 
-            // TO SIMPLIFY
+            // When at the very top of the page
             if ( verticalScroll === 0 ) {
                 setShowPromo(true);
             } else {
@@ -80,9 +85,9 @@ function App() {
 
         }
 
-        window.addEventListener("scroll", handleScroll);  
+        window.addEventListener("scroll", handleScroll);
 
-    }, [existingUser]);
+    }, []);
 
     return (
         <BrowserRouter>
@@ -90,7 +95,7 @@ function App() {
             <UserProgressContextProvider>
             <CartContextProvider>
                 { headerChange ? 
-                    <Header
+                    <HeaderFull
                         showPromo={showPromo}
                         activeCategory={activeCategory}
                         headerHover={headerHover}
@@ -129,10 +134,4 @@ function App() {
 export default App
 
 // TODO:
-
-// Build Search Component ✅
-// Build Cart Component ✅
-// Build Item Component (Modal)
-// Build Checkout Component 
-
-
+// ⦿ Problem: Header user icon is not changing automatically when a user login or logout

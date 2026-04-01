@@ -1,5 +1,5 @@
 // IMAGES
-import TestImage from '/image-4.jpg';
+import TestImage from '/test-image.JPG';
 
 // STYLES
 import styles from '../css/Dropdown.module.css';
@@ -21,7 +21,9 @@ export default function Dropdown ({
                     setActiveCategory('');
                     setHeaderHover(false);
                 }}
-                style={{ top: showPromo ? 'calc(15vh + var(--promo-height))' : `${headerType === 'headerMinimized' ? "9vh" : "15vh"}` }}
+                style={{ 
+                    top: showPromo ? 'calc(15vh + var(--promo-height))' : `${headerType === 'headerMinimized' ? "9vh" : "15vh"}` 
+                }}
             >
                 <ul>
                     <li style={{marginTop: "2rem", marginLeft: "8rem"}}><a href='#'><strong>ABOUT US</strong></a></li>
@@ -36,6 +38,7 @@ export default function Dropdown ({
                     <li style={{marginTop: ".7rem", marginLeft: "8rem"}}><a href='#'>BOOK AN APPOINTMENT</a></li>
                 </ul>
                 <img 
+                    className={styles.dropdownImg}
                     src={TestImage} 
                     alt='product image'
                 />
@@ -66,6 +69,7 @@ export default function Dropdown ({
                     <li style={{marginTop: ".7rem", marginLeft: "8rem"}}><a href='#'>SILVER</a></li>
                 </ul>
                 <img 
+                    className={styles.dropdownImg}
                     src={TestImage} 
                     alt='product image'
                 />
