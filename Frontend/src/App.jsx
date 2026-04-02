@@ -10,6 +10,7 @@ import Cart from "./components/Cart.jsx";
 import Footer from './components/Footer.jsx';
 import Search from './components/Search.jsx';
 import Checkout from './components/Checkout.jsx';
+import Product from './components/UI/Product.jsx';
 
 // PAGES
 import Landing from './pages/Landing.jsx';
@@ -63,6 +64,7 @@ function App() {
                 <Search />
                 <Checkout />
                 <Footer />
+                <Product />
             </CartContextProvider>
             </UserProgressContextProvider>
             </AuthContextProvider>
@@ -73,6 +75,12 @@ function App() {
 export default App
 
 // TODO:
-// ⦿ Restructure Header Component
-// ⦿ Finish Product modal
-// ⦿ Redesign login and register design
+/* 
+    FRONT-END
+    ⦿ Finish Product modal
+    ⦿ Redesign login and register design
+*/
+/*
+    BACKEND:
+    ⦿ Fix Header bug where HeaderMinimized does not render its dropdown.
+*/

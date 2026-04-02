@@ -1,3 +1,6 @@
+// HOOKS AND LIBRARIES
+import { useEffect } from 'react';
+
 // IMAGES
 import TestImage from '/test-image.JPG';
 
@@ -12,9 +15,17 @@ export default function Dropdown ({
         setHeaderHover,
     }) {
     
+    // Prevents scrolling whenever dropdown is rendered
+    // useEffect(() => {
+    //     document.body.style.overflow = 'visible';
+    //     return () => {
+    //         document.body.style.overflow = '';
+    //     };
+    // }, []);
+    
     return (
         <>  
-            {activeCategory === 'more' ? 
+            { activeCategory === 'more' ? 
             <div 
                 className={styles.dropdown}
                 onMouseLeave={() => {
@@ -25,17 +36,17 @@ export default function Dropdown ({
                     top: showPromo ? 'calc(15vh + var(--promo-height))' : `${headerType === 'headerMinimized' ? "9vh" : "15vh"}` 
                 }}
             >
-                <ul>
-                    <li style={{marginTop: "2rem", marginLeft: "8rem"}}><a href='#'><strong>ABOUT US</strong></a></li>
-                    <li style={{marginTop: "1rem" ,marginLeft: "8rem"}}><a href='#'>OUR STORIES</a></li>
-                    <li style={{marginTop: ".7rem", marginLeft: "8rem"}}><a href='#'>MATERIALS</a></li>
-                    <li style={{marginTop: ".7rem", marginLeft: "8rem"}}><a href='#'>SUSTAINABILITY</a></li>
-                    <li style={{marginTop: ".7rem", marginLeft: "8rem"}}><a href='#'>STUDS</a></li>
+                <ul style={{gridColumnStart: '2'}}>
+                    <li><a href='#'><strong>ABOUT US</strong></a></li>
+                    <li><a href='#'>OUR STORIES</a></li>
+                    <li><a href='#'>MATERIALS</a></li>
+                    <li><a href='#'>SUSTAINABILITY</a></li>
+                    <li><a href='#'>STUDS</a></li>
                 </ul>
                 <ul>
-                    <li style={{marginTop: "2rem", marginLeft: "8rem"}}><a href='#'><strong>SERVICES</strong></a></li>
-                    <li style={{marginTop: "1rem", marginLeft: "8rem"}}><a href='#'>REPAIR</a></li>
-                    <li style={{marginTop: ".7rem", marginLeft: "8rem"}}><a href='#'>BOOK AN APPOINTMENT</a></li>
+                    <li><a href='#'><strong>SERVICES</strong></a></li>
+                    <li><a href='#'>REPAIR</a></li>
+                    <li><a href='#'>BOOK AN APPOINTMENT</a></li>
                 </ul>
                 <div className={styles.dropdownImgContainer}>
                     <p>Lorem, ipsum dolor.</p>
@@ -53,20 +64,23 @@ export default function Dropdown ({
                 style={{ 
                     top: showPromo ? 'calc(15vh + var(--promo-height))' : `${headerType === 'headerMinimized' ? "9vh" : "15vh"}`, 
                 }}
-            >
-                <a style={{marginTop: "2rem", marginLeft: "8rem"}} href='#'><strong>ALL {activeCategory.toUpperCase()}</strong></a>
+            >   
+                <ul>
+                    <li><a href='#'><strong>ALL {activeCategory.toUpperCase()}</strong></a></li>
+                </ul>
+                
                 
                 <ul>
-                    <li style={{marginTop: "2rem", marginLeft: "8rem"}}><a href='#'><strong>STYLE</strong></a></li>
-                    <li style={{marginTop: "1rem" ,marginLeft: "8rem"}}><a href='#'>GEMSTONE</a></li>
-                    <li style={{marginTop: ".7rem", marginLeft: "8rem"}}><a href='#'>HOOPS</a></li>
-                    <li style={{marginTop: ".7rem", marginLeft: "8rem"}}><a href='#'>HUGGIES</a></li>
-                    <li style={{marginTop: ".7rem", marginLeft: "8rem"}}><a href='#'>STUDS</a></li>
+                    <li><a href='#'><strong>STYLE</strong></a></li>
+                    <li><a href='#'>GEMSTONE</a></li>
+                    <li><a href='#'>HOOPS</a></li>
+                    <li><a href='#'>HUGGIES</a></li>
+                    <li><a href='#'>STUDS</a></li>
                 </ul>
                 <ul>
-                    <li style={{marginTop: "2rem", marginLeft: "8rem"}}><a href='#'><strong>MATERIAL</strong></a></li>
-                    <li style={{marginTop: "1rem", marginLeft: "8rem"}}><a href='#'>GOLD</a></li>
-                    <li style={{marginTop: ".7rem", marginLeft: "8rem"}}><a href='#'>SILVER</a></li>
+                    <li><a href='#'><strong>MATERIAL</strong></a></li>
+                    <li><a href='#'>GOLD</a></li>
+                    <li><a href='#'>SILVER</a></li>
                 </ul>
                 <div className={styles.dropdownImgContainer}>
                     <p>Lorem, ipsum dolor.</p>

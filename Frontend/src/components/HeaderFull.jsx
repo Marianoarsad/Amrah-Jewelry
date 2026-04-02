@@ -152,7 +152,10 @@ export default function HeaderFull ({
                             <li>
                                 <a 
                                     href='/shop' 
-                                    className={`${headerHover ? styles.navHover : styles.nav} ${activeCategory === 'rings' ? styles.active : ''}`}
+                                    className={`
+                                        ${headerHover ? styles.navHover : styles.nav} 
+                                        ${activeCategory === 'rings' ? styles.active : ''}
+                                    `}
                                     onMouseEnter={() => { setActiveCategory('rings'); }}
                                 >
                                     RINGS
@@ -161,7 +164,10 @@ export default function HeaderFull ({
                             <li>
                                 <a 
                                     href='/shop' 
-                                    className={`${headerHover ? styles.navHover : styles.nav} ${activeCategory === 'bracelet' ? styles.active : ''}`}
+                                    className={`
+                                        ${headerHover ? styles.navHover : styles.nav} 
+                                        ${activeCategory === 'bracelet' ? styles.active : ''}
+                                    `}
                                     onMouseEnter={() => { setActiveCategory('bracelet'); }}
                                 >
                                     BRACELET
@@ -170,7 +176,10 @@ export default function HeaderFull ({
                             <li>
                                 <a 
                                     href='/shop' 
-                                    className={`${headerHover ? styles.navHover : styles.nav} ${activeCategory === 'more' ? styles.active : ''}`}
+                                    className={`
+                                        ${headerHover ? styles.navHover : styles.nav} 
+                                        ${activeCategory === 'more' ? styles.active : ''}
+                                    `}
                                     onMouseEnter={() => { setActiveCategory('more'); }}
                                 >
                                     MORE

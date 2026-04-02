@@ -3,6 +3,7 @@ import { useContext } from 'react';
 
 // CONTEXT 
 import CartContext from '../store/CartContext';
+import UserProgressContext from '../store/UserProgressContext';
 
 import styles from '../css/ProductItem.module.css'
 
@@ -11,15 +12,17 @@ import sampleImage from '../assets/pearl.png';
 export default function ProductItem ({ children, className, id, name, category, description, price, product }) {
     
     const cartCtx = useContext(CartContext);
+    const userProgressCtx = useContext(UserProgressContext);
 
-    function handleAddProductToCart () {
-        cartCtx.addProduct(product);
+    function handleShowProduct () {
+        userProgressCtx.showProduct();
+        //cartCtx.addProduct(product); ADDING PRODUCT TO CART
     }
 
     return (
         <li 
             className={styles.shopGridMainItem}
-            onClick={handleAddProductToCart}
+            onClick={handleShowProduct}
         >
             <article>
                 <img src={sampleImage}/>

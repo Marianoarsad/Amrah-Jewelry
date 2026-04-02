@@ -23,7 +23,7 @@ export default function Header ({
     const [ headerChange, setHeaderChange ] = useState(false);
     
     useEffect(() => {
-        
+
         function handleScroll () {
             if (window.scrollY >= 100) {
                 setHeaderChange(true);
@@ -46,7 +46,6 @@ export default function Header ({
 
     const headerType = headerChange ? (
         <HeaderMinimized
-            showPromo={showPromo}
             headerHover={headerHover}
             setHeaderHover={setHeaderHover}
             activeCategory={activeCategory}
@@ -69,7 +68,7 @@ export default function Header ({
         
     )
 }
-
+// THE FUCK????
 // { headerChange ? 
 //                     <HeaderFull
 //                         showPromo={showPromo}

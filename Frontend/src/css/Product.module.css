@@ -1,0 +1,272 @@
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Arapey:ital@0;1&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Bebas+Neue&family=Carrois+Gothic+SC&family=Delius+Swash+Caps&family=League+Spartan:wght@100..900&family=Lexend+Mega:wght@100..900&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Pacifico&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Roboto+Flex:opsz,wght,XOPQ,XTRA,YOPQ,YTDE,YTFI,YTLC,YTUC@8..144,100..1000,96,468,79,-203,738,514,712&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+.product[open] {
+    position: fixed;
+    box-sizing: border-box;
+    inset: 0;
+    z-index: 1000;
+    
+    margin: 0;
+    margin-left: auto;
+    padding: 0;
+    border: none;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    height: 100vh;
+    width: 97vw;
+    /* Remove default dialog styles */
+    max-width: none;
+    max-height: none;
+
+    background: white;
+}
+
+body:has(.product[open]) {
+    overflow: hidden;
+}
+
+.productBody {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+}
+
+.closeBtn {
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 1.4em;
+    margin-left: 1.4em;
+    
+    border: none;
+    border-radius: 25px;
+    padding: 1em;
+    cursor: pointer;
+    
+    /*FIT ONLY <X/> COMPONENT*/
+    width: fit-content;
+    height: fit-content;
+
+    background-color: rgba(184, 184, 184, 0.1); /* 0.5 is 50% opacity */
+}
+
+.productBodyLeft {
+    height: 100%;
+    width: 35%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.productBodyLeft > h3 {
+    width: 80%;
+    font-size: 3rem;
+    font-family: "Playfair", serif;
+    font-optical-sizing: auto;
+    font-weight: 100;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    padding: 0;
+    margin: 0;
+}
+
+.productBodyLeft > p {
+    width: 80%;
+    padding: 0;
+    margin: 0;
+}
+
+.shortDesc {
+    font-size: 1.2rem;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+
+}
+
+.price {
+    font-size: 1.2rem;
+    font-family: "ABeeZee", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.materialsContainer {
+    height: fit-content;
+    width: 80%;
+    padding: 0;
+
+    display: flex;
+    gap: .3em;
+}
+
+.material {
+    width: 33.3%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .4em;
+    cursor: pointer;
+    transition: scale 300ms ease-in-out;
+}
+
+.material:hover {
+    scale: 1.03;
+}
+
+.material > img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.material > p {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: .8rem;
+}
+
+.sizeContainer {
+    height: fit-content; 
+    height: 7%;
+    width: 80%;
+    border-top: .09rem solid #c9cdcf;
+    border-bottom: .09rem solid #c9cdcf;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.sizeContainer > p {
+    font-size: .9rem;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 450;
+    font-style: normal;
+}
+
+.sizeBtnContainer {
+    display: flex;
+    gap: .6em;
+    height: fit-content;
+}
+
+.sizeBtnContainer > button {
+    background-color: rgb(201 104 104 / .05);
+    padding: 0;
+    border: none;
+    font-size: .8rem;
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    padding: .7em;
+    cursor: pointer;
+    transition: scale 200ms  ease-in-out;
+}
+
+.sizeBtnContainer > button:hover {
+    scale: 1.1;
+}
+
+.actionBtnContainer {
+    height: 20%;
+    width: 80%;
+
+    display: flex;
+    flex-direction: column;
+    gap: .3em;
+}
+
+.btn {
+    width: 100%;
+    height: 50%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    font-size: 1rem;
+    font-family: "League Spartan", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.buyNow {
+    color: black;
+    background-color: #c7464e; 
+    transition: color 150ms ease-in-out;
+    cursor: pointer;
+}
+
+.buyNow:hover {
+    color: white;
+}
+
+.addToCart {
+    background: none;
+    border: .08em solid #000000;
+    margin-bottom: 1em;
+    cursor: pointer;
+    transition: color 150ms ease-in-out;
+}
+
+.addToCart:hover {
+    color: #c7464e;
+    border: .08em solid #c7464e;
+}
+
+.productBodyRight {
+    height: 100%;
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    overflow: auto;
+}
+
+.productBodyRight > img {
+    height: 100vh;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    aspect-ratio: 1 / 1;
+}
+
+.productBodyRight > p {
+    font-family: "Montserrat Alternates", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.5rem;
+}
+
+.shortDescContainer {
+    display: flex;
+    padding: 0;
+    gap: 5em;
+    margin-bottom: 5em;
+}
+
+.shortDescContainer > li {
+    font-size: 1.2rem;
+    padding: 0;
+    font-family: "League Spartan", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
