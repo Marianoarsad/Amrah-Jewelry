@@ -15,13 +15,14 @@ export const getProducts = async (req, res) => {
 
 export const filterProducts = async (req, res) => {
     try {
-        //console.log(req.query);
 
         // FETCH FILTERED PRODUCTS 1️⃣
         const filteredProducts = await Product.find(req.query);
         console.log(filteredProducts);
 
+        console.log(`filteredProducts: ${filteredProducts}`);
         res.status(200).json(filteredProducts);
+        
         
     } catch (error) {
         res.status(500).json({ message: error.message })

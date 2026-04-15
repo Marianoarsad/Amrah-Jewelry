@@ -77,8 +77,7 @@ export default App
 // TODO:
 /* 
     FRONT-END
-    ⦿ Finish Product modal
-    ⦿ Redesign login and register design
+    ⦿ Convert to modal and redesign login and register component
 */
 /*
     BACKEND:

@@ -1,0 +1,50 @@
+.follow {
+    height: fit-content;
+    width: 99vw;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.follow > h3 {
+    font-size: 2rem;
+    color: #c64b50;
+}
+
+.followGrid {
+    margin-top: 1em;
+    height: fit-content;
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: .3em;
+}
+
+.followGrid > img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    transition: scale 200ms ease-in-out ;
+}
+
+.followGrid > img:hover {
+    scale: 1.03;
+}
+
+.igBtn {
+    margin-top: 1em;
+    height: 2.7rem;
+    width: 10rem;
+    background: none;
+    border: .07em solid #696b6c;
+    color: #696b6c;
+    transition: 
+        color 250ms ease-in-out;
+
+}
+
+.igBtn:hover {
+    border: .07em solid #c96868;
+    color: #c96868;
+}

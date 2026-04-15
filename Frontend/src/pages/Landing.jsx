@@ -3,6 +3,7 @@ import Hero from "../components/Hero.jsx";
 import PopularProducts from "../components/PopularProducts.jsx";
 import Categories from "../components/Categories.jsx";
 import Footer from "../components/Footer.jsx";
+import Follow from "../components/Follow.jsx";
 
 export default function Landing ({}) {
     
@@ -13,6 +14,7 @@ export default function Landing ({}) {
             <Hero />
             <PopularProducts />
             <Categories />
+            <Follow />
         </>
     )
 }
