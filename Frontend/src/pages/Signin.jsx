@@ -1,9 +1,14 @@
 // HOOKS & LIBRARIES
 import { useActionState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { X } from 'lucide-react';
 
 // CONTEXT
 import AuthContext from '../store/authContext.jsx';
+import UserProgressContext from '../store/UserProgressContext.jsx';
+
+// COMPONENTS
+import Modal from '../components/UI/Modal.jsx';
 
 // UTIL
 import { isNotEmpty } from '../util/validation.js';
@@ -12,8 +17,10 @@ import styles from '../css/Signin.module.css';
 
 export default function Signin () {
 
-    const authContext = useContext(AuthContext);
     const navigate = useNavigate();
+
+    const authContext = useContext(AuthContext);
+    const userProgressCtx = useContext(UserProgressContext);
 
     async function SigninUserAction (prevFormState, formData) {
         // RETRIEVE FORM DATA FROM CLIENT
@@ -66,6 +73,10 @@ export default function Signin () {
 
     const [ formState, formAction ] = useActionState(SigninUserAction, { errors: null })
 
+    function handleCloseAuth () {
+        userProgressCtx.close();
+    }
+
     useEffect(() => {
             if (formState.success) {
                 navigate('/home');
@@ -73,15 +84,22 @@ export default function Signin () {
     }, [formState.success, navigate]);
 
     return (
-        <section>
-            <div className={styles.signIn}>
+        <Modal
+            className={styles.signIn}
+            open={userProgressCtx.progress === 'auth'}
+            onClose={userProgressCtx.progress === 'auth' ? handleCloseAuth : null}
+        >
+                <button className={styles.closeBtn} onClick={handleCloseAuth}><X/></button>
+
                 <form 
                     className={styles.signinForm}
                     action={formAction}
                 >
-                    <h2>SIGN IN</h2>
+                    <div className={styles.formBtnContainer}>
+                        <button>Sign In</button>
+                        <button>Create Account</button>
+                    </div>
 
-                    <label htmlFor='username'>Username</label>
                     <input 
                         type='text' 
                         id='username' 
@@ -90,7 +108,6 @@ export default function Signin () {
                         placeholder='Enter username' 
                     />
 
-                    <label htmlFor='password'>Password</label>
                     <input 
                         type='password' 
                         id='password' 
@@ -114,7 +131,6 @@ export default function Signin () {
                     </div>
                     
                 </form>
-            </div>
-        </section>
+        </Modal>
     )
 }

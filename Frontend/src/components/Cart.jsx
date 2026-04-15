@@ -30,7 +30,7 @@ export default function Cart ({ ref }) {
     const userProgressCtx = useContext(UserProgressContext);
 
     function handleCloseCart () {
-        userProgressCtx.hideCart();
+        userProgressCtx.close();
     }
 
     function handleGoToCheckout () {

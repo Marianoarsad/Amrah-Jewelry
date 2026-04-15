@@ -15,6 +15,7 @@ import { currencyFormatter } from '../util/formatting.js';
 import styles from '../css/Shop.module.css';
 
 export default function Shop({}) {
+    
     const location = useLocation();
     
     const [ products, setProducts ] = useState([]);
@@ -38,8 +39,6 @@ export default function Shop({}) {
 
             getProducts();
         }
-
-        
     });
 
     return (

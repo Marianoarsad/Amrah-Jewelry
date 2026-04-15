@@ -77,7 +77,7 @@ export default function Checkout () {
     }
 
     function handleFinish () {
-        userProgressCtx.hideCheckout();
+        userProgressCtx.close();
         cartCtx.clearCart();
     }
     

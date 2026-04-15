@@ -21,7 +21,7 @@ export default function Search({}) {
     const navigate = useNavigate();
 
     function handleHideSearch() {
-        userProgressCtx.hideSearch();
+        userProgressCtx.close();
     }
     
     async function handleSearchAction (prevFormState, formData) {

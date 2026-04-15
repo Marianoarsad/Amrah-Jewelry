@@ -6,16 +6,21 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header.jsx';
 import HeaderFull from "./components/HeaderFull.jsx";
 import HeaderMinimized from './components/HeaderMinimized.jsx';
-import Cart from "./components/Cart.jsx";
+
 import Footer from './components/Footer.jsx';
+
+
+
+
+// MODALS
 import Search from './components/Search.jsx';
 import Checkout from './components/Checkout.jsx';
+import Cart from "./components/Cart.jsx";
 import Product from './components/UI/Product.jsx';
+import Signin from './pages/Signin.jsx';
 
 // PAGES
 import Landing from './pages/Landing.jsx';
-import Register from './pages/Register.jsx';
-import Signin from './pages/Signin.jsx';
 import Shop from './pages/Shop.jsx';
 
 // CONTEXT PROVIDER
@@ -57,14 +62,13 @@ function App() {
                     <Route path='/' element={<Landing/>}/>
                     <Route path='/home' element={<Landing/>}/>
                     <Route path='/shop' element={<Shop/>}/>
-                    <Route path='/sign-in' element={<Signin/>}/>
-                    <Route path='/register' element={<Register/>}/>
                 </Routes>
                 <Cart />
                 <Search />
                 <Checkout />
                 <Footer />
                 <Product />
+                <Signin />
             </CartContextProvider>
             </UserProgressContextProvider>
             </AuthContextProvider>

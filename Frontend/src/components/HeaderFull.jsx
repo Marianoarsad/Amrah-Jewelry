@@ -48,12 +48,16 @@ export default function HeaderFull ({
         navigate('/sign-in')
     }
 
-    function handleShowCart() {
+    function handleShowCart () {
         userProgressCtx.showCart();
     }
 
-    function handleShowSearch() {
+    function handleShowSearch () {
         userProgressCtx.showSearch();
+    }
+
+    function handleShowAuth () {
+        userProgressCtx.showAuth();
     }
 
     function handleMouseEnter () {
@@ -202,6 +206,7 @@ export default function HeaderFull ({
                         :  
                         <User 
                             className={ headerHover ? styles.navHover + ` ${styles.navBtn}` : styles.nav }
+                            onClick={handleShowAuth}
                         />
                     }
                 </p>
