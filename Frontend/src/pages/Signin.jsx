@@ -13,6 +13,9 @@ import Modal from '../components/UI/Modal.jsx';
 // UTIL
 import { isNotEmpty } from '../util/validation.js';
 
+// ASSETS
+import SignInImage from '../assets/signin-img.jpg';
+
 import styles from '../css/Signin.module.css';
 
 export default function Signin () {
@@ -89,13 +92,16 @@ export default function Signin () {
             open={userProgressCtx.progress === 'auth'}
             onClose={userProgressCtx.progress === 'auth' ? handleCloseAuth : null}
         >
-                <button className={styles.closeBtn} onClick={handleCloseAuth}><X/></button>
-
+                <div className={styles.amrah}>
+                    <img  src={SignInImage} />
+                </div>
                 <form 
                     className={styles.signinForm}
                     action={formAction}
                 >
-                    <div className={styles.formBtnContainer}>
+                    <button className={styles.closeBtn} onClick={handleCloseAuth}><X/></button>
+
+                    <div className={styles.authBtnContainer}>
                         <button>Sign In</button>
                         <button>Create Account</button>
                     </div>
@@ -105,7 +111,8 @@ export default function Signin () {
                         id='username' 
                         name='username' 
                         defaultValue={formState.enteredValues?.username} 
-                        placeholder='Enter username' 
+                        placeholder='Username'
+                        autoComplete='off'
                     />
 
                     <input 
@@ -113,18 +120,32 @@ export default function Signin () {
                         id='password' 
                         name='password' 
                         defaultValue={formState.enteredValues?.password} 
-                        placeholder='Enter password' 
+                        placeholder='Password'
+                        autoComplete='off' 
                     />
-                    {formState.errors && (
+                    {/* {formState.errors && (
                         <ul className={styles.errors}>
                             {formState.errors.map((error) => (
                                 <li key={error}>{error}</li>
                             ))}
                         </ul>
-                    )}
-                    <a href='#'>Forgot password?</a>
+                    )} */}
+                    <a href='#'>Forgot password</a>
                     <div className={styles.signinActionsContainer}>
                         <button className={styles.signinBtn}>SIGN IN</button>
+                        
+                        <h3>Create an account</h3>
+                        <div className={styles.list}>
+                            <ul className={styles.firstList}>
+                                <li>● Faster Checkout</li>
+                                <li>● Access order history</li>
+                            </ul>
+                            <ul className={styles.secondList}>
+                                <li>● Faster Checkout</li>
+                                <li>● Access order history</li>
+                            </ul>
+                        </div>
+                        
                         <Link to={'/register'} className={styles.signinFormBtn}>
                             <button className={styles.createBtn}>CREATE ACCOUNT</button> 
                         </Link>

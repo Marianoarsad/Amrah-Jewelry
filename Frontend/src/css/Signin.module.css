@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Arapey:ital@0;1&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Bebas+Neue&family=Carrois+Gothic+SC&family=Delius+Swash+Caps&family=League+Spartan:wght@100..900&family=Lexend+Mega:wght@100..900&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Pacifico&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Roboto+Flex:opsz,wght,XOPQ,XTRA,YOPQ,YTDE,YTFI,YTLC,YTUC@8..144,100..1000,96,468,79,-203,738,514,712&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 .signIn[open] {
-    width: 66vw;
+    width: 100vw;
     height: 100vh;
     max-width: none;
     max-height: none;
@@ -7,10 +9,8 @@
     box-sizing: border-box;
     inset: 0;
     border: none;
-    left: auto;
 
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -19,32 +19,36 @@ body:has(.signIn[open]) {
     overflow: hidden;
 }
 
-.closeBtn {
-    border-radius: 50%;
-    width: 3rem;
-    height: 3rem;
-    border: 0;
-    padding: 0;
-    margin-left: 2em;
-
+.amrah {
+    width: 53%;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    align-self: flex-start;
+    background-color: #fbf9f7;
+    overflow: hidden;
+}
+
+.amrah > img {
+    height: 90%; 
+    width: 70%;
+    aspect-ratio: 9 / 16; /* Standard portrait */
+    object-fit: cover;    /* Crops to fit container */
+    overflow: hidden;
 }
 
 .signinForm {
-    width: 90%;
-    height: 90%;
+    width: 47%;
+    height: 100vh;
     display: flex; 
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    background-color: yellow;
+    padding: 2em;
+    overflow-y: scroll;
 }
 
 .signinForm > a {
-    margin-top: 3rem;
+    margin-bottom: 2em;
     align-self: flex-end;
     text-decoration: none;
     color: #C64B50;
@@ -52,24 +56,65 @@ body:has(.signIn[open]) {
     font-weight: 300;
     font-style: normal;
     font-size: 1.1rem;
-    
 }
 
 .signinForm > input {
     width: 100%;
     height: 2.6rem;
-    border: .01rem solid#C64B50;
+    border: none;
     outline: none;
-    padding: 1rem;
+    border-bottom: .01rem solid#C64B50;
+    padding-bottom: .3rem;
+    margin-bottom: 3em;
+}
+
+.closeBtn {
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    border: 0;
+    padding: 0;
+    
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+}
+
+.authBtnContainer {
+    align-self: flex-start;
+    display: flex;
+    gap: 2em;
+    margin-bottom: 2em;
+}
+
+.authBtnContainer > button {
+    border: none;
+    background: none;
+    font-size: 1.2rem;
+    font-family: "Playfair", serif;
+    font-optical-sizing: auto;
+    font-weight: 100;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    cursor: pointer;
 }
 
 .signinActionsContainer {
-    height: 3rem;
+    height: fit-content;
     width: 100%;
+}
 
-    width: 100%;
-    height: 3rem;
-    margin: .3rem;
+.signinActionsContainer > h3 { 
+    margin-top: 2em;
+    margin-bottom: 1rem;
+    font-size: 1.7rem;
+    font-family: "Playfair", serif;
+    font-optical-sizing: auto;
+    font-weight: 100;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
 }
 
 .signinFormBtn {
@@ -80,9 +125,8 @@ body:has(.signIn[open]) {
 }
 
 .signinBtn {
-    margin-top: .7rem;
     width: 100%;
-    height: 100%;
+    height: 3.6rem;
 
     background-color: #C64B50;
     color: white;
@@ -92,13 +136,54 @@ body:has(.signIn[open]) {
 }
 
 .createBtn {
-    margin-top: .7rem;
     width: 100%;
-    height: 100%;
+    height: 3.6rem;
 
     background-color: transparent;
     border: .01rem solid#C64B50;
     color: #C64B50;
 
     cursor: pointer;
+}
+
+.list { 
+    display: flex;
+    gap: 15em;
+}
+
+.firstList {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    list-style: none;
+}
+
+.firstList > li {
+    display: block;
+    font-size: .9rem;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    line-height: 2;
+}
+
+.secondList {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    list-style: none;
+    margin-bottom: 3em;
+}
+
+.secondList > li {
+    display: block;
+    font-size: .9rem;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    line-height: 2;
 }
