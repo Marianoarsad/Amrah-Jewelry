@@ -1,0 +1,45 @@
+.registerForm {
+    height: 69.6vh;
+    min-width: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.registerForm > input,
+select {
+    width: 100%;
+    height: 2.6rem;
+    border: none;
+    outline: none;
+    border-bottom: 0.01rem solid#C64B50;
+    padding-bottom: 0.3rem;
+    margin-bottom: 3em;
+}
+
+.registerForm > a {
+    margin-bottom: 2em;
+    align-self: flex-end;
+    text-decoration: none;
+    color: #c64b50;
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 0.8rem;
+}
+
+.registerBtn {
+    width: 100%;
+    height: 3.6rem;
+
+    background-color: #c64b50;
+    color: white;
+    border: none;
+
+    cursor: pointer;
+}
+
+.registerForm > h3 {
+    font-size: 1rem;
+    font-weight: 200;
+    margin-bottom: 1em;
+}

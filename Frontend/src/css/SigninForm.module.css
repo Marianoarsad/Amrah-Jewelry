@@ -1,0 +1,111 @@
+.signinForm {
+    min-height: 70vh;
+    min-width: 100%;
+}
+
+.signinForm > a {
+    margin-bottom: 2em;
+    align-self: flex-end;
+    text-decoration: none;
+    color: #c64b50;
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 0.8rem;
+}
+
+.signinForm > input {
+    width: 100%;
+    height: 2.6rem;
+    border: none;
+    outline: none;
+    border-bottom: 0.01rem solid#C64B50;
+    padding-bottom: 0.3rem;
+    margin-bottom: 3em;
+}
+
+.signinActionsContainer {
+    height: fit-content;
+    width: 100%;
+}
+
+.signinActionsContainer > h3 {
+    margin-top: 2em;
+    margin-bottom: 1rem;
+    font-size: 1.7rem;
+    font-family: "Playfair", serif;
+    font-optical-sizing: auto;
+    font-weight: 100;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+.signinFormBtn {
+    width: 100%;
+    padding: 0;
+    margin-top: 2rem;
+}
+
+.signinBtn {
+    width: 100%;
+    height: 3.6rem;
+
+    background-color: #c64b50;
+    color: white;
+    border: none;
+
+    cursor: pointer;
+}
+
+.createBtn {
+    width: 100%;
+    height: 3.6rem;
+
+    background-color: transparent;
+    border: 0.01rem solid#C64B50;
+    color: #c64b50;
+
+    cursor: pointer;
+}
+
+.list {
+    display: flex;
+    gap: 15em;
+}
+
+.firstList {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    list-style: none;
+}
+
+.firstList > li {
+    display: block;
+    font-size: 0.9rem;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    line-height: 2;
+}
+
+.secondList {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    list-style: none;
+    margin-bottom: 3em;
+}
+
+.secondList > li {
+    display: block;
+    font-size: 0.9rem;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    line-height: 2;
+}
