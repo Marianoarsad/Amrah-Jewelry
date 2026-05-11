@@ -1,5 +1,6 @@
 // HOOKS AND LIBRARIES
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 // COMPONENTS
 import HeaderFull from "./HeaderFull.jsx";
@@ -9,29 +10,29 @@ import HeaderMinimized from "./HeaderMinimized.jsx";
 import UserProgressContext from "../store/UserProgressContext.jsx";
 import AuthContext from "../store/authContext.jsx";
 
-export default function Header ({ 
-    children, 
+export default function Header({
+    children,
     className,
     onMouseEnter,
-    onMouseLeave 
+    onMouseLeave,
 }) {
+    const [showPromo, setShowPromo] = useState(true);
+    const [headerHover, setHeaderHover] = useState(false);
+    const [activeCategory, setActiveCategory] = useState("");
 
-    const [ showPromo, setShowPromo ] = useState(true);
-    const [ headerHover, setHeaderHover ] = useState(false);
-    const [ activeCategory, setActiveCategory ] = useState('');
+    const [headerChange, setHeaderChange] = useState(false);
 
-    const [ headerChange, setHeaderChange ] = useState(false);
-    
+    const location = useLocation();
+
     useEffect(() => {
-
-        function handleScroll () {
+        function handleScroll() {
             if (window.scrollY >= 100) {
                 setHeaderChange(true);
             } else {
                 setHeaderChange(false);
             }
 
-            // When at the top of the website
+            // When at the top
             if (window.scrollY === 0) {
                 setShowPromo(true);
             } else {
@@ -58,18 +59,14 @@ export default function Header ({
             setHeaderHover={setHeaderHover}
             activeCategory={activeCategory}
             setActiveCategory={setActiveCategory}
+            headerChange={headerChange}
         />
     );
 
-    return (
-        <>
-            {headerType}
-        </>
-        
-    )
+    return <>{headerType}</>;
 }
 // THE FUCK????
-// { headerChange ? 
+// { headerChange ?
 //                     <HeaderFull
 //                         showPromo={showPromo}
 //                         activeCategory={activeCategory}
@@ -78,7 +75,7 @@ export default function Header ({
 //                         setHeaderHover={setHeaderHover}
 //                         setActiveCategory={setActiveCategory}
 //                         isLoggedIn={isLoggedIn}
-//                     /> : 
+//                     /> :
 //                     <HeaderMinimized
 //                         activeCategory={activeCategory}
 //                         headerHover={headerHover}

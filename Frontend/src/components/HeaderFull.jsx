@@ -9,7 +9,7 @@ import {
     User,
     LogOut,
 } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 // COMPONENTS
 import Promo from "./Promo.jsx";
@@ -17,7 +17,7 @@ import Dropdown from "./Dropdown.jsx";
 import Header from "./Header.jsx";
 
 // ASSETS
-import AmrahTextLogoBlack from "/amrah-logo-text-white.png";
+import AmrahTextLogoWhite from "/amrah-logo-text-white.png";
 import AmrahTextLogoRed from "/amrah-logo-text-red.png";
 import AmrahLogo from "../assets/amrah-logo.png";
 import UserIcon from "/user-icon.svg";
@@ -49,6 +49,11 @@ export default function HeaderFull({
     const authContext = useContext(AuthContext);
 
     const navigate = useNavigate();
+    const location = useLocation();
+
+    if (location.pathname === "/shop") {
+        setHeaderHover(true);
+    }
 
     function handleLogout() {
         authContext.logout();
@@ -97,6 +102,8 @@ export default function HeaderFull({
         });
     }
 
+    let headerStyle = "";
+
     return (
         <>
             {showPromo && (
@@ -118,7 +125,6 @@ export default function HeaderFull({
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 style={{
-                    boxShadow: headerHover ? "0 0 10px rgba(0, 0, 0, 0.5)" : "",
                     top: showPromo ? "var(--promo-height)" : "",
                 }}
             >
@@ -147,7 +153,7 @@ export default function HeaderFull({
                             src={
                                 headerHover
                                     ? AmrahTextLogoRed
-                                    : AmrahTextLogoBlack
+                                    : AmrahTextLogoWhite
                             }
                             alt="amrah-logo"
                             width="370rem"

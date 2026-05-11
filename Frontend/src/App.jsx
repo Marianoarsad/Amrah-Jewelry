@@ -76,18 +76,6 @@ function App() {
             <UserProgressContextProvider>
                 <CartContextProvider>
                     <RouterProvider router={router} />
-                    {/* <Header />
-                        <Routes>
-                            <Route path="/" element={<Homepage />} />
-                            <Route path="/home" element={<Homepage />} />
-                            <Route path="/shop" element={<Shop />} />
-                        </Routes> */}
-                    {/* <Cart />
-                    <Search />
-                    <Checkout />
-                    <Footer />
-                    <Product />
-                    <Authentication /> */}
                 </CartContextProvider>
             </UserProgressContextProvider>
         </AuthContextProvider>
@@ -101,7 +89,7 @@ export default App;
 /* 
     FRONT-END:
     ⦿ Convert to modal & finalize UI UX of both login and register component (NOT FINAL)
-    ⦿ Change Header style whehn onn light backgrounds
+    ⦿ Change Header style when on light backgrounds
     ⦿ Refactor Routing using react-router-dom
 */
 
@@ -109,6 +97,11 @@ export default App;
     BACKEND:
     ⦿ Create Data Structure of products.
     ⦿ Create Data Structure of users.
+*/
+
+/*
+    FEATURES:
+    ⦿ Add loading screen/effect.
 */
 
 /*

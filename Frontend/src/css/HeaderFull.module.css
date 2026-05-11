@@ -9,14 +9,16 @@
     top: 0;
     left: 0;
     right: 0;
-    height: var(--promo-height); /* Sets the #promo element's height to the value of the CSS custom property --promo-height defined at :root */
-    
+    height: var(
+        --promo-height
+    ); /* Sets the #promo element's height to the value of the CSS custom property --promo-height defined at :root */
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+
     background: #c64b50;
-    border-bottom: 1px solid rgba(198,75,80,1);
+    border-bottom: 1px solid rgba(198, 75, 80, 1);
 }
 
 .header {
@@ -50,14 +52,18 @@
     right: 0;
     z-index: 2;
 
-    background-color: #FFFFFF;
+    background-color: #ffffff;
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.header .headerHovered, nav {
+.header .headerHovered,
+nav {
     display: flex;
 }
 
-.header .headerHovered, nav ul {
+.header .headerHovered,
+nav ul {
     margin: 0;
     padding: 0;
     width: auto;
@@ -66,11 +72,13 @@
     gap: 1.7rem;
 }
 
-.header .headerHovered, ul li {
+.header .headerHovered,
+ul li {
     display: inline-block;
 }
 
-.header .headerHovered, nav ul li a {
+.header .headerHovered,
+nav ul li a {
     position: relative;
     text-decoration: none;
     user-select: none;
@@ -84,41 +92,48 @@
     transition: scale 300ms ease-in-out;
 }
 
-.header .headerHovered, nav ul li a:hover {
-    color: #94161B;
+.header .headerHovered,
+nav ul li a:hover {
+    color: #94161b;
 }
 
-.header .headerHovered, nav ul li a::before {
-    content: '';     
+.header .headerHovered,
+nav ul li a::before {
+    content: "";
     position: absolute;
     top: 100%;
     left: 0;
     width: 0;
     height: 2px;
-    background: #C64B50;
+    background: #c64b50;
     transition: 0.3s;
 }
 
-.header .headerHovered ::before, .active::before {
+.header .headerHovered ::before,
+.active::before {
     width: 100%;
 }
 
-.header .headerHovered, p {
+.header .headerHovered,
+p {
     margin-right: 1rem;
 }
 
-.header .headerHovered, p * {
+.header .headerHovered,
+p * {
     margin: 0.6rem;
 }
 
-.header .headerHovered, p button {
+.header .headerHovered,
+p button {
     background: none;
     border: none;
     cursor: pointer;
-    transition: scale 200ms ease-in-out
+    transition: scale 200ms ease-in-out;
 }
 
-.header .headerHovered, p button:hover {
+.header .headerHovered,
+p button:hover {
     scale: 1.2;
 }
 
@@ -140,9 +155,6 @@
 
 .navBtn {
     cursor: pointer;
-    transition: 
-        scale 170ms ease-in-out,
-        color 300ms ease-in-out;
 }
 
 .navBtn:hover {
@@ -160,9 +172,6 @@
 }
 
 .logoutBtn {
-
-   
-
     margin: 0;
     padding: 0;
 }
