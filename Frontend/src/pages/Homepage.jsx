@@ -5,10 +5,7 @@ import Categories from "../components/Categories.jsx";
 import Footer from "../components/Footer.jsx";
 import Follow from "../components/Follow.jsx";
 
-export default function Landing ({}) {
-    
-    
-    
+export default function Homepage({}) {
     return (
         <>
             <Hero />
@@ -16,5 +13,5 @@ export default function Landing ({}) {
             <Categories />
             <Follow />
         </>
-    )
+    );
 }

@@ -21,7 +21,7 @@ import SignInImage from "../assets/signin-img.jpg";
 import styles from "../css/Authentication.module.css";
 
 export default function Signin() {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const authContext = useContext(AuthContext);
     const userProgressCtx = useContext(UserProgressContext);

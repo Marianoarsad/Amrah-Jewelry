@@ -1,0 +1,33 @@
+// HOOKS & LIBRARIES
+import { Outlet, useNavigation } from "react-router-dom";
+
+// COMPONENTS
+import Header from "../components/Header.jsx";
+import Footer from "../components/Footer.jsx";
+
+// MODALS
+import Search from "../components/Search.jsx";
+import Checkout from "../components/Checkout.jsx";
+import Cart from "../components/Cart.jsx";
+import Product from "../components/UI/Product.jsx";
+import Authentication from "../components/Authentication.jsx";
+
+export default function RootLayout() {
+    const navigation = useNavigation();
+
+    return (
+        <>
+            <Header />
+            <main>
+                {navigation.state === "loading" && <p>Loading...</p>}
+                <Outlet />
+                <Search />
+                <Checkout />
+                <Cart />
+                <Product />
+                <Authentication />
+                <Footer />
+            </main>
+        </>
+    );
+}

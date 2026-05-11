@@ -1,13 +1,25 @@
 // HOOKS & LIBRARIES
 import { useRef, useEffect, useState, useContext } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+    createBrowserRouter,
+    RouterProvider,
+    BrowserRouter,
+    Routes,
+    Route,
+} from "react-router-dom";
 
 // COMPONENTS
 import Header from "./components/Header.jsx";
 import HeaderFull from "./components/HeaderFull.jsx";
 import HeaderMinimized from "./components/HeaderMinimized.jsx";
-
 import Footer from "./components/Footer.jsx";
+
+// PAGES
+import RootLayout from "./pages/RootLayout.jsx";
+import ShopLayout from "./pages/ShopLayout.jsx";
+import ErrorPage from "./pages/ErrorPage.jsx";
+import Homepage from "./pages/Homepage.jsx";
+import Shop from "./pages/Shop.jsx";
 
 // MODALS
 import Search from "./components/Search.jsx";
@@ -15,10 +27,6 @@ import Checkout from "./components/Checkout.jsx";
 import Cart from "./components/Cart.jsx";
 import Product from "./components/UI/Product.jsx";
 import Authentication from "./components/Authentication.jsx";
-
-// PAGES
-import Landing from "./pages/Landing.jsx";
-import Shop from "./pages/Shop.jsx";
 
 // CONTEXT PROVIDER
 import { AuthContextProvider } from "./store/authContext.jsx";
@@ -31,6 +39,22 @@ import { authService } from "./services/authService.js";
 // CONTEXT
 import AuthContext from "./store/authContext.jsx";
 import UserProgressContext from "./store/UserProgressContext.jsx";
+
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <RootLayout />,
+        errorElement: <ErrorPage />,
+        children: [
+            { index: true, element: <Homepage /> },
+            {
+                path: "shop",
+                element: <ShopLayout />,
+                children: [{ index: true, element: <Shop /> }],
+            },
+        ],
+    },
+]);
 
 function App() {
     const [user, setUser] = useState(null);
@@ -48,38 +72,52 @@ function App() {
     let existingUser = authService.getCurrentUser();
 
     return (
-        <BrowserRouter>
-            <AuthContextProvider>
-                <UserProgressContextProvider>
-                    <CartContextProvider>
-                        <Header />
+        <AuthContextProvider>
+            <UserProgressContextProvider>
+                <CartContextProvider>
+                    <RouterProvider router={router} />
+                    {/* <Header />
                         <Routes>
-                            <Route path="/" element={<Landing />} />
-                            <Route path="/home" element={<Landing />} />
+                            <Route path="/" element={<Homepage />} />
+                            <Route path="/home" element={<Homepage />} />
                             <Route path="/shop" element={<Shop />} />
-                        </Routes>
-                        <Cart />
-                        <Search />
-                        <Checkout />
-                        <Footer />
-                        <Product />
-                        <Authentication />
-                    </CartContextProvider>
-                </UserProgressContextProvider>
-            </AuthContextProvider>
-        </BrowserRouter>
+                        </Routes> */}
+                    {/* <Cart />
+                    <Search />
+                    <Checkout />
+                    <Footer />
+                    <Product />
+                    <Authentication /> */}
+                </CartContextProvider>
+            </UserProgressContextProvider>
+        </AuthContextProvider>
     );
 }
 
 export default App;
 
 // TODO:
+
 /* 
-    FRONT-END
-    ⦿ Convert to modal and redesign login and register component (NOT FINAL)
+    FRONT-END:
+    ⦿ Convert to modal & finalize UI UX of both login and register component (NOT FINAL)
+    ⦿ Change Header style whehn onn light backgrounds
     ⦿ Refactor Routing using react-router-dom
 */
+
 /*
     BACKEND:
-    ⦿ Fix Header bug where HeaderMinimized does not render its dropdown.
+    ⦿ Create Data Structure of products.
+    ⦿ Create Data Structure of users.
+*/
+
+/*
+    STRUCTURE:
+    ⦿ Improve routing of react-router-dom.
+    ⦿ Integrate Redux.
+*/
+
+/*
+    BUGS:
+    ⦿ Header bug where HeaderMinimized does not render its dropdown. (minor)
 */
