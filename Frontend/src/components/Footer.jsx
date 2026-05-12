@@ -1,4 +1,5 @@
 // HOOKS
+import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
 // RESOURCES
@@ -18,10 +19,10 @@ export default function Footer({}) {
                         CATALOG
                     </li>
                     <li className={styles.footerUpperContainerLinks}>
-                        <a href="#">Best Sellers</a>
+                        <Link to="#">Best Sellers</Link>
                     </li>
                     <li className={styles.footerUpperContainerLinks}>
-                        <a href="#">New Arrival</a>
+                        <Link to="#">New Arrival</Link>
                     </li>
                 </ul>
                 <ul style={{ marginLeft: "13rem" }}>
@@ -29,16 +30,16 @@ export default function Footer({}) {
                         CUSTOMER SERVICES
                     </li>
                     <li className={styles.footerUpperContainerLinks}>
-                        <a href="#">FAQ</a>
+                        <Link to="#">FAQ</Link>
                     </li>
                     <li className={styles.footerUpperContainerLinks}>
-                        <a href="#">Refund Policy</a>
+                        <Link to="#">Refund Policy</Link>
                     </li>
                     <li className={styles.footerUpperContainerLinks}>
-                        <a href="#">Terms of Service</a>
+                        <Link to="#">Terms of Service</Link>
                     </li>
                     <li className={styles.footerUpperContainerLinks}>
-                        <a href="#">Contact Us</a>
+                        <Link to="#">Contact Us</Link>
                     </li>
                 </ul>
                 <ul style={{ marginLeft: "13rem" }}>
@@ -46,13 +47,13 @@ export default function Footer({}) {
                         MORE ABOUT US
                     </li>
                     <li className={styles.footerUpperContainerLinks}>
-                        <a href="#">About Us</a>
+                        <Link to="#">About Us</Link>
                     </li>
                     <li className={styles.footerUpperContainerLinks}>
-                        <a href="#">Privacy Policy</a>
+                        <Link to="#">Privacy Policy</Link>
                     </li>
                     <li className={styles.footerUpperContainerLinks}>
-                        <a href="#">Terms and Conditions</a>
+                        <Link to="#">Terms and Conditions</Link>
                     </li>
                 </ul>
             </div>
@@ -71,20 +72,20 @@ export default function Footer({}) {
                     </form>
                 </div>
                 <div className={styles.socmedContainer}>
-                    <a href="#">
+                    <Link to="#">
                         <img
                             className={styles.socmedLogo}
                             src={ShopeeLogo}
                             alt="shopee logo"
                         />
-                    </a>
-                    <a href="#">
+                    </Link>
+                    <Link to="#">
                         <img
                             className={styles.socmedLogo}
                             src={InstagramLogo}
                             alt="instagram logo"
                         />
-                    </a>
+                    </Link>
                     {/* <a href="#"><img className={styles.socmedLogo} src={FacebookLogo} alt="facebook logo"/></a> */}
                 </div>
             </div>

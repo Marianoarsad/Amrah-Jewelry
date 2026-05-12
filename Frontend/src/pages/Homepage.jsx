@@ -10,7 +10,7 @@ export default function Homepage({}) {
         <>
             <Hero />
             <PopularProducts />
-            <Categories />
+            {/* <Categories /> */}
             <Follow />
         </>
     );

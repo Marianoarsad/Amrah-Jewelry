@@ -10,7 +10,7 @@ import HeaderMinimized from "./HeaderMinimized.jsx";
 import UserProgressContext from "../store/UserProgressContext.jsx";
 import AuthContext from "../store/authContext.jsx";
 
-export default function Header({
+export default function HeaderLayout({
     children,
     className,
     onMouseEnter,

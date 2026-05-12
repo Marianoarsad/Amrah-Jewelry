@@ -1,119 +1,128 @@
 // HOOKS & LIBRARIES
-import { Search, Phone, ShoppingCart, User, LogOut } from 'lucide-react';
+import { NavLink } from "react-router-dom";
+import { Search, Phone, ShoppingCart, User, LogOut } from "lucide-react";
 
 // REACT HOOKS
-import { useState } from 'react';
+import { useState } from "react";
 
 // COMPONENTS
-import Dropdown from './Dropdown.jsx';
+import Dropdown from "./Dropdown.jsx";
 
-import styles from '../css/HeaderMinimized.module.css';
+import styles from "../css/HeaderMinimized.module.css";
 
-export default function HeaderMinimized ({ 
+export default function HeaderMinimized({
     activeCategory,
     setActiveCategory,
     headerHover,
     setHeaderHover,
-    isLoggedIn
-    }) {
-    
-    function handleMouseEnter () {
+    isLoggedIn,
+}) {
+    function handleMouseEnter() {
         setHeaderHover(true);
     }
 
-    function handleMouseLeave () {
-        if (activeCategory === '') {
+    function handleMouseLeave() {
+        if (activeCategory === "") {
             setHeaderHover(false);
         }
     }
 
     return (
         <>
-            <header 
+            <header
                 className={styles.header}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
             >
                 <nav>
-
                     {/* LOGO */}
-                    <a href='#'>
-                        <img src='/amrah-logo-stand-alone.png' alt='amrah-logo' className={styles.logo}/>
-                    </a>
+                    <NavLink to="#">
+                        <img
+                            src="/amrah-logo-stand-alone.png"
+                            alt="amrah-logo"
+                            className={styles.logo}
+                        />
+                    </NavLink>
 
                     {/* NAV LINKS */}
                     <ul>
                         <li>
-                            <a 
-                                href='#'
+                            <NavLink
+                                to="#"
                                 onMouseEnter={() => {
-                                    setActiveCategory('earrings')
+                                    setActiveCategory("earrings");
                                 }}
                             >
                                 EARRINGS
-                            </a>
+                            </NavLink>
                         </li>
                         <li>
-                            <a 
-                                href='#'
+                            <NavLink
+                                to="#"
                                 onMouseEnter={() => {
-                                    setActiveCategory('necklace')
+                                    setActiveCategory("necklace");
                                 }}
                             >
                                 NECKLACE
-                            </a>
+                            </NavLink>
                         </li>
                         <li>
-                            <a 
-                                href='#'
+                            <NavLink
+                                to="#"
                                 onMouseEnter={() => {
-                                    setActiveCategory('rings')
+                                    setActiveCategory("rings");
                                 }}
                             >
                                 RINGS
-                            </a>
+                            </NavLink>
                         </li>
                         <li>
-                            <a 
-                                href='#'
+                            <NavLink
+                                to="#"
                                 onMouseEnter={() => {
-                                    setActiveCategory('bracelet')
+                                    setActiveCategory("bracelet");
                                 }}
                             >
                                 BRACELET
-                            </a>
+                            </NavLink>
                         </li>
                         <li>
-                            <a 
-                                href='#'
+                            <NavLink
+                                to="#"
                                 onMouseEnter={() => {
-                                    setActiveCategory('more')
+                                    setActiveCategory("more");
                                 }}
                             >
                                 MORE
-                            </a>
+                            </NavLink>
                         </li>
                     </ul>
                 </nav>
-            
+
                 <div className={styles.buttonContainer}>
-                    <button><Search/></button>
+                    <button>
+                        <Search />
+                    </button>
                     <div className={styles.verticalLine}></div>
                     {/*BUTTONS*/}
-                    <button><Phone/></button>
-                    <button><ShoppingCart/></button>
-                    <button>{ isLoggedIn ?  <LogOut/> : <User/>}</button>
+                    <button>
+                        <Phone />
+                    </button>
+                    <button>
+                        <ShoppingCart />
+                    </button>
+                    <button>{isLoggedIn ? <LogOut /> : <User />}</button>
                 </div>
                 {/*DROPDOWN*/}
-                { activeCategory && headerHover ?
-                    <Dropdown 
+                {activeCategory && headerHover ? (
+                    <Dropdown
                         activeCategory={activeCategory}
                         setActiveCategory={setActiveCategory}
-                        headerType={'headerMinimized'}
+                        headerType={"headerMinimized"}
                         setHeaderHover={setHeaderHover}
-                    /> : null
-                }
+                    />
+                ) : null}
             </header>
         </>
-    )
+    );
 }

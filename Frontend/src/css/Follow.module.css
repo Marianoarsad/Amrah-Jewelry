@@ -18,14 +18,14 @@
     width: 90%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: .3em;
+    gap: 0.3em;
 }
 
 .followGrid > img {
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    transition: scale 200ms ease-in-out ;
+    transition: scale 200ms ease-in-out;
 }
 
 .followGrid > img:hover {
@@ -33,18 +33,15 @@
 }
 
 .igBtn {
-    margin-top: 1em;
-    height: 2.7rem;
-    width: 10rem;
+    margin-top: 2.5em;
+    height: 3rem;
+    width: 12rem;
     background: none;
-    border: .07em solid #696b6c;
+    border: 0.07em solid #696b6c;
     color: #696b6c;
-    transition: 
-        color 250ms ease-in-out;
-
 }
 
 .igBtn:hover {
-    border: .07em solid #c96868;
+    border: 0.07em solid #c96868;
     color: #c96868;
 }

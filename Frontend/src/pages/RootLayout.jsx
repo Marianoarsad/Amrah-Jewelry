@@ -2,7 +2,7 @@
 import { Outlet, useNavigation } from "react-router-dom";
 
 // COMPONENTS
-import Header from "../components/Header.jsx";
+import HeaderLayout from "../components/HeaderLayout.jsx";
 import Footer from "../components/Footer.jsx";
 
 // MODALS
@@ -17,7 +17,7 @@ export default function RootLayout() {
 
     return (
         <>
-            <Header />
+            <HeaderLayout />
             <main>
                 {navigation.state === "loading" && <p>Loading...</p>}
                 <Outlet />

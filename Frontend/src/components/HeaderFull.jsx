@@ -1,5 +1,6 @@
 // PACKAGES
 import { useContext, useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import {
     ChevronLeft,
     ChevronRight,
@@ -14,7 +15,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 // COMPONENTS
 import Promo from "./Promo.jsx";
 import Dropdown from "./Dropdown.jsx";
-import Header from "./Header.jsx";
+import Header from "./HeaderLayout.jsx";
 
 // ASSETS
 import AmrahTextLogoWhite from "/amrah-logo-text-white.png";
@@ -102,8 +103,6 @@ export default function HeaderFull({
         });
     }
 
-    let headerStyle = "";
-
     return (
         <>
             {showPromo && (
@@ -148,7 +147,7 @@ export default function HeaderFull({
                 </p>
                 {/* LOGO  */}
                 <div className={styles.navPlaceHolder}>
-                    <a href="/" style={{ userSelect: "none" }}>
+                    <NavLink to="/" style={{ userSelect: "none" }}>
                         <img
                             src={
                                 headerHover
@@ -158,12 +157,12 @@ export default function HeaderFull({
                             alt="amrah-logo"
                             width="370rem"
                         />
-                    </a>
+                    </NavLink>
                     <nav>
                         <ul>
                             <li>
-                                <a
-                                    href="/shop"
+                                <NavLink
+                                    to="/shop"
                                     className={`
                                         ${headerHover ? styles.navHover : styles.nav} 
                                         ${activeCategory === "earrings" ? styles.active : ""}
@@ -173,11 +172,11 @@ export default function HeaderFull({
                                     }}
                                 >
                                     EARRINGS
-                                </a>
+                                </NavLink>
                             </li>
                             <li>
-                                <a
-                                    href="/shop"
+                                <NavLink
+                                    to="/shop"
                                     className={`
                                         ${headerHover ? styles.navHover : styles.nav} 
                                         ${activeCategory === "necklace" ? styles.active : ""}
@@ -187,11 +186,11 @@ export default function HeaderFull({
                                     }}
                                 >
                                     NECKLACE
-                                </a>
+                                </NavLink>
                             </li>
                             <li>
-                                <a
-                                    href="/shop"
+                                <NavLink
+                                    to="/shop"
                                     className={`
                                         ${headerHover ? styles.navHover : styles.nav} 
                                         ${activeCategory === "rings" ? styles.active : ""}
@@ -201,10 +200,10 @@ export default function HeaderFull({
                                     }}
                                 >
                                     RINGS
-                                </a>
+                                </NavLink>
                             </li>
                             <li>
-                                <a
+                                <NavLink
                                     href="/shop"
                                     className={`
                                         ${headerHover ? styles.navHover : styles.nav} 
@@ -215,11 +214,11 @@ export default function HeaderFull({
                                     }}
                                 >
                                     BRACELET
-                                </a>
+                                </NavLink>
                             </li>
                             <li>
-                                <a
-                                    href="/shop"
+                                <NavLink
+                                    to="/shop"
                                     className={`
                                         ${headerHover ? styles.navHover : styles.nav} 
                                         ${activeCategory === "more" ? styles.active : ""}
@@ -229,7 +228,7 @@ export default function HeaderFull({
                                     }}
                                 >
                                     MORE
-                                </a>
+                                </NavLink>
                             </li>
                         </ul>
                     </nav>

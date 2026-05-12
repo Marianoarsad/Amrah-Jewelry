@@ -9,7 +9,6 @@ import {
 } from "react-router-dom";
 
 // COMPONENTS
-import Header from "./components/Header.jsx";
 import HeaderFull from "./components/HeaderFull.jsx";
 import HeaderMinimized from "./components/HeaderMinimized.jsx";
 import Footer from "./components/Footer.jsx";
@@ -89,19 +88,20 @@ export default App;
 /* 
     FRONT-END:
     ⦿ Convert to modal & finalize UI UX of both login and register component (NOT FINAL)
-    ⦿ Change Header style when on light backgrounds
-    ⦿ Refactor Routing using react-router-dom
+    ⦿ Integrate <Link/> & <NavLink/> for routing
+    ⦿ Create a slider for PopularProducts.jsx
 */
 
 /*
     BACKEND:
     ⦿ Create Data Structure of products.
     ⦿ Create Data Structure of users.
+    ⦿ Convert to SQL for practice.
 */
 
 /*
     FEATURES:
-    ⦿ Add loading screen/effect.
+    ⦿ Add loading screen / effect.
 */
 
 /*
