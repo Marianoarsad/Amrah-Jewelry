@@ -1,0 +1,42 @@
+.navItem {
+    display: block;
+    position: relative;
+    text-decoration: none;
+    user-select: none;
+
+    font-size: 1rem;
+    font-family: "League Spartan", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+
+    transition: scale 300ms ease-in-out;
+}
+
+.navItem:hover {
+    color: #94161b;
+}
+
+.navItem::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #c64b50;
+    transition: 0.3s;
+}
+
+.active::before {
+    width: 100%;
+}
+
+.navHover {
+    color: #c64b50;
+}
+
+.nav {
+    cursor: pointer;
+    color: #ffff;
+}

@@ -16,6 +16,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import Promo from "./Promo.jsx";
 import Dropdown from "./Dropdown.jsx";
 import Header from "./HeaderLayout.jsx";
+import NavItemFull from "./NavItemFull.jsx";
 
 // ASSETS
 import AmrahTextLogoWhite from "/amrah-logo-text-white.png";
@@ -162,62 +163,30 @@ export default function HeaderFull({
                     </NavLink>
                     <nav>
                         <ul>
-                            <li>
-                                <NavLink
-                                    to="/shop?category=Earring"
-                                    className={`
-                                        ${headerHover ? styles.navHover : styles.nav} 
-                                        ${activeCategory === "earrings" ? styles.active : ""}
-                                    `}
-                                    onMouseEnter={() => {
-                                        setActiveCategory("earrings");
-                                    }}
-                                >
-                                    EARRINGS
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
-                                    to="/shop?category=Necklace"
-                                    className={`
-                                        ${headerHover ? styles.navHover : styles.nav} 
-                                        ${activeCategory === "necklace" ? styles.active : ""}
-                                    `}
-                                    onMouseEnter={() => {
-                                        setActiveCategory("necklace");
-                                    }}
-                                >
-                                    NECKLACE
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
-                                    to="/shop?category=Ring"
-                                    className={`
-                                        ${headerHover ? styles.navHover : styles.nav} 
-                                        ${activeCategory === "rings" ? styles.active : ""}
-                                    `}
-                                    onMouseEnter={() => {
-                                        setActiveCategory("rings");
-                                    }}
-                                >
-                                    RINGS
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
-                                    to="/shop?category=Bracelet"
-                                    className={`
-                                        ${headerHover ? styles.navHover : styles.nav} 
-                                        ${activeCategory === "bracelet" ? styles.active : ""}
-                                    `}
-                                    onMouseEnter={() => {
-                                        setActiveCategory("bracelet");
-                                    }}
-                                >
-                                    BRACELET
-                                </NavLink>
-                            </li>
+                            <NavItemFull
+                                category={"EARRING"}
+                                headerHover={headerHover}
+                                activeCategory={activeCategory}
+                                setActiveCategory={setActiveCategory}
+                            />
+                            <NavItemFull
+                                category={"NECKLACE"}
+                                headerHover={headerHover}
+                                activeCategory={activeCategory}
+                                setActiveCategory={setActiveCategory}
+                            />
+                            <NavItemFull
+                                category={"RING"}
+                                headerHover={headerHover}
+                                activeCategory={activeCategory}
+                                setActiveCategory={setActiveCategory}
+                            />
+                            <NavItemFull
+                                category={"BRACELET"}
+                                headerHover={headerHover}
+                                activeCategory={activeCategory}
+                                setActiveCategory={setActiveCategory}
+                            />
                         </ul>
                     </nav>
                 </div>

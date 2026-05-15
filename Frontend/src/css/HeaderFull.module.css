@@ -12,11 +12,9 @@
     height: var(
         --promo-height
     ); /* Sets the #promo element's height to the value of the CSS custom property --promo-height defined at :root */
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     background: #c64b50;
     border-bottom: 1px solid rgba(198, 75, 80, 1);
 }
@@ -24,13 +22,11 @@
 .header {
     width: 100%;
     height: 15vh;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 0;
     background-color: transparent;
-
     position: fixed;
     left: 0;
     right: 0;
@@ -40,13 +36,11 @@
 .headerHovered {
     width: 100%;
     height: 15vh;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 0;
     background-color: transparent;
-
     position: fixed;
     left: 0;
     right: 0;
@@ -69,7 +63,7 @@ nav ul {
     width: auto;
     list-style: none;
     display: flex;
-    gap: 1.7rem;
+    gap: 2rem;
 }
 
 .header .headerHovered,
@@ -82,7 +76,6 @@ nav ul li a {
     position: relative;
     text-decoration: none;
     user-select: none;
-
     font-size: 1rem;
     font-family: "League Spartan", sans-serif;
     font-optical-sizing: auto;
