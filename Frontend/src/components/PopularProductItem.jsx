@@ -2,19 +2,17 @@ import { Link } from "react-router-dom";
 
 import styles from "../css/PopularProductItem.module.css";
 
-export default function PopularProductItem({ img }) {
+export default function PopularProductItem({ id, img, title, desc, price }) {
     return (
-        <li className={`${styles.productItem} swiper-slide`}>
+        <li key={id} className={`${styles.productItem} swiper-slide`}>
             <Link to="#" className={styles.productLink}>
                 <img
                     className={styles.productImg}
                     src={img}
                     alt="Product Image"
                 />
-                <p className={styles.productTitle}>Title</p>
-                <p className={styles.productDesc}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </p>
+                <p className={styles.productTitle}>{title}</p>
+                <p className={styles.productDesc}>{desc}</p>
             </Link>
         </li>
     );

@@ -99,7 +99,6 @@ export default App;
     Not Important:
     ⦿ Convert to modal & finalize UI UX of both login and register component (NOT FINAL)
     ⦿ Map and make a component for productItems in PopularProducts.jsx
-    ⦿ Redesign arrow in carousel (PopularProducts.jsx)
 */
 
 /*
@@ -116,8 +115,8 @@ export default App;
 
 /*
     STRUCTURE:
-    ⦿ Improve routing of react-router-dom.
     ⦿ Integrate Redux.
+    ⦿ Filter in backend not directly on the component(Shop.jsx).
 */
 
 /*

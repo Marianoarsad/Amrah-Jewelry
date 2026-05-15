@@ -19,13 +19,55 @@ import styles from "../css/PopularProducts.module.css";
 Swiper.use([Navigation, Pagination]);
 
 const products = [
-    { name: "Pearl Bracelet", price: 20000, img: productImage1 },
-    { name: "Pearl Necklace", price: 23400, img: productImage2 },
-    { name: "Pearl Earrings", price: 87000, img: productImage3 },
-    { name: "Pearl Pendant", price: 92000, img: productImage4 },
-    { name: "Pearl Pendant", price: 37000, img: productImage5 },
-    { name: "Pearl Pendant", price: 14000, img: productImage6 },
-    { name: "Pearl Pendant", price: 19999, img: productImage7 },
+    {
+        id: "p1",
+        title: "Pearl Bracelet",
+        desc: "Lorem ipsum dolor sit amet consecteturadipisicing elit.",
+        price: 20000,
+        img: productImage1,
+    },
+    {
+        id: "p2",
+        title: "Pearl Necklace",
+        desc: "Lorem ipsum dolor sit amet consecteturadipisicing elit.",
+        price: 23400,
+        img: productImage2,
+    },
+    {
+        id: "p3",
+        title: "Pearl Earrings",
+        desc: "Lorem ipsum dolor sit amet consecteturadipisicing elit.",
+        price: 87000,
+        img: productImage3,
+    },
+    {
+        id: "p4",
+        title: "Pearl Pendant",
+        desc: "Lorem ipsum dolor sit amet consecteturadipisicing elit.",
+        price: 92000,
+        img: productImage4,
+    },
+    {
+        id: "p5",
+        title: "Pearl Pendant",
+        desc: "Lorem ipsum dolor sit amet consecteturadipisicing elit.",
+        price: 37000,
+        img: productImage5,
+    },
+    {
+        id: "p6",
+        title: "Pearl Pendant",
+        desc: "Lorem ipsum dolor sit amet consecteturadipisicing elit.",
+        price: 14000,
+        img: productImage6,
+    },
+    {
+        id: "p7",
+        title: "Pearl Pendant",
+        desc: "Lorem ipsum dolor sit amet consecteturadipisicing elit.",
+        price: 19999,
+        img: productImage7,
+    },
 ];
 
 export default function PopularProducts() {
@@ -72,107 +114,15 @@ export default function PopularProducts() {
             <h2>Popular Products</h2>
             <div className="swiper swiper-popular">
                 <ul className="swiper-wrapper">
-                    <PopularProductItem
-                        className={`${styles.productItem} swiper-slide`}
-                        img={productImage2}
-                    >
-                        <Link to="#" className={styles.productLink}>
-                            <img
-                                className={styles.productImg}
-                                src={productImage1}
-                                alt="Product Image"
-                            />
-                            <p className={styles.productTitle}>Title</p>
-                            <p className={styles.productDesc}>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit.
-                            </p>
-                        </Link>
-                    </PopularProductItem>
-                    <li className={`${styles.productItem} swiper-slide`}>
-                        <Link to="#" className={styles.productLink}>
-                            <img
-                                className={styles.productImg}
-                                src={productImage2}
-                                alt="Product Image"
-                            />
-                            <p className={styles.productTitle}>Title</p>
-                            <p className={styles.productDesc}>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit.
-                            </p>
-                        </Link>
-                    </li>
-                    <li className={`${styles.productItem} swiper-slide`}>
-                        <Link to="#" className={styles.productLink}>
-                            <img
-                                className={styles.productImg}
-                                src={productImage3}
-                                alt="Product Image"
-                            />
-                            <p className={styles.productTitle}>Title</p>
-                            <p className={styles.productDesc}>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit.
-                            </p>
-                        </Link>
-                    </li>
-                    <li className={`${styles.productItem} swiper-slide`}>
-                        <Link to="#" className={styles.productLink}>
-                            <img
-                                className={styles.productImg}
-                                src={productImage4}
-                                alt="Product Image"
-                            />
-                            <p className={styles.productTitle}>Title</p>
-                            <p className={styles.productDesc}>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit.
-                            </p>
-                        </Link>
-                    </li>
-                    <li className={`${styles.productItem} swiper-slide`}>
-                        <Link to="#" className={styles.productLink}>
-                            <img
-                                className={styles.productImg}
-                                src={productImage5}
-                                alt="Product Image"
-                            />
-                            <p className={styles.productTitle}>Title</p>
-                            <p className={styles.productDesc}>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit.
-                            </p>
-                        </Link>
-                    </li>
-                    <li className={`${styles.productItem} swiper-slide`}>
-                        <Link to="#" className={styles.productLink}>
-                            <img
-                                className={styles.productImg}
-                                src={productImage6}
-                                alt="Product Image"
-                            />
-                            <p className={styles.productTitle}>Title</p>
-                            <p className={styles.productDesc}>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit.
-                            </p>
-                        </Link>
-                    </li>
-                    <li className={`${styles.productItem} swiper-slide`}>
-                        <Link to="#" className={styles.productLink}>
-                            <img
-                                className={styles.productImg}
-                                src={productImage7}
-                                alt="Product Image"
-                            />
-                            <p className={styles.productTitle}>Title</p>
-                            <p className={styles.productDesc}>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit.
-                            </p>
-                        </Link>
-                    </li>
+                    {products.map((product) => (
+                        <PopularProductItem
+                            id={product.id}
+                            img={product.img}
+                            title={product.title}
+                            desc={product.desc}
+                            price={product.price}
+                        />
+                    ))}
                 </ul>
                 <div className="swiper-pagination"></div>
                 <div className="swiper-button-next"></div>
