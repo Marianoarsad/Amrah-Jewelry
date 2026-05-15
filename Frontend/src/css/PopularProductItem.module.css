@@ -1,0 +1,30 @@
+.productItem {
+    padding: 2rem;
+    background-color: #ffffff;
+    list-style: none;
+}
+
+.productLink {
+    text-decoration: none;
+}
+
+.productImg {
+    height: auto;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.productTitle {
+    margin-top: 0.5rem;
+    font-family: "Arapey", serif;
+    font-size: 1.5rem;
+    color: #c64b50;
+}
+
+.productDesc {
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.85rem;
+    color: #333;
+    margin-top: 0.3rem;
+}

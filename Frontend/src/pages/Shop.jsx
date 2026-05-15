@@ -1,45 +1,24 @@
 // HOOKS & PACKAGES
-import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { ChevronDown, ListFilter } from 'lucide-react';
+import { useLoaderData, useSearchParams } from "react-router-dom";
+
+import { ChevronDown, ListFilter } from "lucide-react";
 
 // COMPONENTS
-import ProductItem from '../components/ProductItem.jsx';
+import ProductItem from "../components/ProductItem.jsx";
 
 // ASSETS
-import sampleImage1 from '../assets/pearl.png';
+import sampleImage1 from "../assets/pearl.png";
 
 // UTIL
-import { currencyFormatter } from '../util/formatting.js';
+import { currencyFormatter } from "../util/formatting.js";
 
-import styles from '../css/Shop.module.css';
+import styles from "../css/Shop.module.css";
 
-export default function Shop({}) {
-    
-    const location = useLocation();
-    
-    const [ products, setProducts ] = useState([]);
+export default function Shop({ category }) {
+    const products = useLoaderData();
 
-    // DESTRUCTURE FROM Search.jsx
-    const { filteredProducts, category } = location.state || {};
-
-    // FETCH PRODUCTS
-    useEffect(() => {
-
-        if (filteredProducts) {
-            setProducts(filteredProducts);
-            
-        } else {
-            async function getProducts () {
-                const response = await fetch ('http://localhost:8000/products/getProducts');
-                const products = await response.json();
-
-                setProducts(products);
-            }
-
-            getProducts();
-        }
-    });
+    const [searchParams, setSearchParams] = useSearchParams();
+    const showFilteredProducts = searchParams.get("filter");
 
     return (
         <section className={styles.shop}>
@@ -47,25 +26,25 @@ export default function Shop({}) {
             <div className={styles.shopStyleContainer}>
                 <div className={styles.shopStyle}>
                     <a>
-                        <img src={sampleImage1} alt='sample-image'/>
+                        <img src={sampleImage1} alt="sample-image" />
                     </a>
                     <span>Lorem Ipsum</span>
                 </div>
                 <div className={styles.shopStyle}>
                     <a>
-                        <img src={sampleImage1} alt='sample-image'/>
+                        <img src={sampleImage1} alt="sample-image" />
                     </a>
                     <span>Lorem Ipsum</span>
                 </div>
                 <div className={styles.shopStyle}>
                     <a>
-                        <img src={sampleImage1} alt='sample-image'/>
+                        <img src={sampleImage1} alt="sample-image" />
                     </a>
                     <span>Lorem Ipsum</span>
                 </div>
                 <div className={styles.shopStyle}>
                     <a>
-                        <img src={sampleImage1} alt='sample-image'/>
+                        <img src={sampleImage1} alt="sample-image" />
                     </a>
                     <span>Lorem Ipsum</span>
                 </div>
@@ -77,10 +56,9 @@ export default function Shop({}) {
                     <div className={styles.shopGridUpperLeft}>
                         <button>
                             SORT BY
-                            <ChevronDown  size={24} color="#c7464e"/>
+                            <ChevronDown size={24} color="#c7464e" />
                         </button>
                         <p>{products.length} PRODUCTS</p>
-                        
                     </div>
                     <div className={styles.shopGridUpperMiddle}>
                         {category ? <h3>{category}</h3> : <h3>Shop</h3>}
@@ -88,7 +66,13 @@ export default function Shop({}) {
                     <div className={styles.shopGridUpperRight}>
                         <button>
                             FILTER
-                            <ListFilter size={16} style={{ marginLeft: '.4rem', color: '#c7464e' }}/>
+                            <ListFilter
+                                size={16}
+                                style={{
+                                    marginLeft: ".4rem",
+                                    color: "#c7464e",
+                                }}
+                            />
                         </button>
                     </div>
                 </div>
@@ -108,5 +92,36 @@ export default function Shop({}) {
                 </ul>
             </div>
         </section>
-    )
+    );
+}
+
+export async function loader({ request }) {
+    const url = new URL(request.url);
+    const category = url.searchParams.get("category");
+
+    // console.log(category);
+
+    const response = await fetch("http://localhost:8000/products/getProducts");
+
+    if (!response.ok) {
+        return Response.json(
+            { message: "Could not fetch products." },
+            { status: 500 },
+        );
+    } else {
+        const products = await response.json();
+        // console.log(products);
+
+        if (!category) return products;
+
+        // FILTERING PRODUCTS
+        const filteredProducts = products.filter(
+            (product) =>
+                product.category.toLowerCase() === category.toLowerCase(),
+        );
+
+        // console.log(filteredProducts);
+
+        return filteredProducts;
+    }
 }

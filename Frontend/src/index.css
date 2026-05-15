@@ -13,13 +13,22 @@ html {
 
 .swiper-popular .swiper-button-next,
 .swiper-popular .swiper-button-prev {
+    width: 0.9rem;
     color: #c64b50;
     transition: scale 200ms ease-in-out;
 }
 
+.swiper-popular .swiper-button-next {
+    margin-right: 0.6rem;
+}
+
+.swiper-popular .swiper-button-prev {
+    margin-left: 0.6rem;
+}
+
 .swiper-popular .swiper-button-next:hover,
 .swiper-popular .swiper-button-prev:hover {
-    scale: 1.2;
+    scale: 1.1;
 }
 
 .swiper-popular .swiper-pagination-bullet {

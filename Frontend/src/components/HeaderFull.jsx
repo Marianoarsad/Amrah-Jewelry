@@ -52,6 +52,8 @@ export default function HeaderFull({
     const navigate = useNavigate();
     const location = useLocation();
 
+    // console.log(location.pathname);
+
     if (location.pathname === "/shop") {
         setHeaderHover(true);
     }
@@ -162,7 +164,7 @@ export default function HeaderFull({
                         <ul>
                             <li>
                                 <NavLink
-                                    to="/shop"
+                                    to="/shop?category=Earring"
                                     className={`
                                         ${headerHover ? styles.navHover : styles.nav} 
                                         ${activeCategory === "earrings" ? styles.active : ""}
@@ -176,7 +178,7 @@ export default function HeaderFull({
                             </li>
                             <li>
                                 <NavLink
-                                    to="/shop"
+                                    to="/shop?category=Necklace"
                                     className={`
                                         ${headerHover ? styles.navHover : styles.nav} 
                                         ${activeCategory === "necklace" ? styles.active : ""}
@@ -190,7 +192,7 @@ export default function HeaderFull({
                             </li>
                             <li>
                                 <NavLink
-                                    to="/shop"
+                                    to="/shop?category=Ring"
                                     className={`
                                         ${headerHover ? styles.navHover : styles.nav} 
                                         ${activeCategory === "rings" ? styles.active : ""}
@@ -204,7 +206,7 @@ export default function HeaderFull({
                             </li>
                             <li>
                                 <NavLink
-                                    href="/shop"
+                                    to="/shop?category=Bracelet"
                                     className={`
                                         ${headerHover ? styles.navHover : styles.nav} 
                                         ${activeCategory === "bracelet" ? styles.active : ""}

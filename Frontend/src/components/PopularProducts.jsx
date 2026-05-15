@@ -3,6 +3,8 @@ import { useRef, useEffect } from "react";
 import Swiper from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
 
+import PopularProductItem from "./PopularProductItem.jsx";
+
 // ASSETS
 import productImage1 from "../assets/product-test-image-1.jpg";
 import productImage2 from "../assets/product-test-image-2.jpg";
@@ -70,7 +72,10 @@ export default function PopularProducts() {
             <h2>Popular Products</h2>
             <div className="swiper swiper-popular">
                 <ul className="swiper-wrapper">
-                    <li className={`${styles.productItem} swiper-slide`}>
+                    <PopularProductItem
+                        className={`${styles.productItem} swiper-slide`}
+                        img={productImage2}
+                    >
                         <Link to="#" className={styles.productLink}>
                             <img
                                 className={styles.productImg}
@@ -83,7 +88,7 @@ export default function PopularProducts() {
                                 adipisicing elit.
                             </p>
                         </Link>
-                    </li>
+                    </PopularProductItem>
                     <li className={`${styles.productItem} swiper-slide`}>
                         <Link to="#" className={styles.productLink}>
                             <img

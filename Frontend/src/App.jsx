@@ -18,7 +18,7 @@ import RootLayout from "./pages/RootLayout.jsx";
 import ShopLayout from "./pages/ShopLayout.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import Homepage from "./pages/Homepage.jsx";
-import Shop from "./pages/Shop.jsx";
+import Shop, { loader as productsLoader } from "./pages/Shop.jsx";
 
 // MODALS
 import Search from "./components/Search.jsx";
@@ -40,6 +40,7 @@ import AuthContext from "./store/authContext.jsx";
 import UserProgressContext from "./store/UserProgressContext.jsx";
 
 const router = createBrowserRouter([
+    // DITO UNG MISMONG ROUTING WALA SA BACKEND GAGOOOOOOOO
     {
         path: "/",
         element: <RootLayout />,
@@ -49,7 +50,13 @@ const router = createBrowserRouter([
             {
                 path: "shop",
                 element: <ShopLayout />,
-                children: [{ index: true, element: <Shop /> }],
+                children: [
+                    {
+                        index: true,
+                        element: <Shop />,
+                        loader: productsLoader,
+                    },
+                ],
             },
         ],
     },
@@ -87,9 +94,12 @@ export default App;
 
 /* 
     FRONT-END:
+    Important:
+
+    Not Important:
     ⦿ Convert to modal & finalize UI UX of both login and register component (NOT FINAL)
-    ⦿ Integrate <Link/> & <NavLink/> for routing
-    ⦿ Create a slider for PopularProducts.jsx
+    ⦿ Map and make a component for productItems in PopularProducts.jsx
+    ⦿ Redesign arrow in carousel (PopularProducts.jsx)
 */
 
 /*
