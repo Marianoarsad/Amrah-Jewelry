@@ -98,7 +98,6 @@ export default App;
 
     Not Important:
     ⦿ Convert to modal & finalize UI UX of both login and register component (NOT FINAL)
-    ⦿ Map and make a component for productItems in PopularProducts.jsx
 */
 
 /*
@@ -110,6 +109,7 @@ export default App;
 
 /*
     FEATURES:
+    ⦿ Open product detail for each product.
     ⦿ Add loading screen / effect.
 */
 

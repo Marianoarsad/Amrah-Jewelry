@@ -1,5 +1,5 @@
 // HOOKS & LIBRARIES
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { Search, Phone, ShoppingCart, User, LogOut } from "lucide-react";
 
 // REACT HOOKS
@@ -7,6 +7,7 @@ import { useState } from "react";
 
 // COMPONENTS
 import Dropdown from "./Dropdown.jsx";
+import NavItemMinimized from "./NavItemMinimized.jsx";
 
 import styles from "../css/HeaderMinimized.module.css";
 
@@ -36,7 +37,15 @@ export default function HeaderMinimized({
             >
                 <nav>
                     {/* LOGO */}
-                    <NavLink to="#">
+                    <NavLink
+                        to="/"
+                        onClick={() => {
+                            window.scrollTo({
+                                top: 0,
+                                behavior: "smooth",
+                            });
+                        }}
+                    >
                         <img
                             src="/amrah-logo-stand-alone.png"
                             alt="amrah-logo"
@@ -46,56 +55,26 @@ export default function HeaderMinimized({
 
                     {/* NAV LINKS */}
                     <ul>
-                        <li>
-                            <NavLink
-                                to="#"
-                                onMouseEnter={() => {
-                                    setActiveCategory("earrings");
-                                }}
-                            >
-                                EARRINGS
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to="#"
-                                onMouseEnter={() => {
-                                    setActiveCategory("necklace");
-                                }}
-                            >
-                                NECKLACE
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to="#"
-                                onMouseEnter={() => {
-                                    setActiveCategory("rings");
-                                }}
-                            >
-                                RINGS
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to="#"
-                                onMouseEnter={() => {
-                                    setActiveCategory("bracelet");
-                                }}
-                            >
-                                BRACELET
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to="#"
-                                onMouseEnter={() => {
-                                    setActiveCategory("more");
-                                }}
-                            >
-                                MORE
-                            </NavLink>
-                        </li>
+                        <NavItemMinimized
+                            category={"EARRINGS"}
+                            setActiveCategory={setActiveCategory}
+                            setHeaderHover={setHeaderHover}
+                        />
+                        <NavItemMinimized
+                            category={"NECKLACE"}
+                            setActiveCategory={setActiveCategory}
+                            setHeaderHover={setHeaderHover}
+                        />
+                        <NavItemMinimized
+                            category={"RING"}
+                            setActiveCategory={setActiveCategory}
+                            setHeaderHover={setHeaderHover}
+                        />
+                        <NavItemMinimized
+                            category={"BRACELET"}
+                            setActiveCategory={setActiveCategory}
+                            setHeaderHover={setHeaderHover}
+                        />
                     </ul>
                 </nav>
 

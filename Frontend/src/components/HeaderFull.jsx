@@ -218,20 +218,6 @@ export default function HeaderFull({
                                     BRACELET
                                 </NavLink>
                             </li>
-                            <li>
-                                <NavLink
-                                    to="/shop"
-                                    className={`
-                                        ${headerHover ? styles.navHover : styles.nav} 
-                                        ${activeCategory === "more" ? styles.active : ""}
-                                    `}
-                                    onMouseEnter={() => {
-                                        setActiveCategory("more");
-                                    }}
-                                >
-                                    MORE
-                                </NavLink>
-                            </li>
                         </ul>
                     </nav>
                 </div>
