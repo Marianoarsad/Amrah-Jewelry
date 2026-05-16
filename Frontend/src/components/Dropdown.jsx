@@ -1,5 +1,5 @@
 // HOOKS AND LIBRARIES
-import { useEffect } from 'react';
+import { AnimatePresence, motion } from "framer-motion"; // eslint-disable-line no-unused-vars
 
 // IMAGES
 import TestImage from '/test-image.JPG';
@@ -24,10 +24,15 @@ export default function Dropdown ({
     // }, []);
     
     return (
-        <>  
-            { activeCategory === 'more' ? 
-            <div 
+        <AnimatePresence mode="wait">
+            { activeCategory && 
+            <motion.div 
                 className={styles.dropdown}
+                key={activeCategory}
+                initial={{ opacity: 0, y: -15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.15, ease: "easeInOut" }}
                 onMouseLeave={() => {
                     setActiveCategory('');
                     setHeaderHover(false);
@@ -36,6 +41,8 @@ export default function Dropdown ({
                     top: showPromo ? 'calc(15vh + var(--promo-height))' : `${headerType === 'headerMinimized' ? "9vh" : "15vh"}` 
                 }}
             >
+                { activeCategory === 'more' ? 
+                <>
                 <ul style={{gridColumnStart: '2'}}>
                     <li><a href='#'><strong>ABOUT US</strong></a></li>
                     <li><a href='#'>OUR STORIES</a></li>
@@ -52,19 +59,9 @@ export default function Dropdown ({
                     <p>Lorem, ipsum dolor.</p>
                     <button>SHOP NOW</button>
                 </div>
-                
-            </div>
-            : // ELSE 
-            <div 
-                className={styles.dropdown}
-                onMouseLeave={() => {
-                    setActiveCategory('');
-                    setHeaderHover(false);
-                }}
-                style={{ 
-                    top: showPromo ? 'calc(15vh + var(--promo-height))' : `${headerType === 'headerMinimized' ? "9vh" : "15vh"}`, 
-                }}
-            >   
+                </>
+                : // ELSE 
+                <>
                 <ul>
                     <li><a href='#'><strong>ALL {activeCategory.toUpperCase()}</strong></a></li>
                 </ul>
@@ -86,8 +83,10 @@ export default function Dropdown ({
                     <p>Lorem, ipsum dolor.</p>
                     <button>SHOP NOW</button>
                 </div>
-            </div>
+                </>
+                }
+            </motion.div>
             }
-        </>
+        </AnimatePresence>
     )
 }
