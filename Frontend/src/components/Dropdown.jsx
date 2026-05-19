@@ -1,92 +1,159 @@
 // HOOKS AND LIBRARIES
-import { AnimatePresence, motion } from "framer-motion"; // eslint-disable-line no-unused-vars
+import { memo, useMemo } from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 // IMAGES
-import TestImage from '/test-image.JPG';
+import TestImage from "/test-image.JPG";
+import Necklace from "../assets/product-test-image-5.jpg";
+import Ring from "../assets/product-test-image-4.jpg";
+import Bracelet from "../assets/product-test-image-6.jpg";
+import Earring from "../assets/product-test-image-2.jpg";
 
 // STYLES
-import styles from '../css/Dropdown.module.css';
+import styles from "../css/Dropdown.module.css";
 
-export default function Dropdown ({
-        showPromo, 
-        activeCategory, 
-        setActiveCategory,
-        headerType, 
-        setHeaderHover,
-    }) {
-    
-    // Prevents scrolling whenever dropdown is rendered
-    // useEffect(() => {
-    //     document.body.style.overflow = 'visible';
-    //     return () => {
-    //         document.body.style.overflow = '';
-    //     };
-    // }, []);
-    
+const Dropdown = memo(function Dropdown({
+    showPromo,
+    activeCategory,
+    setActiveCategory,
+    headerType,
+    setHeaderHover,
+}) {
+    const dropdownContent = useMemo(() => {
+        if (activeCategory === "more") {
+            return (
+                <>
+                    <ul style={{ gridColumnStart: "2" }}>
+                        <li>
+                            <Link to="#">
+                                <strong>ABOUT US</strong>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="#">OUR STORIES</Link>
+                        </li>
+                        <li>
+                            <Link to="#">MATERIALS</Link>
+                        </li>
+                        <li>
+                            <Link to="#">SUSTAINABILITY</Link>
+                        </li>
+                        <li>
+                            <Link to="#">STUDS</Link>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <Link to="#">
+                                <strong>SERVICES</strong>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="#">REPAIR</Link>
+                        </li>
+                        <li>
+                            <Link to="#">BOOK AN APPOINTMENT</Link>
+                        </li>
+                    </ul>
+                    <div className={styles.dropdownImgContainer}>
+                        <img
+                            className={styles.dropdownImg}
+                            src={Necklace}
+                            alt="more image"
+                        />
+                        <p>Lorem, ipsum dolor.</p>
+                        <button>SHOP NOW</button>
+                    </div>
+                </>
+            );
+        }
+
+        const categoryImages = {
+            earring: Earring,
+            necklace: Necklace,
+            ring: Ring,
+            bracelet: Bracelet,
+        };
+
+        return (
+            <>
+                <ul>
+                    <li>
+                        <Link to="#">
+                            <strong>ALL {activeCategory.toUpperCase()}</strong>
+                        </Link>
+                    </li>
+                </ul>
+
+                <ul>
+                    <li>
+                        <Link to="#">
+                            <strong>STYLE</strong>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="#">GEMSTONE</Link>
+                    </li>
+                    <li>
+                        <Link to="#">HOOPS</Link>
+                    </li>
+                    <li>
+                        <Link to="#">HUGGIES</Link>
+                    </li>
+                    <li>
+                        <Link to="#">STUDS</Link>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <Link to="#">
+                            <strong>MATERIAL</strong>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="#">GOLD</Link>
+                    </li>
+                    <li>
+                        <Link to="#">SILVER</Link>
+                    </li>
+                </ul>
+                <div className={styles.dropdownImgContainer}>
+                    <img
+                        className={styles.dropdownImg}
+                        src={categoryImages[activeCategory] || Necklace}
+                        alt="product image"
+                    />
+                </div>
+            </>
+        );
+    }, [activeCategory]);
+
     return (
-        <AnimatePresence mode="wait">
-            { activeCategory && 
-            <motion.div 
-                className={styles.dropdown}
-                key={activeCategory}
-                initial={{ opacity: 0, y: -15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.15, ease: "easeInOut" }}
-                onMouseLeave={() => {
-                    setActiveCategory('');
-                    setHeaderHover(false);
-                }}
-                style={{ 
-                    top: showPromo ? 'calc(15vh + var(--promo-height))' : `${headerType === 'headerMinimized' ? "9vh" : "15vh"}` 
-                }}
-            >
-                { activeCategory === 'more' ? 
-                <>
-                <ul style={{gridColumnStart: '2'}}>
-                    <li><a href='#'><strong>ABOUT US</strong></a></li>
-                    <li><a href='#'>OUR STORIES</a></li>
-                    <li><a href='#'>MATERIALS</a></li>
-                    <li><a href='#'>SUSTAINABILITY</a></li>
-                    <li><a href='#'>STUDS</a></li>
-                </ul>
-                <ul>
-                    <li><a href='#'><strong>SERVICES</strong></a></li>
-                    <li><a href='#'>REPAIR</a></li>
-                    <li><a href='#'>BOOK AN APPOINTMENT</a></li>
-                </ul>
-                <div className={styles.dropdownImgContainer}>
-                    <p>Lorem, ipsum dolor.</p>
-                    <button>SHOP NOW</button>
-                </div>
-                </>
-                : // ELSE 
-                <>
-                <ul>
-                    <li><a href='#'><strong>ALL {activeCategory.toUpperCase()}</strong></a></li>
-                </ul>
-                
-                
-                <ul>
-                    <li><a href='#'><strong>STYLE</strong></a></li>
-                    <li><a href='#'>GEMSTONE</a></li>
-                    <li><a href='#'>HOOPS</a></li>
-                    <li><a href='#'>HUGGIES</a></li>
-                    <li><a href='#'>STUDS</a></li>
-                </ul>
-                <ul>
-                    <li><a href='#'><strong>MATERIAL</strong></a></li>
-                    <li><a href='#'>GOLD</a></li>
-                    <li><a href='#'>SILVER</a></li>
-                </ul>
-                <div className={styles.dropdownImgContainer}>
-                    <p>Lorem, ipsum dolor.</p>
-                    <button>SHOP NOW</button>
-                </div>
-                </>
-                }
-            </motion.div>
-            }
-        </AnimatePresence>
-    )
-}
+        <motion.div
+            className={styles.dropdown}
+            initial={{ y: -15, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -25, opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            // When user hovers out of the dropdown:
+            // 1. Clear activeCategory - triggers AnimatePresence exit animation
+            //    (slides up 25px with fade out over 0.25s), then unmount after animation completes
+            // 2. Set headerHover to false - changes HeaderFull to "unhovered" state
+            //    (white logo, white nav styling)
+            onMouseLeave={() => {
+                setActiveCategory("");
+                setHeaderHover(false);
+            }}
+            style={{
+                top: showPromo
+                    ? "calc(15vh + var(--promo-height))"
+                    : `${headerType === "headerMinimized" ? "9vh" : "15vh"}`,
+            }}
+        >
+            {dropdownContent}
+        </motion.div>
+    );
+});
+
+export default Dropdown;

@@ -94,7 +94,7 @@ export default App;
 
 /* 
     FRONT-END:
-    Important:
+    ⦿ Change image in Dropdown.jsx according to active category
 
     Not Important:
     ⦿ Convert to modal & finalize UI UX of both login and register component (NOT FINAL)
@@ -109,8 +109,11 @@ export default App;
 
 /*
     FEATURES:
-    ⦿ Open product detail for each product.
+    ⦿ Add animations for modals.
     ⦿ Add loading screen / effect.
+
+    TEMPORARILY DISABLED:
+    ⦿ "more" category in dropdown
 */
 
 /*

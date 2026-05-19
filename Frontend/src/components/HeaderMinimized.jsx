@@ -1,5 +1,6 @@
 // HOOKS & LIBRARIES
 import { NavLink, Link } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import { Search, Phone, ShoppingCart, User, LogOut } from "lucide-react";
 
 // REACT HOOKS
@@ -93,14 +94,17 @@ export default function HeaderMinimized({
                     <button>{isLoggedIn ? <LogOut /> : <User />}</button>
                 </div>
                 {/*DROPDOWN*/}
-                {activeCategory && headerHover ? (
-                    <Dropdown
-                        activeCategory={activeCategory}
-                        setActiveCategory={setActiveCategory}
-                        headerType={"headerMinimized"}
-                        setHeaderHover={setHeaderHover}
-                    />
-                ) : null}
+                <AnimatePresence mode="wait">
+                    {activeCategory && headerHover && (
+                        <Dropdown
+                            key={activeCategory}
+                            activeCategory={activeCategory}
+                            setActiveCategory={setActiveCategory}
+                            headerType={"headerMinimized"}
+                            setHeaderHover={setHeaderHover}
+                        />
+                    )}
+                </AnimatePresence>
             </header>
         </>
     );

@@ -1,6 +1,7 @@
 // PACKAGES
 import { useContext, useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import {
     ChevronLeft,
     ChevronRight,
@@ -53,11 +54,9 @@ export default function HeaderFull({
     const navigate = useNavigate();
     const location = useLocation();
 
-    // console.log(location.pathname);
-
-    if (location.pathname === "/shop") {
-        setHeaderHover(true);
-    }
+    // REMOVED: Auto-setting headerHover to true on /shop page was causing
+    // the dropdown to persist even when user wasn't interacting with it.
+    // The dropdown should only show when user actively hovers over nav items.
 
     function handleLogout() {
         authContext.logout();
@@ -162,7 +161,7 @@ export default function HeaderFull({
                         />
                     </NavLink>
                     <nav>
-                        <ul>
+                        <ul style={{ marginTop: ".7rem" }}>
                             <NavItemFull
                                 category={"EARRING"}
                                 headerHover={headerHover}
@@ -225,14 +224,17 @@ export default function HeaderFull({
                 </p>
             </header>
             {/*DROPDOWN*/}
-            {activeCategory && headerHover ? (
-                <Dropdown
-                    activeCategory={activeCategory}
-                    setHeaderHover={setHeaderHover}
-                    setActiveCategory={setActiveCategory}
-                    showPromo={showPromo}
-                />
-            ) : null}
+            <AnimatePresence mode="wait">
+                {activeCategory && headerHover && (
+                    <Dropdown
+                        key={activeCategory}
+                        activeCategory={activeCategory}
+                        setHeaderHover={setHeaderHover}
+                        setActiveCategory={setActiveCategory}
+                        showPromo={showPromo}
+                    />
+                )}
+            </AnimatePresence>
         </>
     );
 }

@@ -1,16 +1,21 @@
 // HOOKS
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 // COMPONENTS
-import { CircleArrowLeft, CircleArrowRight, CircleDot, Circle } from 'lucide-react';
+import {
+    CircleArrowLeft,
+    CircleArrowRight,
+    CircleDot,
+    Circle,
+} from "lucide-react";
 
 // IMAGES
-import HeroBackground from '/hero-background-5.jpg';
+import HeroBackground from "/hero-background-5.jpg";
 
-import styles from '../css/Hero.module.css'
+import styles from "../css/Hero.module.css";
 
-export default function Carousel () {
-    
+export default function Carousel() {
     return (
         <section id="hero" className={styles.hero}>
             <div className={styles.heroTextContainer}>
@@ -18,7 +23,9 @@ export default function Carousel () {
                 <h1>TIMELESS COLLECTION</h1>
                 <p>Introducing timeless designs</p>
             </div>
-            <button className={styles.shopNowBtn}><a href="/shop">Shop now</a></button>
+            <Link className={styles.shopNowBtn} to="/shop">
+                SHOP NOW
+            </Link>
         </section>
-    )
+    );
 }
