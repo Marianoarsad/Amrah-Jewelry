@@ -4,10 +4,9 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 // IMAGES
-import TestImage from "/test-image.JPG";
-import Necklace from "../assets/product-test-image-5.jpg";
-import Ring from "../assets/product-test-image-4.jpg";
-import Bracelet from "../assets/product-test-image-6.jpg";
+import Necklace from "../assets/product-test-image-5.JPG";
+import Ring from "../assets/product-test-image-4.JPG";
+import Bracelet from "../assets/product-test-image-6.JPG";
 import Earring from "../assets/product-test-image-2.jpg";
 
 // STYLES

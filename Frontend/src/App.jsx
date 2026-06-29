@@ -1,128 +1,95 @@
 // HOOKS & LIBRARIES
-import { useRef, useEffect, useState, useContext } from "react";
-import {
-    createBrowserRouter,
-    RouterProvider,
-    BrowserRouter,
-    Routes,
-    Route,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-// COMPONENTS
-import HeaderFull from "./components/HeaderFull.jsx";
-import HeaderMinimized from "./components/HeaderMinimized.jsx";
-import Footer from "./components/Footer.jsx";
-
-// PAGES
+// EAGER PAGES (app shell — always needed)
 import RootLayout from "./pages/RootLayout.jsx";
 import ShopLayout from "./pages/ShopLayout.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
-import Homepage from "./pages/Homepage.jsx";
-import Shop, { loader as productsLoader } from "./pages/Shop.jsx";
 
-// MODALS
-import Search from "./components/Search.jsx";
-import Checkout from "./components/Checkout.jsx";
-import Cart from "./components/Cart.jsx";
-import Product from "./components/UI/Product.jsx";
-import Authentication from "./components/Authentication.jsx";
-
-// CONTEXT PROVIDER
+// CONTEXT PROVIDERS
 import { AuthContextProvider } from "./store/authContext.jsx";
 import { CartContextProvider } from "./store/CartContext.jsx";
 import { UserProgressContextProvider } from "./store/UserProgressContext.jsx";
+import { ToastContextProvider } from "./store/ToastContext.jsx";
+import { WishlistContextProvider } from "./store/WishlistContext.jsx";
 
-// SERVICES (Helper Functions)
-import { authService } from "./services/authService.js";
+// GLOBAL UI
+import ToastHost from "./components/UI/ToastHost.jsx";
+import RouteFallback from "./components/UI/RouteFallback.jsx";
 
-// CONTEXT
-import AuthContext from "./store/authContext.jsx";
-import UserProgressContext from "./store/UserProgressContext.jsx";
-
+// Route-level code splitting: each page (and its loader) is fetched on demand.
+// React Router treats the dynamic import as part of the navigation's loading
+// phase, so the top progress bar in RootLayout covers the wait.
 const router = createBrowserRouter([
-    // DITO UNG MISMONG ROUTING WALA SA BACKEND GAGOOOOOOOO
     {
         path: "/",
         element: <RootLayout />,
         errorElement: <ErrorPage />,
         children: [
-            { index: true, element: <Homepage /> },
+            {
+                index: true,
+                lazy: async () => {
+                    const { default: Component } = await import(
+                        "./pages/Homepage.jsx"
+                    );
+                    return { Component };
+                },
+            },
             {
                 path: "shop",
                 element: <ShopLayout />,
                 children: [
                     {
                         index: true,
-                        element: <Shop />,
-                        loader: productsLoader,
+                        lazy: async () => {
+                            const { default: Component, loader } = await import(
+                                "./pages/Shop.jsx"
+                            );
+                            return { Component, loader };
+                        },
                     },
                 ],
+            },
+            {
+                path: "product/:id",
+                lazy: async () => {
+                    const { default: Component, loader } = await import(
+                        "./pages/ProductDetail.jsx"
+                    );
+                    return { Component, loader };
+                },
+            },
+            {
+                path: "wishlist",
+                lazy: async () => {
+                    const { default: Component } = await import(
+                        "./pages/Wishlist.jsx"
+                    );
+                    return { Component };
+                },
             },
         ],
     },
 ]);
 
 function App() {
-    const [user, setUser] = useState(null);
-
-    // CONTEXT
-    const userProgressCtx = useContext(UserProgressContext);
-    const authContext = useContext(AuthContext);
-
-    // console.log(`authContext.user:  ${JSON.stringify(authContext.user)}`)
-    // console.log(`authContext.isAuthenticated:  ${authContext.isAuthenticated}`)
-
-    // HEADER CHANGE HANDLER
-
-    // CHECK IF THERE IS A LOGGED IN USER
-    let existingUser = authService.getCurrentUser();
-
     return (
         <AuthContextProvider>
-            <UserProgressContextProvider>
-                <CartContextProvider>
-                    <RouterProvider router={router} />
-                </CartContextProvider>
-            </UserProgressContextProvider>
+            <ToastContextProvider>
+                <WishlistContextProvider>
+                    <UserProgressContextProvider>
+                        <CartContextProvider>
+                            <RouterProvider
+                                router={router}
+                                fallbackElement={<RouteFallback />}
+                            />
+                            <ToastHost />
+                        </CartContextProvider>
+                    </UserProgressContextProvider>
+                </WishlistContextProvider>
+            </ToastContextProvider>
         </AuthContextProvider>
     );
 }
 
 export default App;
-
-// TODO:
-
-/* 
-    FRONT-END:
-    ⦿ Change image in Dropdown.jsx according to active category
-
-    Not Important:
-    ⦿ Convert to modal & finalize UI UX of both login and register component (NOT FINAL)
-*/
-
-/*
-    BACKEND:
-    ⦿ Create Data Structure of products.
-    ⦿ Create Data Structure of users.
-    ⦿ Convert to SQL for practice.
-*/
-
-/*
-    FEATURES:
-    ⦿ Add animations for modals.
-    ⦿ Add loading screen / effect.
-
-    TEMPORARILY DISABLED:
-    ⦿ "more" category in dropdown
-*/
-
-/*
-    STRUCTURE:
-    ⦿ Integrate Redux.
-    ⦿ Filter in backend not directly on the component(Shop.jsx).
-*/
-
-/*
-    BUGS:
-    ⦿ Header bug where HeaderMinimized does not render its dropdown. (minor)
-*/

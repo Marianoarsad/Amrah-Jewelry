@@ -18,6 +18,9 @@ import Promo from "./Promo.jsx";
 import Dropdown from "./Dropdown.jsx";
 import Header from "./HeaderLayout.jsx";
 import NavItemFull from "./NavItemFull.jsx";
+import { CartButton, WishlistButton } from "./UI/CartButton.jsx";
+
+import btnStyles from "../css/HeaderButtons.module.css";
 
 // ASSETS
 import AmrahTextLogoWhite from "/amrah-logo-text-white.png";
@@ -29,6 +32,7 @@ import ShoppingBag from "/shopping-bag.svg";
 // CONTEXT
 import UserProgressContext from "../store/UserProgressContext.jsx";
 import AuthContext from "../store/authContext.jsx";
+import ToastContext from "../store/ToastContext.jsx";
 
 import styles from "../css/HeaderFull.module.css";
 
@@ -50,6 +54,7 @@ export default function HeaderFull({
 
     const userProgressCtx = useContext(UserProgressContext);
     const authContext = useContext(AuthContext);
+    const toastCtx = useContext(ToastContext);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -60,7 +65,8 @@ export default function HeaderFull({
 
     function handleLogout() {
         authContext.logout();
-        navigate("/sign-in");
+        toastCtx.addToast("You've been signed out.", { type: "info" });
+        navigate("/");
     }
 
     function handleShowCart() {
@@ -194,33 +200,43 @@ export default function HeaderFull({
                     style={{ marginBottom: "2rem", marginRight: "2rem" }}
                     className={styles.btnContainer}
                 >
-                    <ShoppingCart
-                        onClick={handleShowCart}
-                        className={
+                    <WishlistButton
+                        onClick={() => navigate("/wishlist")}
+                        iconClassName={
                             headerHover
                                 ? styles.navHover + ` ${styles.navBtn}`
                                 : styles.nav
                         }
                     />
-                    {isLoggedIn ? (
-                        <LogOut
-                            className={
-                                headerHover
-                                    ? styles.navHover + ` ${styles.navBtn}`
-                                    : styles.nav
-                            }
-                            onClick={handleLogout}
-                        />
-                    ) : (
-                        <User
-                            className={
-                                headerHover
-                                    ? styles.navHover + ` ${styles.navBtn}`
-                                    : styles.nav
-                            }
-                            onClick={handleShowAuth}
-                        />
-                    )}
+                    <CartButton
+                        onClick={handleShowCart}
+                        iconClassName={
+                            headerHover
+                                ? styles.navHover + ` ${styles.navBtn}`
+                                : styles.nav
+                        }
+                    />
+                    <span className={btnStyles.iconWrap}>
+                        {isLoggedIn ? (
+                            <LogOut
+                                className={
+                                    headerHover
+                                        ? styles.navHover + ` ${styles.navBtn}`
+                                        : styles.nav
+                                }
+                                onClick={handleLogout}
+                            />
+                        ) : (
+                            <User
+                                className={
+                                    headerHover
+                                        ? styles.navHover + ` ${styles.navBtn}`
+                                        : styles.nav
+                                }
+                                onClick={handleShowAuth}
+                            />
+                        )}
+                    </span>
                 </p>
             </header>
             {/*DROPDOWN*/}

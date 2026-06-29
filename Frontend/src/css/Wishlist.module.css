@@ -1,0 +1,79 @@
+.page {
+    width: 100%;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 10rem 1.5rem 4rem;
+    min-height: 70vh;
+    font-family: "Montserrat", sans-serif;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.header h1 {
+    margin: 0 0 0.4rem;
+    font-family: "Playfair", serif;
+    font-weight: 400;
+    font-size: 2.4rem;
+    color: #1f1f1f;
+}
+
+.header p {
+    margin: 0;
+    color: #888;
+    font-size: 0.95rem;
+}
+
+.grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1rem;
+}
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 4rem 1rem;
+    color: #c64b50;
+}
+
+.empty p {
+    margin: 0;
+    font-family: "Playfair", serif;
+    font-size: 1.2rem;
+    color: #444;
+}
+
+.shopLink {
+    margin-top: 0.5rem;
+    padding: 0.85rem 1.6rem;
+    background: #c64b50;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 0.4rem;
+    font-family: "League Spartan", sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+
+    transition:
+        background 150ms ease,
+        transform 150ms ease;
+}
+
+.shopLink:hover {
+    background: #b03b40;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+    .page {
+        padding: 8rem 1rem 3rem;
+    }
+}

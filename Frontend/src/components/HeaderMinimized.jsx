@@ -1,14 +1,20 @@
 // HOOKS & LIBRARIES
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { Search, Phone, ShoppingCart, User, LogOut } from "lucide-react";
 
 // REACT HOOKS
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 // COMPONENTS
 import Dropdown from "./Dropdown.jsx";
 import NavItemMinimized from "./NavItemMinimized.jsx";
+import { CartButton, WishlistButton } from "./UI/CartButton.jsx";
+
+// CONTEXT
+import UserProgressContext from "../store/UserProgressContext.jsx";
+import AuthContext from "../store/authContext.jsx";
+import ToastContext from "../store/ToastContext.jsx";
 
 import styles from "../css/HeaderMinimized.module.css";
 
@@ -19,6 +25,17 @@ export default function HeaderMinimized({
     setHeaderHover,
     isLoggedIn,
 }) {
+    const userProgressCtx = useContext(UserProgressContext);
+    const authContext = useContext(AuthContext);
+    const toastCtx = useContext(ToastContext);
+    const navigate = useNavigate();
+
+    function handleLogout() {
+        authContext.logout();
+        toastCtx.addToast("You've been signed out.", { type: "info" });
+        navigate("/");
+    }
+
     function handleMouseEnter() {
         setHeaderHover(true);
     }
@@ -80,7 +97,7 @@ export default function HeaderMinimized({
                 </nav>
 
                 <div className={styles.buttonContainer}>
-                    <button>
+                    <button onClick={() => userProgressCtx.showSearch()}>
                         <Search />
                     </button>
                     <div className={styles.verticalLine}></div>
@@ -88,10 +105,23 @@ export default function HeaderMinimized({
                     <button>
                         <Phone />
                     </button>
-                    <button>
-                        <ShoppingCart />
+                    <button onClick={() => navigate("/wishlist")}>
+                        <WishlistButton onClick={() => navigate("/wishlist")} />
                     </button>
-                    <button>{isLoggedIn ? <LogOut /> : <User />}</button>
+                    <button onClick={() => userProgressCtx.showCart()}>
+                        <CartButton
+                            onClick={() => userProgressCtx.showCart()}
+                        />
+                    </button>
+                    <button
+                        onClick={() =>
+                            isLoggedIn
+                                ? handleLogout()
+                                : userProgressCtx.showAuth()
+                        }
+                    >
+                        {isLoggedIn ? <LogOut /> : <User />}
+                    </button>
                 </div>
                 {/*DROPDOWN*/}
                 <AnimatePresence mode="wait">

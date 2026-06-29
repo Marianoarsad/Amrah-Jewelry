@@ -1,74 +1,23 @@
-import { Link } from "react-router-dom";
 import { useRef, useEffect } from "react";
 import Swiper from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
 
 import PopularProductItem from "./PopularProductItem.jsx";
 
-// ASSETS
-import productImage1 from "../assets/product-test-image-1.jpg";
-import productImage2 from "../assets/product-test-image-2.jpg";
-import productImage3 from "../assets/product-test-image-3.jpg";
-import productImage4 from "../assets/product-test-image-4.jpg";
-import productImage5 from "../assets/product-test-image-5.jpg";
-import productImage6 from "../assets/product-test-image-6.jpg";
-import productImage7 from "../assets/product-test-image-7.jpg";
+// DATA
+import { getPopularProducts } from "../data/products.js";
 
 import styles from "../css/PopularProducts.module.css";
 
 Swiper.use([Navigation, Pagination]);
 
-const products = [
-    {
-        id: "p1",
-        title: "Pearl Bracelet",
-        desc: "Lorem ipsum dolor sit amet consecteturadipisicing elit.",
-        price: 20000,
-        img: productImage1,
-    },
-    {
-        id: "p2",
-        title: "Pearl Necklace",
-        desc: "Lorem ipsum dolor sit amet consecteturadipisicing elit.",
-        price: 23400,
-        img: productImage2,
-    },
-    {
-        id: "p3",
-        title: "Pearl Earrings",
-        desc: "Lorem ipsum dolor sit amet consecteturadipisicing elit.",
-        price: 87000,
-        img: productImage3,
-    },
-    {
-        id: "p4",
-        title: "Pearl Pendant",
-        desc: "Lorem ipsum dolor sit amet consecteturadipisicing elit.",
-        price: 92000,
-        img: productImage4,
-    },
-    {
-        id: "p5",
-        title: "Pearl Pendant",
-        desc: "Lorem ipsum dolor sit amet consecteturadipisicing elit.",
-        price: 37000,
-        img: productImage5,
-    },
-    {
-        id: "p6",
-        title: "Pearl Pendant",
-        desc: "Lorem ipsum dolor sit amet consecteturadipisicing elit.",
-        price: 14000,
-        img: productImage6,
-    },
-    {
-        id: "p7",
-        title: "Pearl Pendant",
-        desc: "Lorem ipsum dolor sit amet consecteturadipisicing elit.",
-        price: 19999,
-        img: productImage7,
-    },
-];
+const products = getPopularProducts().map((p) => ({
+    id: p._id,
+    title: p.name,
+    desc: p.description,
+    price: p.price,
+    img: p.image,
+}));
 
 export default function PopularProducts() {
     const swiperRef = useRef(null);
@@ -116,6 +65,7 @@ export default function PopularProducts() {
                 <ul className="swiper-wrapper">
                     {products.map((product) => (
                         <PopularProductItem
+                            key={product.id}
                             id={product.id}
                             img={product.img}
                             title={product.title}

@@ -1,19 +1,29 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
 
+import { currencyFormatter } from "../util/formatting.js";
 import styles from "../css/PopularProductItem.module.css";
 
-export default function PopularProductItem({ id, img, title, desc, price }) {
+function PopularProductItem({ id, img, title, desc, price }) {
     return (
-        <li key={id} className={`${styles.productItem} swiper-slide`}>
-            <Link to="#" className={styles.productLink}>
+        <li className={`${styles.productItem} swiper-slide`}>
+            <Link to={`/product/${id}`} className={styles.productLink}>
                 <img
                     className={styles.productImg}
                     src={img}
-                    alt="Product Image"
+                    alt={title}
                 />
                 <p className={styles.productTitle}>{title}</p>
-                <p className={styles.productDesc}>{desc}</p>
+                {price != null ? (
+                    <p className={styles.productPrice}>
+                        {currencyFormatter.format(price)}
+                    </p>
+                ) : (
+                    <p className={styles.productDesc}>{desc}</p>
+                )}
             </Link>
         </li>
     );
 }
+
+export default memo(PopularProductItem);

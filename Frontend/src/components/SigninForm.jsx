@@ -1,112 +1,102 @@
 // HOOKS AND LIBRARIES
-import { useState, useActionState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useActionState } from "react";
+import { Mail, Lock, AlertCircle } from "lucide-react";
 
-import styles from "../css/SigninForm.module.css";
+// CONTEXT
+import AuthContext from "../store/authContext.jsx";
+import ToastContext from "../store/ToastContext.jsx";
 
-export default function SigninForm() {
-    async function SigninUserAction(prevFormState, formData) {
-        // RETRIEVE FORM DATA FROM CLIENT
-        const username = formData.get("username");
+// COMPONENTS
+import FormField from "./UI/FormField.jsx";
+import Button from "./UI/Button.jsx";
+
+// UTIL
+import { isNotEmpty, isEmail } from "../util/validation.js";
+
+import styles from "../css/Auth.module.css";
+
+export default function SigninForm({ onSuccess, onSwitchMode }) {
+    const authContext = useContext(AuthContext);
+    const toastCtx = useContext(ToastContext);
+
+    async function signinAction(prevState, formData) {
+        const email = formData.get("email");
         const password = formData.get("password");
 
-        let errors = [];
+        const fieldErrors = {};
+        if (!isEmail(email)) fieldErrors.email = "Enter a valid email address.";
+        if (!isNotEmpty(password))
+            fieldErrors.password = "Please enter your password.";
 
-        // VALIDATION
-        if (!isNotEmpty(username)) {
-            errors.push("Please enter a valid username.");
-            console.log(`Errors: ${errors}`);
-        }
-
-        if (!isNotEmpty(password)) {
-            errors.push("Please enter a valid password.");
-            console.log(`Errors: ${errors}`);
-        }
-
-        // IF HAVE ERRORS, RETURN ERROR ARRAY
-        if (errors.length > 0) {
-            return {
-                errors,
-                enteredValues: {
-                    username,
-                    password,
-                },
-            };
+        if (Object.keys(fieldErrors).length > 0) {
+            return { fieldErrors, values: { email } };
         }
 
         try {
-            await authContext.login({
-                username,
-                password,
-            });
-
-            // IF NO ERRORS, RETURN SUCCESS STATE
-            return { errors: null, success: true };
+            const user = await authContext.login({ email, password });
+            toastCtx.addToast(`Welcome back, ${user.firstName || "friend"}!`);
+            onSuccess?.(user);
+            return { success: true };
         } catch (error) {
             return {
-                errors: [error.message || "Login failed"],
-                enteredValues: {
-                    username,
-                    password,
-                },
+                formError: error.message || "Sign in failed.",
+                values: { email },
             };
         }
     }
 
-    const [formState, formAction] = useActionState(SigninUserAction, {
-        errors: null,
+    const [state, formAction, isPending] = useActionState(signinAction, {
+        fieldErrors: {},
     });
 
-    const [userFormState, setUserFormState] = useState("signin");
-
     return (
-        <form className={styles.signinForm} action={formAction}>
-            <input
-                type="text"
-                id="username"
-                name="username"
-                defaultValue={formState.enteredValues?.username}
-                placeholder="Username"
-                autoComplete="off"
+        <form className={styles.form} action={formAction} noValidate>
+            <FormField
+                label="Email"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                icon={Mail}
+                defaultValue={state.values?.email}
+                error={state.fieldErrors?.email}
+                autoComplete="email"
             />
 
-            <input
-                type="password"
-                id="password"
+            <FormField
+                label="Password"
                 name="password"
-                defaultValue={formState.enteredValues?.password}
-                placeholder="Password"
-                autoComplete="off"
+                type="password"
+                placeholder="Enter your password"
+                icon={Lock}
+                error={state.fieldErrors?.password}
+                autoComplete="current-password"
             />
-            {/* 
-                {formState.errors && (
-                        <ul className={styles.errors}>
-                            {formState.errors.map((error) => (
-                                <li key={error}>{error}</li>
-                            ))}
-                        </ul>
-                )} 
-             */}
-            <a href="#">Forgot password</a>
-            <div className={styles.signinActionsContainer}>
-                <button className={styles.signinBtn}>SIGN IN</button>
 
-                <h3>Create an account</h3>
-                <div className={styles.list}>
-                    <ul className={styles.firstList}>
-                        <li>● Faster Checkout</li>
-                        <li>● Access order history</li>
-                    </ul>
-                    <ul className={styles.secondList}>
-                        <li>● Faster Checkout</li>
-                        <li>● Access order history</li>
-                    </ul>
-                </div>
+            <button type="button" className={styles.forgot}>
+                Forgot password?
+            </button>
 
-                <Link to={"/register"} className={styles.signinFormBtn}>
-                    <button className={styles.createBtn}>CREATE ACCOUNT</button>
-                </Link>
-            </div>
+            {state.formError && (
+                <p className={styles.formError}>
+                    <AlertCircle size={15} />
+                    {state.formError}
+                </p>
+            )}
+
+            <Button type="submit" fullWidth size="lg" loading={isPending}>
+                {isPending ? "Signing in…" : "SIGN IN"}
+            </Button>
+
+            <p className={styles.switchPrompt}>
+                New to Amrah?{" "}
+                <button
+                    type="button"
+                    className={styles.switchLink}
+                    onClick={() => onSwitchMode?.("register")}
+                >
+                    Create an account
+                </button>
+            </p>
         </form>
     );
 }

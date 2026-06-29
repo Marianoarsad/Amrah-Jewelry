@@ -14,7 +14,7 @@ export default function NavItemMinimized({
             <NavLink
                 to={`/shop?category=${lowerCaseCategory}`}
                 onMouseEnter={() => {
-                    setActiveCategory("earrings");
+                    setActiveCategory(lowerCaseCategory);
                 }}
                 onClick={() => {
                     setHeaderHover(false);

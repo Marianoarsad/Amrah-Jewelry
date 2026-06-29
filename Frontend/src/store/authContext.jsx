@@ -1,57 +1,67 @@
 // HOOKS & LIBRARIES
-import { createContext, useState, useEffect, useReducer } from "react";
+import { createContext, useState, useEffect, useCallback } from "react";
 
-// SERVICES (Helper Functions)
-import { authService } from '../services/authService.js';
+// SERVICES
+import { authService } from "../services/authService.js";
 
 const AuthContext = createContext({
     user: null,
-    login: (credentials) => {},
-    register: (userData) => {},
-    logout: () => {}
+    isAuthenticated: false,
+    isLoading: false,
+    login: async (credentials) => {},
+    register: async (userData) => {},
+    logout: () => {},
 });
 
 export function AuthContextProvider({ children }) {
+    const [user, setUser] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const [ currentUser, setCurrentUser ] = useState(null);
-    const [ isLoading, setIsLoading ] = useState(false);
+    // Restore a persisted session on first load so the user stays signed in.
+    useEffect(() => {
+        const current = authService.getCurrentUser();
+        if (current) setUser(current);
+    }, []);
 
-    // useEffect(() => {
-    //     const currentUser = authService.getCurrentUser();
-    //     console.log(`Current User: ${JSON.stringify(currentUser)}`);
+    const login = useCallback(async (credentials) => {
+        setIsLoading(true);
+        try {
+            const session = await authService.login(credentials);
+            setUser(session.user);
+            return session.user;
+        } finally {
+            setIsLoading(false);
+        }
+    }, []);
 
-    //     if (currentUser) {
-    //         setUser(currentUser);
-    //     }
+    const register = useCallback(async (userData) => {
+        setIsLoading(true);
+        try {
+            const session = await authService.register(userData);
+            setUser(session.user);
+            return session.user;
+        } finally {
+            setIsLoading(false);
+        }
+    }, []);
 
-    // }, []);
+    const logout = useCallback(() => {
+        authService.logout();
+        setUser(null);
+    }, []);
 
-    async function login (credentials) {
-        const res = await authService.login(credentials);
-        //console.log(res);
-        setCurrentUser(res);
-        return res
-    }
-
-    async function register (userData) {
-        const data = await authService.register(userData);
-        return data;
-    }
-
-    async function logout () {
-        await authService.logout();
-        setCurrentUser(null);
-    }
-
-    const authContext = {
-        user: currentUser,
+    const value = {
+        user,
+        isAuthenticated: !!user,
         isLoading,
         login,
         register,
         logout,
-    }
+    };
 
-    return <AuthContext.Provider value={authContext}>{children}</AuthContext.Provider>
+    return (
+        <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+    );
 }
 
 export default AuthContext;

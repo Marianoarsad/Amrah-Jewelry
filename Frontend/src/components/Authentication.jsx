@@ -1,10 +1,9 @@
 // HOOKS & LIBRARIES
-import { useState, useActionState, useContext, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
 import { X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 // CONTEXT
-import AuthContext from "../store/authContext.jsx";
 import UserProgressContext from "../store/UserProgressContext.jsx";
 
 // COMPONENTS
@@ -12,74 +11,106 @@ import Modal from "./UI/Modal.jsx";
 import SigninForm from "./SigninForm.jsx";
 import RegisterForm from "./RegisterForm.jsx";
 
-// UTIL
-import { isNotEmpty } from "../util/validation.js";
-
 // ASSETS
 import SignInImage from "../assets/signin-img.jpg";
 
 import styles from "../css/Authentication.module.css";
 
-export default function Signin() {
-    // const navigate = useNavigate();
-
-    const authContext = useContext(AuthContext);
+export default function Authentication() {
     const userProgressCtx = useContext(UserProgressContext);
+    const [mode, setMode] = useState("signin"); // 'signin' | 'register'
 
-    const [userFormState, setUserFormState] = useState("signin");
+    const open = userProgressCtx.progress === "auth";
 
-    function handleSigninForm() {
-        setUserFormState("signin");
-    }
+    // Reset to the sign-in tab each time the modal is opened.
+    useEffect(() => {
+        if (open) setMode("signin");
+    }, [open]);
 
-    function handleRegisterForm() {
-        setUserFormState("register");
-    }
-
-    function handleCloseAuth() {
+    function handleClose() {
         userProgressCtx.close();
     }
 
-    let form = <SigninForm />;
-
-    if (userFormState === "register") {
-        form = <RegisterForm />;
-    }
+    const isSignin = mode === "signin";
 
     return (
         <Modal
             className={styles.signIn}
-            open={userProgressCtx.progress === "auth"}
-            onClose={
-                userProgressCtx.progress === "auth" ? handleCloseAuth : null
-            }
+            open={open}
+            onClose={open ? handleClose : null}
         >
             <div className={styles.amrah}>
-                <img src={SignInImage} />
+                <img src={SignInImage} alt="Amrah jewelry" />
             </div>
-            <div className={styles.formContainer}>
-                <div className={styles.formHeader}>
-                    <button
-                        className={styles.authBtn}
-                        onClick={handleSigninForm}
-                    >
-                        Sign In
-                    </button>
-                    <button
-                        className={styles.authBtn}
-                        onClick={handleRegisterForm}
-                    >
-                        Create Account
-                    </button>
-                    <button
-                        className={styles.closeBtn}
-                        onClick={handleCloseAuth}
-                    >
-                        <X />
-                    </button>
-                </div>
 
-                {form}
+            <div className={styles.formContainer}>
+                <button
+                    className={styles.closeBtn}
+                    onClick={handleClose}
+                    aria-label="Close"
+                >
+                    <X size={20} />
+                </button>
+
+                <div className={styles.formInner}>
+                    <header className={styles.formIntro}>
+                        <h2>{isSignin ? "Welcome back" : "Create account"}</h2>
+                        <p>
+                            {isSignin
+                                ? "Sign in to continue your Amrah experience."
+                                : "Join Amrah for faster checkout and order history."}
+                        </p>
+                    </header>
+
+                    <div className={styles.tabs} role="tablist">
+                        <button
+                            role="tab"
+                            aria-selected={isSignin}
+                            className={`${styles.tab} ${isSignin ? styles.tabActive : ""}`}
+                            onClick={() => setMode("signin")}
+                        >
+                            Sign In
+                        </button>
+                        <button
+                            role="tab"
+                            aria-selected={!isSignin}
+                            className={`${styles.tab} ${!isSignin ? styles.tabActive : ""}`}
+                            onClick={() => setMode("register")}
+                        >
+                            Register
+                        </button>
+                        <span
+                            className={styles.tabIndicator}
+                            style={{
+                                transform: isSignin
+                                    ? "translateX(0%)"
+                                    : "translateX(100%)",
+                            }}
+                        />
+                    </div>
+
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={mode}
+                            initial={{ opacity: 0, x: isSignin ? -14 : 14 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: isSignin ? 14 : -14 }}
+                            transition={{ duration: 0.2 }}
+                        >
+                            {isSignin ? (
+                                <SigninForm
+                                    onSuccess={handleClose}
+                                    onSwitchMode={setMode}
+                                />
+                            ) : (
+                                <RegisterForm
+                                    onSuccess={handleClose}
+                                    onSwitchMode={setMode}
+                                />
+                            )}
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
             </div>
         </Modal>
     );

@@ -123,6 +123,42 @@ body:has(.product[open]) {
     scale: 1.03;
 }
 
+.materialActive {
+    outline: 2px solid #c64b50;
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+.ratingRow {
+    width: 80%;
+}
+
+.sizeActive {
+    background-color: #c64b50 !important;
+    color: #fff;
+}
+
+.viewFull {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.4rem;
+
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    color: #c64b50;
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.82rem;
+
+    transition: gap 150ms ease;
+}
+
+.viewFull:hover {
+    gap: 0.6rem;
+}
+
 .material > img {
     width: 100%;
     aspect-ratio: 1 / 1;
@@ -186,17 +222,19 @@ body:has(.product[open]) {
 }
 
 .actionBtnContainer {
-    height: 20%;
+    height: auto;
     width: 80%;
 
     display: flex;
     flex-direction: column;
-    gap: .3em;
+    gap: .4em;
+
+    margin-bottom: 1.5rem;
 }
 
 .btn {
     width: 100%;
-    height: 50%;
+    height: 3rem;
     padding: 0;
     margin: 0;
     border: 0;

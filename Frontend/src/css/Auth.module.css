@@ -1,0 +1,85 @@
+/* Shared styles for the sign-in / register forms */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    gap: 0.9rem;
+}
+
+.row > * {
+    flex: 1;
+}
+
+.forgot {
+    align-self: flex-end;
+    margin-top: -0.4rem;
+
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.78rem;
+    color: #c64b50;
+
+    transition: opacity 150ms ease;
+}
+
+.forgot:hover {
+    opacity: 0.75;
+}
+
+.formError {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    margin: 0;
+    padding: 0.6rem 0.8rem;
+
+    background: rgba(214, 69, 60, 0.08);
+    border: 1px solid rgba(214, 69, 60, 0.25);
+    border-radius: 0.4rem;
+
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.82rem;
+    color: #b5343b;
+}
+
+.switchPrompt {
+    margin: 0.3rem 0 0;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.85rem;
+    color: #6a6a6a;
+}
+
+.switchLink {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #c64b50;
+
+    transition: opacity 150ms ease;
+}
+
+.switchLink:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 560px) {
+    .row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}

@@ -2,76 +2,54 @@
     display: flex;
     flex-direction: column;
 
-    position: absolute;
-    left: 64.8%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: auto;
 
     border-radius: 0;
     border-top: none;
     border-right: none;
     border-bottom: none;
-    border-left: #C64B50 solid 2px;
+    border-left: #c64b50 solid 2px;
     margin: 0;
-    
-    width: 35%;
-    height: 100%;
+
+    width: min(38%, 32rem);
+    max-width: 100vw;
+    height: 100vh;
     min-height: 100vh;
-    max-height: fit-content;
+    max-height: 100vh;
+
+    padding: 1.25rem 1.4rem;
 
     background-color: white;
+    overflow: hidden;
+
+    animation: open-cart 0.4s ease-in-out;
 }
 
 .checkout::backdrop {
     background: rgba(0, 0, 0, 0.5);
 }
 
-.checkoutForm {
-    display: flex;
-    flex-direction: column;
-    gap: .8rem;
-    
-    margin-top: 2rem;
-}
-
 body:has(.checkout[open]) {
     overflow: hidden;
 }
 
-.inputContainer {
+.checkoutHeader {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(198, 75, 80, 0.18);
 }
 
-.checkoutForm h2 {
-    font-size: 2rem;
-    color: #C64B50;
-}
-
-.checkoutForm p {
-    font-size: 1.3rem;
-}
-
-.checkoutForm label {
-    color: #C64B50;
-    font-size: 1.1rem;
-}
-
-.checkoutForm input {
-    height: 2rem;
-    border: 1px solid #C64B50;
-}
-
-.checkoutForm button {
-    height: 3.2rem;
-    border: 0;
-    color: white;
-    background-color: #C64B50;
-}
-
-.checkoutSubmitBtn {
-    height: 3.2rem;
-    border: 0;
-    color: white;
-    background-color: #C64B50;
+.checkoutHeader h2 {
+    margin: 0;
+    font-family: "Playfair", serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: #c64b50;
 }
 
 .modalActions {
@@ -84,7 +62,235 @@ body:has(.checkout[open]) {
 }
 
 .modalActions > * {
-    stroke: #C64B50;
+    stroke: #c64b50;
     width: 100%;
     height: 100%;
+}
+
+.scrollArea {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 1rem 0.2rem 2rem;
+}
+
+/* ORDER SUMMARY */
+.summary {
+    margin-bottom: 1.6rem;
+}
+
+.summary h3,
+.checkoutForm h3 {
+    margin: 0 0 0.8rem;
+    font-family: "League Spartan", sans-serif;
+    font-size: 1.1rem;
+    color: #1f1f1f;
+}
+
+.summaryList {
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+}
+
+.summaryList li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.4rem 0;
+    font-size: 0.86rem;
+    color: #444;
+}
+
+.summaryName {
+    color: #2b2b2b;
+}
+
+.qtyTag {
+    color: #999;
+    font-size: 0.78rem;
+}
+
+.emptyNote {
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.totals {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.totals > div {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    color: #555;
+}
+
+.grandTotal {
+    margin-top: 0.3rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    font-size: 1.05rem !important;
+    font-weight: 700;
+    color: #c64b50 !important;
+}
+
+/* FORM */
+.checkoutForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.row {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.row .inputContainer {
+    flex: 1;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.checkoutForm label {
+    color: #777;
+    font-size: 0.8rem;
+    font-family: "Montserrat", sans-serif;
+}
+
+.checkoutForm input {
+    height: 2.6rem;
+    padding: 0 0.7rem;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    border-radius: 0.35rem;
+    outline: none;
+    font-size: 0.9rem;
+
+    transition: border-color 150ms ease;
+}
+
+.checkoutForm input:focus {
+    border-color: #c64b50;
+}
+
+.errorText {
+    margin: 0;
+    color: #b5343b;
+    font-size: 0.82rem;
+}
+
+.placeOrderBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    height: 3.2rem;
+    margin-top: 0.5rem;
+    border: 0;
+    border-radius: 0.4rem;
+    cursor: pointer;
+
+    color: white;
+    background-color: #c64b50;
+    font-family: "League Spartan", sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+
+    transition:
+        background 150ms ease,
+        transform 150ms ease;
+}
+
+.placeOrderBtn:hover:not(:disabled) {
+    background-color: #b03b40;
+    transform: translateY(-1px);
+}
+
+.placeOrderBtn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.spinner {
+    animation: spin 0.9s linear infinite;
+}
+
+/* CONFIRMATION */
+.confirmation {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.6rem;
+    padding: 2rem 1rem;
+}
+
+.confirmIcon {
+    color: #2e9e6b;
+}
+
+.confirmation h2 {
+    margin: 0.5rem 0 0;
+    font-family: "Playfair", serif;
+    font-weight: 400;
+    font-size: 2rem;
+    color: #1f1f1f;
+}
+
+.orderNumber {
+    margin: 0;
+    font-weight: 600;
+    color: #c64b50;
+    letter-spacing: 0.05em;
+}
+
+.confirmText {
+    margin: 0.3rem 0 1.2rem;
+    color: #666;
+    font-size: 0.9rem;
+    max-width: 22rem;
+    line-height: 1.5;
+}
+
+.checkoutSubmitBtn {
+    height: 3.2rem;
+    padding: 0 2rem;
+    border: 0;
+    border-radius: 0.4rem;
+    color: white;
+    background-color: #c64b50;
+    cursor: pointer;
+    font-family: "League Spartan", sans-serif;
+    font-size: 1rem;
+
+    transition: background 150ms ease;
+}
+
+.checkoutSubmitBtn:hover {
+    background-color: #b03b40;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 640px) {
+    .checkout[open] {
+        width: 100vw;
+        border-left: none;
+    }
 }

@@ -1,5 +1,5 @@
 // HOOKS AND LIBRARIES
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -23,7 +23,13 @@ export default function HeaderLayout({
 
     const [headerChange, setHeaderChange] = useState(false);
 
+    const { isAuthenticated } = useContext(AuthContext);
     const location = useLocation();
+
+    // Only the homepage uses the transparent HeaderFull (white logo over the
+    // hero). Every other route is a light-background content page, so it always
+    // shows the solid HeaderMinimized — otherwise the white header is invisible.
+    const isHome = location.pathname === "/";
 
     useEffect(() => {
         function handleScroll() {
@@ -39,30 +45,38 @@ export default function HeaderLayout({
             } else {
                 setShowPromo(false);
             }
+
+            // Close dropdown on any scroll movement.
+            // This triggers AnimatePresence exit animation (slide up + fade out),
+            // then unmounts the dropdown after animation completes.
+            if (activeCategory !== "") {
+                setActiveCategory("");
+            }
         }
 
         window.addEventListener("scroll", handleScroll);
 
         return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    }, [activeCategory]);
 
-    // On /shop page, keep header in "hovered" state (red logo, styled nav)
+    // On inner pages, keep header in "hovered" state (red logo, styled nav)
     // without showing any dropdown content (activeCategory remains empty)
     useEffect(() => {
-        if (location.pathname === "/shop") {
+        if (!isHome) {
             setHeaderHover(true);
         }
-    }, [location.pathname]);
+    }, [isHome]);
 
-    // On /shop page, always show HeaderMinimized regardless of scroll position
-    // On other pages, switch between HeaderFull and HeaderMinimized based on scroll
-    const headerType = location.pathname === "/shop" || headerChange ? (
+    // On the homepage, switch between HeaderFull (at top) and HeaderMinimized
+    // (after scrolling 100px). Inner pages always use HeaderMinimized below.
+    const headerType = headerChange ? (
         <HeaderMinimized
             key="headerMinimized"
             headerHover={headerHover}
             setHeaderHover={setHeaderHover}
             activeCategory={activeCategory}
             setActiveCategory={setActiveCategory}
+            isLoggedIn={isAuthenticated}
         />
     ) : (
         <HeaderFull
@@ -73,14 +87,15 @@ export default function HeaderLayout({
             activeCategory={activeCategory}
             setActiveCategory={setActiveCategory}
             headerChange={headerChange}
+            isLoggedIn={isAuthenticated}
         />
     );
 
-    // On /shop page: render a static <div> (no animation needed since HeaderMinimized
-    // is always shown regardless of scroll position)
-    // On other pages: render a <motion.div> with slide animation that triggers when
-    // switching between HeaderFull (at top) and HeaderMinimized (after scrolling 100px)
-    if (location.pathname === "/shop") {
+    // Inner pages: render a static <div> with HeaderMinimized (always visible,
+    // regardless of scroll position).
+    // Homepage: render a <motion.div> with slide animation that triggers when
+    // switching between HeaderFull (at top) and HeaderMinimized (after scrolling).
+    if (!isHome) {
         return (
             <div
                 style={{
@@ -98,6 +113,7 @@ export default function HeaderLayout({
                     setHeaderHover={setHeaderHover}
                     activeCategory={activeCategory}
                     setActiveCategory={setActiveCategory}
+                    isLoggedIn={isAuthenticated}
                 />
             </div>
         );
