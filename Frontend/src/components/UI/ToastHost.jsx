@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { createPortal } from "react-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion as Motion } from "framer-motion";
 import { Check, Info, X, Heart } from "lucide-react";
 
 import ToastContext from "../../store/ToastContext.jsx";
@@ -24,7 +24,7 @@ export default function ToastHost() {
                 {toasts.map((toast) => {
                     const Icon = ICONS[toast.type] || Check;
                     return (
-                        <motion.div
+                        <Motion.div
                             key={toast.id}
                             className={`${styles.toast} ${styles[toast.type] || ""}`}
                             initial={{ opacity: 0, y: -16, scale: 0.96 }}
@@ -48,7 +48,7 @@ export default function ToastHost() {
                             <p className={styles.toastMessage}>
                                 {toast.message}
                             </p>
-                        </motion.div>
+                        </Motion.div>
                     );
                 })}
             </AnimatePresence>

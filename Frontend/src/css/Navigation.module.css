@@ -1,0 +1,217 @@
+.announcement {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background: var(--brand);
+    color: white;
+    padding: 0 16px;
+    min-height: 36px;
+    font-size: 11px;
+    text-align: center;
+}
+.announcement p {
+    max-width: 650px;
+}
+.announcement button {
+    color: inherit;
+    background: none;
+    border: 0;
+    min-height: 36px;
+}
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+}
+.top {
+    max-width: 1440px;
+    margin: auto;
+    padding: 24px var(--gutter) 18px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 20px;
+}
+.logo img {
+    display: block;
+    width: 260px;
+    height: auto;
+}
+.utilities {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.utilities:last-child {
+    justify-content: flex-end;
+}
+.utilities button {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: none;
+    color: var(--ink);
+    min-width: 44px;
+    min-height: 44px;
+    cursor: pointer;
+}
+.utilities svg {
+    width: 20px;
+    height: 20px;
+}
+.searchLabel {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+}
+.desktop {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    min-height: 48px;
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+.desktop a {
+    text-decoration: none;
+    color: var(--ink);
+    padding: 12px 0;
+}
+.desktop a:hover {
+    color: var(--brand);
+}
+.navItem {
+    display: flex;
+    align-items: center;
+}
+.navItem button {
+    background: none;
+    border: 0;
+    padding: 14px 8px;
+    cursor: pointer;
+    color: var(--brand);
+}
+.mega {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-block: 1px solid var(--border);
+    padding: 40px max(var(--gutter),calc((100% - 1100px)/2));
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1.3fr;
+    gap: 32px;
+    text-transform: none;
+    letter-spacing: 0;
+    box-shadow: 0 16px 24px #0000000a;
+    animation: reveal 180ms ease;
+}
+.mega>div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.mega img {
+    width: 100%;
+    aspect-ratio: 3/2;
+    object-fit: cover;
+}
+.mega a {
+    font-size: 12px;
+}
+.mobileToggle {
+    display: none!important;
+}
+.mobilePanel {
+    position: fixed;
+    inset: 0;
+    margin: 0;
+    width: 100%;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    border: 0;
+    padding: 24px;
+    background: white;
+}
+.mobileHead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+.mobileHead button {
+    border: 0;
+    background: none;
+    min-width: 44px;
+    min-height: 44px;
+}
+.mobilePanel nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.mobilePanel nav a,.mobilePanel nav button {
+    font-family: var(--font-body);
+    font-size: 28px;
+    padding: 16px 0;
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    background: none;
+    text-align: left;
+    text-decoration: none;
+    color: var(--ink);
+}
+@media(max-width:1023px) {
+    .desktop {
+        display: none;
+    }
+    .mobileToggle {
+        display: flex!important;
+    }
+    .top {
+        padding: 14px 16px;
+        gap: 6px;
+    }
+    .logo img {
+        width: 145px;
+    }
+    .utilities {
+        gap: 0;
+    }
+    .searchLabel,.account {
+        display: none!important;
+    }
+    .utilities button {
+        min-width: 36px;
+    }
+    .utilities svg {
+        width: 18px;
+    }
+    .announcement {
+        font-size: 10px;
+        gap: 8px;
+    }
+    .announcement p {
+        max-width: 270px;
+    }
+}
+@media(max-width:374px) {
+    .logo img {
+        width: 120px;
+    }
+}
+
+.mobilePanel nav a, .mobilePanel nav button { font-family: var(--font-editorial); }
+.mobileHead { position: sticky; top: -24px; background: white; padding-block: 16px; z-index: 1; }
+
+.announcement p { margin: 0; padding-block: 6px; }

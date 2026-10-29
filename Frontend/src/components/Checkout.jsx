@@ -102,6 +102,7 @@ export default function Checkout() {
     if (formState.success) {
         return (
             <Modal
+            aria-label="Checkout"
                 className={styles.checkout}
                 open={open}
                 onClose={handleFinish}
@@ -129,6 +130,7 @@ export default function Checkout() {
 
     return (
         <Modal
+            aria-label="Checkout"
             className={styles.checkout}
             open={open}
             onClose={open ? handleClose : null}
@@ -264,7 +266,7 @@ export default function Checkout() {
                     </div>
 
                     {formState.errors && (
-                        <p className={styles.errorText}>{formState.errors}</p>
+                        <p className={styles.errorText} role="alert">{formState.errors}</p>
                     )}
 
                     <button

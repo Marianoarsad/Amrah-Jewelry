@@ -1,6 +1,7 @@
+import { useEffect } from "react";
 // HOOKS & LIBRARIES
 import { Outlet, useNavigation, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion as Motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 // COMPONENTS
 import HeaderLayout from "../components/HeaderLayout.jsx";
@@ -14,8 +15,10 @@ import Product from "../components/UI/Product.jsx";
 import Authentication from "../components/Authentication.jsx";
 
 export default function RootLayout() {
+    const reducedMotion = useReducedMotion();
     const navigation = useNavigation();
     const location = useLocation();
+    useEffect(() => { window.scrollTo(0, 0); }, [location.pathname]);
 
     return (
         <>
@@ -24,7 +27,7 @@ export default function RootLayout() {
             {/* Thin top loading bar while a route loader is pending */}
             <AnimatePresence>
                 {navigation.state === "loading" && (
-                    <motion.div
+                    <Motion.div
                         initial={{ scaleX: 0, opacity: 1 }}
                         animate={{ scaleX: 1 }}
                         exit={{ opacity: 0 }}
@@ -37,24 +40,24 @@ export default function RootLayout() {
                             height: "3px",
                             transformOrigin: "0% 50%",
                             background:
-                                "linear-gradient(90deg, #c64b50, #e08a8e)",
+                                "var(--brand)",
                             zIndex: 5000,
                         }}
                     />
                 )}
             </AnimatePresence>
 
-            <main>
+            <main id="main-content" tabIndex={-1}>
                 <AnimatePresence mode="wait">
-                    <motion.div
+                    <Motion.div
                         key={location.pathname}
-                        initial={{ opacity: 0, y: 8 }}
+                        initial={reducedMotion ? false : { opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3, ease: "easeOut" }}
                     >
                         <Outlet />
-                    </motion.div>
+                    </Motion.div>
                 </AnimatePresence>
 
                 <Search />
@@ -62,8 +65,8 @@ export default function RootLayout() {
                 <Cart />
                 <Product />
                 <Authentication />
-                <Footer />
             </main>
+            <Footer />
         </>
     );
 }

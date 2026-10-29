@@ -1,29 +1,24 @@
 import { useRef, useEffect } from "react";
-import Swiper from "swiper";
+import SwiperCore from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
 
 import PopularProductItem from "./PopularProductItem.jsx";
 
 // DATA
-import { getPopularProducts } from "../data/products.js";
+
 
 import styles from "../css/PopularProducts.module.css";
 
-Swiper.use([Navigation, Pagination]);
 
-const products = getPopularProducts().map((p) => ({
-    id: p._id,
-    title: p.name,
-    desc: p.description,
-    price: p.price,
-    img: p.image,
-}));
 
-export default function PopularProducts() {
+export default function PopularProducts({ products: catalog }) {
+    const featured = (catalog.some((p) => p.popular) ? catalog.filter((p) => p.popular) : catalog).slice(0, 12);
+    const products = featured.map((p) => ({id:p._id,title:p.name,desc:p.description,price:p.price,img:p.image}));
     const swiperRef = useRef(null);
 
     useEffect(() => {
-        swiperRef.current = new Swiper(".swiper-popular", {
+        swiperRef.current = new SwiperCore(".swiper-popular", {
+            modules: [Navigation, Pagination],
             loop: true,
             slidesPerView: 1,
             spaceBetween: 16,
@@ -60,7 +55,7 @@ export default function PopularProducts() {
 
     return (
         <div className={styles.popularProducts}>
-            <h2>Popular Products</h2>
+            <div className="section-heading"><p className="eyebrow">The collection</p><h2>Popular Products</h2></div>
             <div className="swiper swiper-popular">
                 <ul className="swiper-wrapper">
                     {products.map((product) => (

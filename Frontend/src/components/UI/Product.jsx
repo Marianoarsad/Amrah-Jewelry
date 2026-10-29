@@ -70,6 +70,7 @@ export default function Product() {
 
     return (
         <Modal
+            aria-label="Product quick view"
             className={styles.product}
             open={open}
             onClose={open ? handleHideProduct : null}
@@ -112,10 +113,10 @@ export default function Product() {
                                                 ? styles.materialActive
                                                 : ""
                                         }`}
-                                        onClick={() => setMaterial(m.name)}
                                     >
+                                        <button type="button" aria-pressed={material === m.name} onClick={() => setMaterial(m.name)}>
                                         <img src={m.image} alt={m.name} />
-                                        <p>{m.name}</p>
+                                        <p>{m.name}</p></button>
                                     </li>
                                 ))}
                             </ul>
@@ -129,6 +130,7 @@ export default function Product() {
                                     {product.sizes.map((s) => (
                                         <button
                                             key={s}
+                                        aria-pressed={size === s}
                                             className={
                                                 size === s
                                                     ? styles.sizeActive

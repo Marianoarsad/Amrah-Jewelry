@@ -1,7 +1,7 @@
 // HOOKS & LIBRARIES
 import { useContext, memo } from "react";
 import { Minus, Plus, X } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 
 // ASSETS
 import FallbackImage from "../assets/pearl.png";
@@ -32,7 +32,7 @@ function CartItem({ product }) {
     const lineTotal = product.price * product.quantity;
 
     return (
-        <motion.li
+        <Motion.li
             className={styles.cartItem}
             layout
             initial={{ opacity: 0, x: 24 }}
@@ -49,6 +49,7 @@ function CartItem({ product }) {
             />
             <div className={styles.cartItemLeftBody}>
                 <p className={styles.cartItemTitle}>{product.name}</p>
+                {product.selectedMaterial && <p className={styles.cartItemSize}>{product.selectedMaterial}</p>}
                 {product.selectedSize && (
                     <p className={styles.cartItemSize}>
                         Size: {product.selectedSize}
@@ -85,7 +86,7 @@ function CartItem({ product }) {
                 </button>
                 <p>{currencyFormatter.format(lineTotal)}</p>
             </div>
-        </motion.li>
+        </Motion.li>
     );
 }
 

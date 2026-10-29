@@ -171,6 +171,7 @@ export default function Cart() {
 
     return (
         <Modal
+            aria-label="Your bag"
             className={styles.cart}
             open={userProgressCtx.progress === "cart"}
             onClose={

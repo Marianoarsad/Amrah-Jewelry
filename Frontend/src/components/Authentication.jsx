@@ -1,7 +1,7 @@
 // HOOKS & LIBRARIES
 import { useState, useContext, useEffect } from "react";
 import { X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion as Motion, AnimatePresence } from "framer-motion";
 
 // CONTEXT
 import UserProgressContext from "../store/UserProgressContext.jsx";
@@ -12,7 +12,7 @@ import SigninForm from "./SigninForm.jsx";
 import RegisterForm from "./RegisterForm.jsx";
 
 // ASSETS
-import SignInImage from "../assets/signin-img.jpg";
+import SignInImage from "../assets/signin-img.webp";
 
 import styles from "../css/Authentication.module.css";
 
@@ -32,9 +32,17 @@ export default function Authentication() {
     }
 
     const isSignin = mode === "signin";
+    function handleTabKey(event) {
+        if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+        event.preventDefault();
+        const nextMode = event.key === "Home" ? "signin" : event.key === "End" ? "register" : isSignin ? "register" : "signin";
+        setMode(nextMode);
+        event.currentTarget.parentElement.querySelectorAll('[role="tab"]')[nextMode === "signin" ? 0 : 1].focus();
+    }
 
     return (
         <Modal
+            aria-label="Sign in or register"
             className={styles.signIn}
             open={open}
             onClose={open ? handleClose : null}
@@ -62,10 +70,13 @@ export default function Authentication() {
                         </p>
                     </header>
 
-                    <div className={styles.tabs} role="tablist">
+                    <div className={styles.tabs} role="tablist" aria-label="Account access">
                         <button
                             role="tab"
+                            onKeyDown={handleTabKey}
+                            aria-controls="authentication-panel"
                             aria-selected={isSignin}
+                            tabIndex={isSignin ? 0 : -1}
                             className={`${styles.tab} ${isSignin ? styles.tabActive : ""}`}
                             onClick={() => setMode("signin")}
                         >
@@ -73,7 +84,10 @@ export default function Authentication() {
                         </button>
                         <button
                             role="tab"
+                            onKeyDown={handleTabKey}
+                            aria-controls="authentication-panel"
                             aria-selected={!isSignin}
+                            tabIndex={isSignin ? -1 : 0}
                             className={`${styles.tab} ${!isSignin ? styles.tabActive : ""}`}
                             onClick={() => setMode("register")}
                         >
@@ -90,7 +104,10 @@ export default function Authentication() {
                     </div>
 
                     <AnimatePresence mode="wait">
-                        <motion.div
+                        <Motion.div
+                            id="authentication-panel"
+                            role="tabpanel"
+                            aria-label={isSignin ? "Sign in" : "Register"}
                             key={mode}
                             initial={{ opacity: 0, x: isSignin ? -14 : 14 }}
                             animate={{ opacity: 1, x: 0 }}
@@ -108,7 +125,7 @@ export default function Authentication() {
                                     onSwitchMode={setMode}
                                 />
                             )}
-                        </motion.div>
+                        </Motion.div>
                     </AnimatePresence>
                 </div>
             </div>

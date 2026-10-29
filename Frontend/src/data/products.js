@@ -18,14 +18,14 @@ import img6 from "../assets/product-test-image-6.JPG";
 import img7 from "../assets/product-test-image-7.JPG";
 import imgPearl from "../assets/pearl.png";
 import imgPearlBracelet from "../assets/pearl-bracelet.jpg";
-import imgGrid1 from "../assets/grid-image-1.png";
-import imgGrid2 from "../assets/grid-image-2.png";
-import imgGrid3 from "../assets/grid-image-3.png";
-import imgGrid4 from "../assets/grid-image-4.png";
-import imgGrid5 from "../assets/grid-image-5.png";
-import imgGrid6 from "../assets/grid-image-6.png";
-import imgGrid7 from "../assets/grid-image-7.png";
-import imgGrid8 from "../assets/grid-image-8.png";
+import imgGrid1 from "../assets/grid-image-1.webp";
+import imgGrid2 from "../assets/grid-image-2.webp";
+import imgGrid3 from "../assets/grid-image-3.webp";
+import imgGrid4 from "../assets/grid-image-4.webp";
+import imgGrid5 from "../assets/grid-image-5.webp";
+import imgGrid6 from "../assets/grid-image-6.webp";
+import imgGrid7 from "../assets/grid-image-7.webp";
+import imgGrid8 from "../assets/grid-image-8.webp";
 
 // SWATCH IMAGES FOR MATERIAL OPTIONS
 const ROSE_GOLD = imgGrid1;

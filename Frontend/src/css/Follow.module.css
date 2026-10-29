@@ -1,47 +1,35 @@
 .follow {
-    height: fit-content;
-    width: 99vw;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: var(--section-space) var(--gutter);
+    max-width: 1280px;
+    margin: auto;
+    text-align: center;
 }
-
-.follow > h3 {
-    font-size: 2rem;
-    color: #c64b50;
+.follow h3 {
+    font-size: clamp(28px,3vw,40px);
+    margin-bottom: 40px;
 }
-
 .followGrid {
-    margin-top: 1em;
-    height: fit-content;
-    width: 90%;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 0.3em;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 16px;
 }
-
-.followGrid > img {
+.followGrid img {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    height: auto;
+    aspect-ratio: 1;
     object-fit: cover;
-    transition: scale 200ms ease-in-out;
 }
-
-.followGrid > img:hover {
-    scale: 1.03;
-}
-
 .igBtn {
-    margin-top: 2.5em;
-    height: 3rem;
-    width: 12rem;
-    background: none;
-    border: 0.07em solid #696b6c;
-    color: #696b6c;
+    display: inline-block;
+    margin-top: 32px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--brand);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-decoration: none;
 }
-
-.igBtn:hover {
-    border: 0.07em solid #c96868;
-    color: #c96868;
+@media(max-width:767px) {
+    .followGrid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
 }

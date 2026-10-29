@@ -1,3 +1,4 @@
+import FallbackImage from "../assets/pearl.png";
 import { memo } from "react";
 import { Link } from "react-router-dom";
 
@@ -10,7 +11,10 @@ function PopularProductItem({ id, img, title, desc, price }) {
             <Link to={`/product/${id}`} className={styles.productLink}>
                 <img
                     className={styles.productImg}
-                    src={img}
+                    src={img || FallbackImage}
+                    loading="lazy"
+                    width="500" height="500"
+                    onError={(event) => { event.currentTarget.src = FallbackImage; }}
                     alt={title}
                 />
                 <p className={styles.productTitle}>{title}</p>

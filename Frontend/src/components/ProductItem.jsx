@@ -1,7 +1,7 @@
 // HOOKS & LIBRARIES
 import { useContext, memo } from "react";
-import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { motion as Motion } from "framer-motion";
 import { Heart, Eye, ShoppingBag } from "lucide-react";
 
 // CONTEXT
@@ -25,13 +25,8 @@ function ProductItem({ product, price }) {
     const toastCtx = useContext(ToastContext);
     const wishlistCtx = useContext(WishlistContext);
 
-    const navigate = useNavigate();
 
     const wishlisted = wishlistCtx.isWishlisted(product._id);
-
-    function handleOpenDetail() {
-        navigate(`/product/${product._id}`);
-    }
 
     function handleQuickView(e) {
         e.stopPropagation();
@@ -58,15 +53,15 @@ function ProductItem({ product, price }) {
     }
 
     return (
-        <motion.li
+        <Motion.li
             className={styles.card}
-            onClick={handleOpenDetail}
-            initial={{ opacity: 0, y: 18 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.35, ease: "easeOut" }}
         >
             <div className={styles.imageWrap}>
+                <Link className={styles.imageLink} to={`/product/${product._id}`}>
                 <img
                     className={styles.image}
                     src={product.image || FallbackImage}
@@ -77,6 +72,7 @@ function ProductItem({ product, price }) {
                     }}
                 />
 
+                </Link>
                 {/* BADGES */}
                 <div className={styles.badges}>
                     {product.isNew && (
@@ -95,7 +91,8 @@ function ProductItem({ product, price }) {
                 <button
                     className={`${styles.wishBtn} ${wishlisted ? styles.wishActive : ""}`}
                     onClick={handleToggleWishlist}
-                    aria-label="Toggle wishlist"
+                    aria-label={`Save ${product.name} to wishlist`}
+                    aria-pressed={wishlisted}
                 >
                     <Heart
                         size={18}
@@ -121,7 +118,7 @@ function ProductItem({ product, price }) {
             </div>
 
             <article className={styles.info}>
-                <p className={styles.name}>{product.name}</p>
+                <p className={styles.name}><Link to={`/product/${product._id}`}>{product.name}</Link></p>
                 <Rating
                     value={product.rating || 0}
                     reviews={product.reviews}
@@ -131,7 +128,7 @@ function ProductItem({ product, price }) {
                     {price || currencyFormatter.format(product.price)}
                 </p>
             </article>
-        </motion.li>
+        </Motion.li>
     );
 }
 

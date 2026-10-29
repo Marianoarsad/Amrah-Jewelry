@@ -6,7 +6,7 @@ import {
     useNavigation,
 } from "react-router-dom";
 import { ChevronDown, ListFilter, X, Check } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion as Motion, AnimatePresence } from "framer-motion";
 
 // COMPONENTS
 import ProductItem from "../components/ProductItem.jsx";
@@ -184,6 +184,7 @@ export default function Shop() {
                     <div className={styles.shopGridUpperLeft} ref={sortRef}>
                         <button
                             className={styles.controlBtn}
+                            aria-expanded={showSortMenu}
                             onClick={() => setShowSortMenu((s) => !s)}
                         >
                             SORT BY
@@ -191,7 +192,7 @@ export default function Shop() {
                         </button>
                         <AnimatePresence>
                             {showSortMenu && (
-                                <motion.ul
+                                <Motion.ul
                                     className={styles.sortMenu}
                                     initial={{ opacity: 0, y: -8 }}
                                     animate={{ opacity: 1, y: 0 }}
@@ -206,6 +207,8 @@ export default function Shop() {
                                                     ? styles.sortActive
                                                     : ""
                                             }
+                                        >
+                                            <button type="button" aria-pressed={sortBy === opt.id}
                                             onClick={() => {
                                                 setSortBy(opt.id);
                                                 setShowSortMenu(false);
@@ -214,10 +217,10 @@ export default function Shop() {
                                             {opt.label}
                                             {sortBy === opt.id && (
                                                 <Check size={14} />
-                                            )}
+                                            )}</button>
                                         </li>
                                     ))}
-                                </motion.ul>
+                                </Motion.ul>
                             )}
                         </AnimatePresence>
                         <p className={styles.countLabel}>
@@ -226,12 +229,13 @@ export default function Shop() {
                     </div>
 
                     <div className={styles.shopGridUpperMiddle}>
-                        <h3>{heading}</h3>
+                        <h1>{heading}</h1>
                     </div>
 
                     <div className={styles.shopGridUpperRight}>
                         <button
                             className={styles.controlBtn}
+                            aria-expanded={showFilters}
                             onClick={() => setShowFilters((s) => !s)}
                         >
                             FILTER
@@ -251,7 +255,7 @@ export default function Shop() {
                 {/* FILTER PANEL */}
                 <AnimatePresence>
                     {showFilters && (
-                        <motion.div
+                        <Motion.div
                             className={styles.filterPanel}
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: "auto" }}
@@ -315,7 +319,7 @@ export default function Shop() {
                                     </button>
                                 )}
                             </div>
-                        </motion.div>
+                        </Motion.div>
                     )}
                 </AnimatePresence>
 
@@ -355,6 +359,7 @@ export default function Shop() {
     );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components -- React Router lazy routes consume this loader.
 export async function loader({ request }) {
     const url = new URL(request.url);
     const category = url.searchParams.get("category");

@@ -1,97 +1,76 @@
-@import url("https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Arapey:ital@0;1&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Bebas+Neue&family=Carrois+Gothic+SC&family=Delius+Swash+Caps&family=League+Spartan:wght@100..900&family=Lexend+Mega:wght@100..900&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Pacifico&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Roboto+Flex:opsz,wght,XOPQ,XTRA,YOPQ,YTDE,YTFI,YTLC,YTUC@8..144,100..1000,96,468,79,-203,738,514,712&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
-
 .hero {
-    height: 100vh;
-    width: 99vw;
-    background-image: url("/hero-background-5.jpg");
-    background-size: cover;
-    background-position: center;
-
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    min-height: 650px;
+    background: var(--surface-soft);
+}
+.copy {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     justify-content: center;
-    align-items: center;
+    padding: 64px max(var(--gutter),calc((100vw - 1280px)/2));
+    padding-right: 40px;
 }
-
-.heroTextContainer {
-    height: 35%;
-    width: fit-content;
-    margin-top: 7rem;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    color: #ffff;
-    background-color: none;
+.copy h1 {
+    color: var(--ink);
+    font-size: clamp(48px,5.2vw,82px);
+    line-height: 1.05;
+    margin: 16px 0 24px;
 }
-
-.heroTextContainer > h3 {
-    padding: 0;
-    margin: 0;
-    font-weight: normal;
-    font-size: 2.2rem;
-    text-align: left;
-    font-family: "League Spartan", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 200;
-    font-style: normal;
+.copy h1 em {
+    font-weight: 400;
+    color: var(--brand);
 }
-
-.heroTextContainer > h1 {
-    padding: 0;
-    margin: 0;
-
-    font-size: 5rem;
-    text-align: center;
-    font-family: "Playfair", serif;
-    font-optical-sizing: auto;
-    font-weight: 300;
-    font-style: normal;
-    font-variation-settings: "wdth" 100;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+.copy>p:not(:first-child) {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 32px;
 }
-
-.heroTextContainer > p {
-    text-align: center;
-    font-size: 1.3rem;
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 300;
-    font-style: normal;
-    padding: 0;
-    margin: 0;
+.hero>img {
+    width: 100%;
+    height: 100%;
+    max-height: 800px;
+    object-fit: cover;
+    object-position: center 35%;
+    min-width: 0;
 }
-
-.shopNowBtn {
-    width: 9%;
-    height: 10%;
-
-    background: transparent;
-    border: 1px solid white;
-    padding: 1.4rem;
-
-    font-family: "Lexend Mega", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-    font-size: 0.7rem;
+.cta {
+    background: var(--brand);
     color: white;
     text-decoration: none;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    cursor: pointer;
-    transition:
-        scale 200ms ease-in-out,
-        background-color 200ms ease-in-out,
-        border-color 200ms ease-in-out;
+    min-height: 48px;
+    min-width: 180px;
+    padding: 15px 28px;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    transition: background var(--duration);
 }
-
-.shopNowBtn:hover {
-    color: black;
-    background-color: #c64b50;
-    border-color: #c64b50;
-    scale: 1.03;
+.cta:hover {
+    background: var(--brand-hover);
+}
+@media(max-width:767px) {
+    .hero {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+    .hero>img {
+        grid-row: 1;
+        height: 420px;
+        object-position: center 35%;
+    }
+    .copy {
+        padding: 40px 24px 48px;
+    }
+    .copy h1 {
+        font-size: 48px;
+    }
+    .copy h1 br {
+        display: none;
+    }
+    .copy h1 em {
+        display: block;
+    }
 }

@@ -1,6 +1,6 @@
 // HOOKS & LIBRARIES
 import { useContext, useState, useMemo, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { X, Search as SearchIcon } from "lucide-react";
 
 // CONTEXT
@@ -10,20 +10,24 @@ import UserProgressContext from "../store/UserProgressContext.jsx";
 import Modal from "./UI/Modal.jsx";
 
 // DATA
-import { PRODUCTS, CATEGORIES, getPopularProducts } from "../data/products.js";
+import { PRODUCTS, CATEGORIES } from "../data/products.js";
 
 // UTIL
+import { catalogCategories } from "../util/catalog.js";
+import { productService } from "../services/productService.js";
 import { currencyFormatter } from "../util/formatting.js";
 
 import FallbackImage from "../assets/pearl.png";
 import styles from "../css/Search.module.css";
 
-const popular = getPopularProducts().slice(0, 5);
+
 
 export default function Search() {
     const userProgressCtx = useContext(UserProgressContext);
     const navigate = useNavigate();
 
+    const [catalog, setCatalog] = useState(PRODUCTS);
+    const popular = (catalog.some((p) => p.popular) ? catalog.filter((p) => p.popular) : catalog).slice(0, 5);
     const [query, setQuery] = useState("");
 
     const open = userProgressCtx.progress === "search";
@@ -33,24 +37,26 @@ export default function Search() {
         if (open) setQuery("");
     }, [open]);
 
+    useEffect(() => {
+        if (!open) return;
+        let cancelled = false;
+        productService.getProducts().then((items) => { if (!cancelled) setCatalog(items); });
+        return () => { cancelled = true; };
+    }, [open]);
+
     const results = useMemo(() => {
         const q = query.trim().toLowerCase();
         if (!q) return [];
-        return PRODUCTS.filter(
+        return catalog.filter(
             (p) =>
                 p.name.toLowerCase().includes(q) ||
                 p.category.toLowerCase().includes(q) ||
                 (p.description || "").toLowerCase().includes(q),
         ).slice(0, 6);
-    }, [query]);
+    }, [query, catalog]);
 
     function handleClose() {
         userProgressCtx.close();
-    }
-
-    function goToProduct(id) {
-        userProgressCtx.close();
-        navigate(`/product/${id}`);
     }
 
     function goToCategory(categoryId) {
@@ -69,6 +75,7 @@ export default function Search() {
 
     return (
         <Modal
+            aria-label="Search jewelry"
             className={styles.search}
             open={open}
             onClose={open ? handleClose : null}
@@ -100,6 +107,7 @@ export default function Search() {
                         <input
                             className={styles.searchInput}
                             type="search"
+                            aria-label="Search jewelry"
                             placeholder="Search for rings, pearls, gifts…"
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
@@ -132,8 +140,8 @@ export default function Search() {
                                     <li
                                         key={p._id}
                                         className={styles.resultItem}
-                                        onClick={() => goToProduct(p._id)}
                                     >
+                                        <Link className={styles.resultLink} to={`/product/${p._id}`} onClick={handleClose}>
                                         <img
                                             src={p.image || FallbackImage}
                                             alt={p.name}
@@ -149,6 +157,7 @@ export default function Search() {
                                         <span className={styles.resultPrice}>
                                             {currencyFormatter.format(p.price)}
                                         </span>
+                                        </Link>
                                     </li>
                                 ))}
                             </ul>
@@ -164,7 +173,7 @@ export default function Search() {
                                 Shop by category
                             </h3>
                             <div className={styles.categoryContainer}>
-                                {CATEGORIES.map((cat) => (
+                                {catalogCategories(catalog, CATEGORIES).map((cat) => (
                                     <button
                                         type="button"
                                         key={cat.id}
@@ -192,8 +201,8 @@ export default function Search() {
                                     <li
                                         key={p._id}
                                         className={styles.popularItem}
-                                        onClick={() => goToProduct(p._id)}
                                     >
+                                        <Link className={styles.popularLink} to={`/product/${p._id}`} onClick={handleClose}>
                                         <div className={styles.popularImgWrap}>
                                             <img
                                                 src={p.image || FallbackImage}
@@ -206,6 +215,7 @@ export default function Search() {
                                         <p className={styles.price}>
                                             {currencyFormatter.format(p.price)}
                                         </p>
+                                        </Link>
                                     </li>
                                 ))}
                             </ul>

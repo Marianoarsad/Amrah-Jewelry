@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { ShoppingCart, Heart } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion as Motion } from "framer-motion";
 
 import CartContext from "../../store/CartContext.jsx";
 import WishlistContext from "../../store/WishlistContext.jsx";
@@ -12,17 +13,16 @@ export function CartButton({ iconClassName, onClick }) {
     const count = cartCtx.totalQuantity;
 
     return (
-        <span
+        <button
+            type="button"
             className={styles.iconWrap}
             onClick={onClick}
-            role="button"
-            tabIndex={0}
             aria-label={`Open cart (${count} items)`}
         >
             <ShoppingCart className={iconClassName} />
             <AnimatePresence>
                 {count > 0 && (
-                    <motion.span
+                    <Motion.span
                         key={count}
                         className={styles.badge}
                         initial={{ scale: 0.4, opacity: 0 }}
@@ -35,10 +35,10 @@ export function CartButton({ iconClassName, onClick }) {
                         }}
                     >
                         {count}
-                    </motion.span>
+                    </Motion.span>
                 )}
             </AnimatePresence>
-        </span>
+        </button>
     );
 }
 
@@ -48,17 +48,16 @@ export function WishlistButton({ iconClassName, onClick }) {
     const count = wishlistCtx.count;
 
     return (
-        <span
+        <Link
+            to="/wishlist"
             className={styles.iconWrap}
             onClick={onClick}
-            role="button"
-            tabIndex={0}
             aria-label={`Open wishlist (${count} items)`}
         >
             <Heart className={iconClassName} />
             <AnimatePresence>
                 {count > 0 && (
-                    <motion.span
+                    <Motion.span
                         key={count}
                         className={styles.badge}
                         initial={{ scale: 0.4, opacity: 0 }}
@@ -71,9 +70,9 @@ export function WishlistButton({ iconClassName, onClick }) {
                         }}
                     >
                         {count}
-                    </motion.span>
+                    </Motion.span>
                 )}
             </AnimatePresence>
-        </span>
+        </Link>
     );
 }

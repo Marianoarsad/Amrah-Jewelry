@@ -1,7 +1,7 @@
 // HOOKS & LIBRARIES
 import { useContext, useState } from "react";
 import { useLoaderData, useNavigate, Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 import {
     Heart,
     Minus,
@@ -20,6 +20,7 @@ import WishlistContext from "../store/WishlistContext.jsx";
 import UserProgressContext from "../store/UserProgressContext.jsx";
 
 // COMPONENTS
+import Modal from "../components/UI/Modal.jsx";
 import Rating from "../components/UI/Rating.jsx";
 import ProductItem from "../components/ProductItem.jsx";
 
@@ -46,6 +47,7 @@ export default function ProductDetail() {
         ? product.images
         : [product.image || FallbackImage];
 
+    const [zoom, setZoom] = useState(false);
     const [activeImage, setActiveImage] = useState(gallery[0]);
     const [material, setMaterial] = useState(product.materials?.[0]?.name);
     const [size, setSize] = useState(product.sizes?.[0]);
@@ -83,7 +85,8 @@ export default function ProductDetail() {
     }
 
     return (
-        <motion.section
+        <>
+        <Motion.section
             className={styles.page}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -113,6 +116,8 @@ export default function ProductDetail() {
                                 className={`${styles.thumb} ${
                                     activeImage === img ? styles.thumbActive : ""
                                 }`}
+                                aria-label={`View image ${i + 1} of ${product.name}`}
+                                aria-pressed={activeImage === img}
                                 onMouseEnter={() => setActiveImage(img)}
                                 onClick={() => setActiveImage(img)}
                             >
@@ -120,13 +125,14 @@ export default function ProductDetail() {
                             </button>
                         ))}
                     </div>
-                    <motion.div
+                    <Motion.div
                         className={styles.mainImageWrap}
                         key={activeImage}
                         initial={{ opacity: 0.4, scale: 1.01 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.3 }}
                     >
+                        <button className={styles.zoomTrigger} onClick={() => setZoom(true)}>Enlarge image</button>
                         <img
                             className={styles.mainImage}
                             src={activeImage}
@@ -135,7 +141,7 @@ export default function ProductDetail() {
                                 e.currentTarget.src = FallbackImage;
                             }}
                         />
-                    </motion.div>
+                    </Motion.div>
                 </div>
 
                 {/* DETAILS */}
@@ -178,10 +184,10 @@ export default function ProductDetail() {
                                                 ? styles.materialActive
                                                 : ""
                                         }`}
-                                        onClick={() => setMaterial(m.name)}
                                     >
+                                        <button type="button" aria-pressed={material === m.name} onClick={() => setMaterial(m.name)}>
                                         <img src={m.image} alt={m.name} />
-                                        <span>{m.name}</span>
+                                        <span>{m.name}</span></button>
                                     </li>
                                 ))}
                             </ul>
@@ -201,6 +207,7 @@ export default function ProductDetail() {
                                 {product.sizes.map((s) => (
                                     <button
                                         key={s}
+                                        aria-pressed={size === s}
                                         className={`${styles.sizeBtn} ${
                                             size === s ? styles.sizeActive : ""
                                         }`}
@@ -302,10 +309,13 @@ export default function ProductDetail() {
                     </ul>
                 </div>
             )}
-        </motion.section>
+        </Motion.section>
+        <Modal open={zoom} onClose={() => setZoom(false)} className="image-zoom" aria-label={`${product.name} enlarged image`}><button onClick={() => setZoom(false)}>Close image</button><img src={activeImage} alt={product.name}/></Modal>
+        </>
     );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components -- React Router lazy routes consume this loader.
 export async function loader({ params }) {
     const product = await productService.getProductById(params.id);
 

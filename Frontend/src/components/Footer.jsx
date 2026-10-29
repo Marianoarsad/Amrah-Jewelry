@@ -10,7 +10,7 @@ import InstagramLogo from "/instagram-logo.svg";
 // CSS
 import styles from "../css/Footer.module.css";
 
-export default function Footer({}) {
+export default function Footer() {
     return (
         <footer className={styles.footer}>
             <div className={styles.footerUpperContainer}>
@@ -25,7 +25,7 @@ export default function Footer({}) {
                         <Link to="#">New Arrival</Link>
                     </li>
                 </ul>
-                <ul style={{ marginLeft: "13rem" }}>
+                <ul>
                     <li className={styles.footerUpperContainerHeader}>
                         CUSTOMER SERVICES
                     </li>
@@ -42,7 +42,7 @@ export default function Footer({}) {
                         <Link to="#">Contact Us</Link>
                     </li>
                 </ul>
-                <ul style={{ marginLeft: "13rem" }}>
+                <ul>
                     <li className={styles.footerUpperContainerHeader}>
                         MORE ABOUT US
                     </li>
@@ -65,8 +65,8 @@ export default function Footer({}) {
                         arrivals, and more.
                     </p>
                     <form>
-                        <input placeholder="Email" />
-                        <button>
+                        <label className={styles.emailLabel} htmlFor="newsletter-email">Email</label><input id="newsletter-email" type="email" placeholder="Email" />
+                        <button aria-label="Subscribe to newsletter">
                             <ArrowRight color="#c7464e" />
                         </button>
                     </form>

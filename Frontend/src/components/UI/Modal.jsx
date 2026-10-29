@@ -7,6 +7,7 @@ export default function Modal({
     onClose,
     className,
     closeOnBackdrop = false,
+    ...props
 }) {
     const dialog = useRef();
 
@@ -15,11 +16,13 @@ export default function Modal({
 
         if (!modal) return;
 
-        if (open) {
-            modal.showModal();
-        }
-
-        return () => modal.close();
+        if (!open) return;
+        const previousFocus = document.activeElement;
+        modal.showModal();
+        return () => {
+            modal.close();
+            if (previousFocus?.isConnected) previousFocus.focus();
+        };
     }, [open]);
 
     // A click whose target is the <dialog> itself comes from the ::backdrop
@@ -33,6 +36,8 @@ export default function Modal({
 
     return createPortal(
         <dialog
+            aria-label="Amrah Jewelry dialog"
+            {...props}
             ref={dialog}
             className={className}
             onClose={onClose}

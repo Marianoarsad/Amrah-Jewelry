@@ -8,22 +8,17 @@
     inset: 0;
     border: none;
     padding: 0;
-
     display: flex;
     justify-content: center;
     align-items: stretch;
-
     overflow: hidden;
 }
-
 .signIn::backdrop {
     background: rgba(0, 0, 0, 0.5);
 }
-
 body:has(.signIn[open]) {
     overflow: hidden;
 }
-
 /* LEFT IMAGERY */
 .amrah {
     width: 50%;
@@ -31,31 +26,26 @@ body:has(.signIn[open]) {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #fbf9f7;
+    background-color: var(--surface-soft);
     overflow: hidden;
 }
-
 .amrah > img {
     height: 100%;
     width: 100%;
     object-fit: cover;
 }
-
 /* RIGHT FORM PANEL */
 .formContainer {
     position: relative;
     width: 50%;
     height: 100vh;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     padding: 2rem;
     overflow-y: auto;
 }
-
 .formInner {
     width: 100%;
     max-width: 26rem;
@@ -63,23 +53,20 @@ body:has(.signIn[open]) {
     flex-direction: column;
     gap: 1.4rem;
 }
-
 .formIntro h2 {
     margin: 0 0 0.35rem;
-    font-family: "Playfair", serif;
+    font-family: var(--font-editorial);
     font-weight: 400;
     font-size: 2rem;
-    color: #1f1f1f;
+    color: var(--ink);
 }
-
 .formIntro p {
     margin: 0;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-body);
     font-size: 0.88rem;
-    color: #8a8a8a;
+    color: var(--muted);
     line-height: 1.5;
 }
-
 /* TABS */
 .tabs {
     position: relative;
@@ -88,7 +75,6 @@ body:has(.signIn[open]) {
     border-radius: 0.5rem;
     padding: 0.25rem;
 }
-
 .tab {
     flex: 1;
     z-index: 1;
@@ -96,81 +82,98 @@ body:has(.signIn[open]) {
     border: none;
     background: none;
     cursor: pointer;
-
-    font-family: "League Spartan", sans-serif;
+    font-family: var(--font-body);
     font-size: 0.9rem;
     letter-spacing: 0.02em;
-    color: #8a8a8a;
-
+    color: var(--muted);
     transition: color 200ms ease;
 }
-
 .tabActive {
-    color: #c64b50;
+    color: var(--brand);
     font-weight: 600;
 }
-
 .tabIndicator {
     position: absolute;
     top: 0.25rem;
     left: 0.25rem;
     width: calc(50% - 0.25rem);
     height: calc(100% - 0.5rem);
-
-    background: #fff;
+    background: var(--surface);
     border-radius: 0.4rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-
     transition: transform 260ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 /* CLOSE */
 .closeBtn {
     position: absolute;
     top: 1.4rem;
     right: 1.4rem;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     width: 2.6rem;
     height: 2.6rem;
     border-radius: 50%;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    background: #fff;
-    color: #c64b50;
+    background: var(--surface);
+    color: var(--brand);
     cursor: pointer;
-
-    transition:
-        background 150ms ease,
+    transition: background 150ms ease,
         transform 150ms ease;
 }
-
 .closeBtn:hover {
     background: rgba(198, 75, 80, 0.08);
     transform: rotate(90deg);
 }
-
 /* RESPONSIVE */
 @media (max-width: 900px) {
     .amrah {
         display: none;
     }
-
     .formContainer {
         width: 100%;
     }
 }
-
 @media (max-width: 560px) {
     .formContainer {
         padding: 1.25rem;
         justify-content: flex-start;
         padding-top: 4.5rem;
     }
-
     .formIntro h2 {
         font-size: 1.7rem;
+    }
+}
+.signIn[open] {
+    background: white;
+    height: 100dvh;
+}
+.amrah {
+    background: var(--surface-soft);
+    height: 100dvh;
+}
+.formContainer {
+    height: 100dvh;
+    padding: 48px;
+}
+.formIntro h2 {
+    font-size: 42px;
+}
+.tabs,.tabActive {
+    border-radius: 0;
+}
+.formInner {
+    max-width: 420px;
+}
+@media(max-width:767px) {
+    .amrah {
+        display: none;
+    }
+    .formContainer {
+        width: 100%;
+        padding: 24px;
+    }
+    .formIntro h2 {
+        font-size: 34px;
     }
 }

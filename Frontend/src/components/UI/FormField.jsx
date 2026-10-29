@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useId } from "react";
+import { motion as Motion, AnimatePresence } from "framer-motion";
 import { Eye, EyeOff, AlertCircle } from "lucide-react";
 
 import styles from "../../css/FormField.module.css";
@@ -19,14 +19,15 @@ export default function FormField({
     ...props
 }) {
     const [showPassword, setShowPassword] = useState(false);
-    const fieldId = id || name;
+    const generatedId = useId();
+    const fieldId = id || `${name}-${generatedId}`;
     const isPassword = type === "password";
     const inputType = isPassword && showPassword ? "text" : type;
 
     return (
-        <motion.div
+        <Motion.div
             className={`${styles.field} ${className}`}
-            animate={error ? { x: [0, -6, 6, -4, 4, 0] } : { x: 0 }}
+            initial={false}
             transition={{ duration: 0.35 }}
         >
             {label && (
@@ -56,7 +57,6 @@ export default function FormField({
                         aria-label={
                             showPassword ? "Hide password" : "Show password"
                         }
-                        tabIndex={-1}
                     >
                         {showPassword ? (
                             <EyeOff size={16} />
@@ -69,7 +69,8 @@ export default function FormField({
 
             <AnimatePresence>
                 {error && (
-                    <motion.p
+                    <Motion.p
+                        role="alert"
                         id={`${fieldId}-error`}
                         className={styles.errorText}
                         initial={{ opacity: 0, y: -4 }}
@@ -79,9 +80,9 @@ export default function FormField({
                     >
                         <AlertCircle size={13} />
                         {error}
-                    </motion.p>
+                    </Motion.p>
                 )}
             </AnimatePresence>
-        </motion.div>
+        </Motion.div>
     );
 }
